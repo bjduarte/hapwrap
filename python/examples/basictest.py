@@ -21,44 +21,13 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
-#Define functions which detect object,elevation,distance:
-def buzz(elevation, distance, direction):
-    pulse_color = Color(255, 0, 0)
-    direction_color = Color(0, 255, 0)
-    iter =0 
 
-    if elevation[0] <= 5:
-        min_motor=0
-    elif elevation[0] >= 6 and elevation[0] <= 11:
-        min_motor=6
-    elif elevation[0] >= 12:
-        min_motor=12
-    main_motor = min_motor + distance[2]
-    elevation.setPixelColor(main_motor,direction_color)
-    elevation.show()
-    time.sleep(1.5)
-    while iter < 2:
-        for i in range(min_motor,(min_motor+6)):
-            elevation.setPixelColor(i, pulse_color)
-            elevation.show()
-        if distance[1]==10:
-            time.sleep(0.3)
-        if distance[1]==15:
-            time.sleep(0.65)
-        if distance[1]==20:
-            time.sleep(1.5)
-        if distance[1]==25:
-            time.sleep(1.5)
-        iter +=1
-
-
-#Define functions which animate LEDs in various ways.
-#def#colorWipe(strip, color, wait_ms=50):
-    #3"""Wipe color across display a pixel at a time."""
-    #for i in range(strip.numPixels()):
-        #strip.setPixelColor(i, color)
-        #strip.show()
-        #time.sleep(wait_ms/1000.0)
+defcolorWipe(strip, color, wait_ms=50):
+    """Wipe color across display a pixel at a time."""
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
 
 # def theaterChase(strip, color, wait_ms=50, iterations=10):
 #             for i in range(0, strip.numPixels(), 3):
@@ -140,9 +109,8 @@ if __name__ == '__main__':
           print ("Distance: " + distance)
           print ("direction: " + direction)
           
-            buzz(elevation, distance), direction
             # print ('Color wipe animations.')
-            # colorWipe(strip, Color(255, 0, 0))  # Red wipe
+            colorWipe(strip, Color(255, 255, 255),100)  # Red wipe
             # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
             # colorWipe(strip, Color(0, 0, 255))  # Green wipe
             # print ('Theater chase animations.')
