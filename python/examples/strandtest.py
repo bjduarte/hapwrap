@@ -21,38 +21,37 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
+pulse_on = Color(255, 255, 255)
+pulse_off = Color(0, 0, 0)
+elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6],[12,13,14,15,16,17]]
+num_hearteats = 3
+hearttime = 0.05
+
 def buzz(strip, elevation, distance, direction):
     # elevation = 1,2,3
     # distance 10, 15, 20 ,25  # .35, .7, 1.05, 1.4
     # direction -0,1,2,3,4,5
-    pulse_color = Color(255, 255, 255)
-    pulse_off = Color(0, 0, 0)
-    num_hearteats = 3
-    elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6],[12,13,14,15,16,17]]
-    distSlep = ((distance/5) * .35) * 1000
-    hearttime = 0.05 * 1000
-    print("")
+
+    distSlep = ((distance/5) * .35) 
     pix = elevationL[elevation-1][direction]
-    for i in xrange(num_hearteats): 
-        print("heartbeat number %d" , i)
-        strip.setPixelColor(pix,pulse_color)#on 
+
+    for _ in xrange(num_hearteats): 
+
+        strip.setPixelColor(pix,pulse_on)#on 
         strip.show()
         time.sleep(hearttime)
-        print("on")
+
         strip.setPixelColor(pix,pulse_off)#off
         strip.show()
         time.sleep(hearttime)
-        print("off")
-        strip.setPixelColor(pix,pulse_color)#on
+
+        strip.setPixelColor(pix,pulse_on)#on
         strip.show()
         time.sleep(hearttime)
-        print("on")
+
         strip.setPixelColor(pix,pulse_off)#delay
         strip.show()
         time.sleep(distSlep)
-        print("off")
-    print("donzo")
-
 
 
 
@@ -72,15 +71,11 @@ if __name__ == '__main__':
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     # Intialize the library (must be called once before other functions).
     strip.begin()
-
     print ('Press Ctrl-C to quit.')
-    #if not args.clear:
-    #    print('Use "-c" argument to clear LEDs on exit')
-
     try:
 
         while True:
-          inp = raw_input("\ninput elvation, distance and direction seperated by spaces!")
+          inp = raw_input("\ninput elvation, distance and direction seperated by spaces!\n")
           inpList = inp.split(" ")
           buzz(strip,int(inpList[0]), int(inpList[1]), int(inpList[2]))
 
