@@ -28,27 +28,30 @@ def buzz(strip, elevation, distance, direction):
     pulse_color = Color(255, 255, 255)
     pulse_off = Color(0, 0, 0)
     num_hearteats = 3
-    elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6].[12,13,14,15,16,17]]
+    elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6],[12,13,14,15,16,17]]
     distSlep = ((distance/5) * .35) * 1000
     hearttime = 0.05 * 1000
-
+    print("")
     pix = elevationL[elevation-1][direction]
     for i in xrange(num_hearteats): 
+        print("heartbeat number %d" , i)
         strip.setPixelColor(pix,pulse_color)#on 
         strip.show()
         time.sleep(hearttime)
-
+        print("on")
         strip.setPixelColor(pix,pulse_off)#off
         strip.show()
         time.sleep(hearttime)
-
+        print("off")
         strip.setPixelColor(pix,pulse_color)#on
         strip.show()
         time.sleep(hearttime)
-
+        print("on")
         strip.setPixelColor(pix,pulse_off)#delay
         strip.show()
         time.sleep(distSlep)
+        print("off")
+    print("donzo")
 
 
 
@@ -79,7 +82,7 @@ if __name__ == '__main__':
         while True:
           inp = raw_input("\ninput elvation, distance and direction seperated by spaces!")
           inpList = inp.split(" ")
-          buzz(int(inpList[0]), int(inpList[2]), int(inpList[3]))
+          buzz(strip,int(inpList[0]), int(inpList[1]), int(inpList[2]))
 
 
     except KeyboardInterrupt:
