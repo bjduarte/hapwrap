@@ -8,9 +8,10 @@
 import time
 from neopixel import *
 import argparse
+import sys
 
 # LED strip configuration:
-LED_COUNT      = 24      # Number of LED pixels.
+LED_COUNT      = 18      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -21,44 +22,43 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
 #Define functions which detect object,elevation,distance:
-def buzz(elevation, distance):
-    
+def buzz(elevation, distance, direction):
     pulse_color = Color(255, 0, 0)
     direction_color = Color(0, 255, 0)
     iter =0 
-    if distance[0] == 0:
+
+    if elevation[0] <= 5:
         min_motor=0
-    elif distance[0] == 1:
-        min_motor=8
-    else:
-        min_motor=16
-    main_motor = min_motor+distance[2]
+    elif elevation[0] >= 6 and elevation[0] <= 11:
+        min_motor=6
+    elif elevation[0] >= 12:
+        min_motor=12
+    main_motor = min_motor + distance[2]
     elevation.setPixelColor(main_motor,direction_color)
     elevation.show()
     time.sleep(1.5)
-    while iter<2:
-        for i in range(min_motor,(min_motor+8)):
+    while iter < 2:
+        for i in range(min_motor,(min_motor+6)):
             elevation.setPixelColor(i, pulse_color)
             elevation.show()
         if distance[1]==10:
-            time.sleep(1.5*0.5)
+            time.sleep(0.3)
         if distance[1]==15:
-            time.sleep(1)
+            time.sleep(0.65)
         if distance[1]==20:
             time.sleep(1.5)
         if distance[1]==25:
-            time.sleep(2)
+            time.sleep(1.5)
         iter +=1
 
 
-
-# Define functions which animate LEDs in various ways.
-# def colorWipe(strip, color, wait_ms=50):
-#     """Wipe color across display a pixel at a time."""
-#     for i in range(strip.numPixels()):
-#         strip.setPixelColor(i, color)
-#         strip.show()
-#         time.sleep(wait_ms/1000.0)
+#Define functions which animate LEDs in various ways.
+#def#colorWipe(strip, color, wait_ms=50):
+    #3"""Wipe color across display a pixel at a time."""
+    #for i in range(strip.numPixels()):
+        #strip.setPixelColor(i, color)
+        #strip.show()
+        #time.sleep(wait_ms/1000.0)
 
 # def theaterChase(strip, color, wait_ms=50, iterations=10):
 #             for i in range(0, strip.numPixels(), 3):
@@ -114,10 +114,13 @@ if __name__ == '__main__':
     # Process arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+    parser.add_argument('elevation')
+    parser.add_argument('distance')
+    parser.add_argument('direction')
     args = parser.parse_args()
 
-    #demo_input [object (0-2),distance (10-25),orientation (0-8)
-    demo_input = [[0,20,3],[1,10,7],[2,25,0]]
+    #demo_input [elevation (0-2),distance (10-25),direction (0-5)
+    demo_input = [[0,20,3],[1,10,5],[2,25,0]]
 
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
@@ -131,9 +134,13 @@ if __name__ == '__main__':
     try:
 
         while True:
-            print('Eyes On Demo')
-            for pattern in demo_input:
-                buzz(strip,pattern)
+          print('Eyes On Demo')
+          print('\nEnter elevation, distance, direction:')
+          print ("Elevation: " + elevation)
+          print ("Distance: " + distance)
+          print ("direction: " + direction)
+          
+            buzz(elevation, distance), direction
             # print ('Color wipe animations.')
             # colorWipe(strip, Color(255, 0, 0))  # Red wipe
             # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
