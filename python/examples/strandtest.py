@@ -21,34 +21,33 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
 #Define functions which detect object,elevation,distance:
-def buzz(strip,combo):
-    
+def buzz(elevation, distance):
     
     pulse_color = Color(255, 0, 0)
     direction_color = Color(0, 255, 0)
     iter =0 
-    if combo[0]==0:
+    if distance[0] == 0:
         min_motor=0
-    elif combo[0]==1:
+    elif distance[0] == 1:
         min_motor=8
     else:
         min_motor=16
-    main_motor = min_motor+combo[2]
-    strip.setPixelColor(main_motor,direction_color)
-    strip.show()
-    time.sleep(wait_ms/1000.0)
-    while iter<3:
-        for i in range(min_motor,min_motor+8)):
-        strip.setPixelColor(i, pulse_color)
-        strip.show()
-        if combo[1]==10:
-            time.sleep(wait_ms/1000.0)
-        if combo[1]==15:
-            time.sleep(wait_ms/500.0)
-        if combo[1]==20:
-            time.sleep(wait_ms)
-        if combo[1]==10:
-            time.sleep(wait_ms*2)
+    main_motor = min_motor+distance[2]
+    elevation.setPixelColor(main_motor,direction_color)
+    elevation.show()
+    time.sleep(1.5)
+    while iter<2:
+        for i in range(min_motor,(min_motor+8)):
+            elevation.setPixelColor(i, pulse_color)
+            elevation.show()
+        if distance[1]==10:
+            time.sleep(1.5*0.5)
+        if distance[1]==15:
+            time.sleep(1)
+        if distance[1]==20:
+            time.sleep(1.5)
+        if distance[1]==25:
+            time.sleep(2)
         iter +=1
 
 
