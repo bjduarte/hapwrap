@@ -113,11 +113,11 @@ def buzz(elevation, distance, direction):
 if __name__ == '__main__':
     # Process arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
-    parser.add_argument('elevation')
-    parser.add_argument('distance')
-    parser.add_argument('direction')
-    args = parser.parse_args()
+    #parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+    parser.add_argument('--elevation',action='store_true', dest='elevation')
+    parser.add_argument('--distance',action='store_true', dest='distance')
+    parser.add_argument('--direction',action='store_true', dest='direction')
+    args= parser.parse_known_args(['--elevation','--distance','--direction'])
 
     #demo_input [elevation (0-2),distance (10-25),direction (0-5)
     demo_input = [[0,20,3],[1,10,5],[2,25,0]]
@@ -128,8 +128,8 @@ if __name__ == '__main__':
     strip.begin()
 
     print ('Press Ctrl-C to quit.')
-    if not args.clear:
-        print('Use "-c" argument to clear LEDs on exit')
+    #if not args.clear:
+    #    print('Use "-c" argument to clear LEDs on exit')
 
     try:
 
@@ -140,7 +140,7 @@ if __name__ == '__main__':
           print ("Distance: " + distance)
           print ("direction: " + direction)
           
-            buzz(elevation, distance), direction
+          buzz(elevation, distance, direction)
             # print ('Color wipe animations.')
             # colorWipe(strip, Color(255, 0, 0))  # Red wipe
             # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
