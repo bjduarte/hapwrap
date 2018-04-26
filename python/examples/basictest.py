@@ -22,7 +22,8 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
 
-defcolorWipe(strip, color, wait_ms=50):
+def colorWipe(strip, color, wait_ms=50):
+
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
@@ -81,12 +82,12 @@ defcolorWipe(strip, color, wait_ms=50):
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
-    parser.add_argument('elevation')
-    parser.add_argument('distance')
-    parser.add_argument('direction')
-    args = parser.parse_args()
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+    #parser.add_argument('elevation')
+    #parser.add_argument('distance')
+    #parser.add_argument('direction')
+    #args = parser.parse_args()
 
     #demo_input [elevation (0-2),distance (10-25),direction (0-5)
     demo_input = [[0,20,3],[1,10,5],[2,25,0]]
@@ -97,20 +98,20 @@ if __name__ == '__main__':
     strip.begin()
 
     print ('Press Ctrl-C to quit.')
-    if not args.clear:
-        print('Use "-c" argument to clear LEDs on exit')
+    #if not args.clear:
+    #    print('Use "-c" argument to clear LEDs on exit')
 
     try:
 
-        while True:
-          print('Eyes On Demo')
-          print('\nEnter elevation, distance, direction:')
-          print ("Elevation: " + elevation)
-          print ("Distance: " + distance)
-          print ("direction: " + direction)
-          
+    #    while True:
+    #   print('Eyes On Demo')
+    #     print('\nEnter elevation, distance, direction:')
+    #    print ("Elevation: " + elevation)
+    #      print ("Distance: " + distance)
+    #      print ("direction: " + direction)
+    #      
             # print ('Color wipe animations.')
-            colorWipe(strip, Color(255, 255, 255),100)  # Red wipe
+        colorWipe(strip, Color(255, 255, 255),2000)  # Red wipe
             # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
             # colorWipe(strip, Color(0, 0, 255))  # Green wipe
             # print ('Theater chase animations.')
@@ -123,5 +124,5 @@ if __name__ == '__main__':
             # theaterChaseRainbow(strip)
 
     except KeyboardInterrupt:
-        if args.clear:
-            colorWipe(strip, Color(0,0,0), 10)
+       # if args.clear:
+       colorWipe(strip, Color(0,0,0), 10)
