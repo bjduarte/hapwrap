@@ -11,7 +11,7 @@ import argparse
 import sys
 
 # LED strip configuration:
-LED_COUNT      = 18      # Number of LED pixels.
+LED_COUNT      = 24      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -23,14 +23,14 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
-elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6],[12,13,14,15,16,17]]
-num_heartbeats = 3
+elevationL= [[0,1,2,3,4,5,6,7],[15,14,13,12,11,10,9,8],[16,17,18,19,20,21,22,23]]
+num_hearteats = 3
 hearttime = 0.05
 
 def buzz(strip, elevation, distance, direction):
     # elevation = 1,2,3
     # distance 10, 15, 20 ,25  # .35, .7, 1.05, 1.4
-    # direction -0,1,2,3,4,5
+    # direction 0,1,2,3,4,5,6,7
 
     distSlep = ((distance/5) * .35) 
     pix = elevationL[elevation-1][direction]
