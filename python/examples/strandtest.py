@@ -24,7 +24,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
 elevationL= [[0,1,2,3,4,5],[11,10,9,8,7,6],[12,13,14,15,16,17]]
-num_hearteats = 3
+num_heartbeats = 3
 hearttime = 0.05
 
 def buzz(strip, elevation, distance, direction):
@@ -35,7 +35,7 @@ def buzz(strip, elevation, distance, direction):
     distSlep = ((distance/5) * .35) 
     pix = elevationL[elevation-1][direction]
 
-    for _ in xrange(num_hearteats): 
+    for _ in xrange(num_heartbeats): 
 
         strip.setPixelColor(pix,pulse_on)#on 
         strip.show()
@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-    # Intialize the library (must be called once before other functions).
+    # Initialize the library (must be called once before other functions).
     strip.begin()
     print ('Press Ctrl-C to quit.')
     try:

@@ -23,10 +23,6 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
 def colorWipe(strip, color, wait_ms=50):
-<<<<<<< HEAD
-=======
-
->>>>>>> 1e9248040c5f2cec1232c1a81c03978cf551ecd0
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
