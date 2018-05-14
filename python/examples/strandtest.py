@@ -24,7 +24,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
 elevationL= [[0,1,2,3,4,5,6,7],[15,14,13,12,11,10,9,8],[16,17,18,19,20,21,22,23]]
-num_hearteats = 3
+num_heartbeats = 3
 hearttime = 0.05
 
 def buzz(strip, elevation, distance, direction):

@@ -31,33 +31,33 @@ patterns = {
 
 
 def heart_beat(elevation, distance, direction):
-  pix = [elevation][direction]
+  pix = elevation = patterns.get('elevation')[ele]
 
-    for _ in xrange(heart_beat_pulse): 
+  for _ in xrange(heart_beat_pulse): 
 
-        strip.setPixelColor(pix,pulse_on)
-        print ("beat1")
-        strip.show()
-        time.sleep(heart_beat_gap)
+    strip.setPixelColor(pix,pulse_on)
+    print ("beat1")
+    strip.show()
+    time.sleep(heart_beat_gap)
 
-        strip.setPixelColor(pix,pulse_off)
-        print ('gap')
-        strip.show()
-        time.sleep(heart_beat_gap)
+    strip.setPixelColor(pix,pulse_off)
+    print ('gap')
+    strip.show()
+    time.sleep(heart_beat_gap)
 
-        strip.setPixelColor(pix,pulse_on)
-        print ('beat2')
-        strip.show()
-        time.sleep(heart_beat_gap)
+    strip.setPixelColor(pix,pulse_on)
+    print ('beat2')
+    strip.show()
+    time.sleep(heart_beat_gap)
 
-        strip.setPixelColor(pix,pulse_off)
-        print ('gap')
-        strip.show()
-        time.sleep(0.35)
-        print ('heart beat1')
+    strip.setPixelColor(pix,pulse_off)
+    print ('gap')
+    strip.show()
+    time.sleep(0.35)
+    print ('heart beat1')
 
 
-def get_pattern(strip, ele, dist, dir):
+def get_pattern(ele, dist, dir):
   elevation = patterns.get('elevation')[ele]
   distance = patterns.get('distance')[dist]
 
@@ -76,7 +76,7 @@ def get_pattern(strip, ele, dist, dir):
 
 if __name__ == '__main__':
   # Create NeoPixel object with appropriate configuration.
-  trip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+  strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
   # Initialize the library (must be called once before other functions).
   strip.begin()
   print ('Press Ctrl-C to quit.')
@@ -85,8 +85,7 @@ if __name__ == '__main__':
     while True:
       objectInput = input("\nEnter the elvation, distance, and direction!\n")
       objectPosition = objectInput.split(" ")
-      pat = get_pattern(int(objectPosition[0]), int(objectPosition[1]), int(objectPosition[2]))
-      print('input: ', pat)
+      xget_pattern(int(objectPosition[0]), int(objectPosition[1]), int(objectPosition[2]))
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)
