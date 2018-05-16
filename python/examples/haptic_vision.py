@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import time
 import json
@@ -19,8 +19,9 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
+elevationl = [[0,1,2,3,4,5, 6, 7],[15, 14, 13, 12, 11, 10, 9, 8],[16, 17, 18, 19, 20, 21, 22, 23]]
 heart_beat_pulse = 3
-heart__beat_gap = 0.05
+heart_beat_gap = 0.05
 
 # Dictionary containing object positions
 patterns = {
@@ -30,9 +31,9 @@ patterns = {
 }
 
 
-def heart_beat(elevation, distance, direction):
-  pix = elevation = patterns.get('elevation')[ele]
-
+def heart_beat(strip, elevation, distance, direction):
+  pix = direction
+  
   for _ in xrange(heart_beat_pulse): 
 
     strip.setPixelColor(pix,pulse_on)
@@ -57,21 +58,13 @@ def heart_beat(elevation, distance, direction):
     print ('heart beat1')
 
 
-def get_pattern(ele, dist, dir):
+def get_pattern(strip, ele, dist, dir):
   elevation = patterns.get('elevation')[ele]
   distance = patterns.get('distance')[dist]
-
-  if (elevation == 1):
-    direction = patterns.get('direction')[dir]
-  elif (elevation == 2):
-    direction = (patterns.get('direction')[dir] + 8)
-  else:
-    direction = (patterns.get('direction')[dir] + 8)
+  direction = patterns.get('direction')[elevation-1][dir-1]
 
   #print (elevation, distance, direction)
-  heart_beat(elevation, distance, direction)
-
-  return (elevation, distance, direction)
+  heart_beat(strip, elevation, distance, direction)
 
 
 if __name__ == '__main__':
@@ -83,9 +76,9 @@ if __name__ == '__main__':
 
   try:
     while True:
-      objectInput = input("\nEnter the elvation, distance, and direction!\n")
+      objectInput = raw_input("\nEnter the elvation, distance, and direction!\n")
       objectPosition = objectInput.split(" ")
-      xget_pattern(int(objectPosition[0]), int(objectPosition[1]), int(objectPosition[2]))
+      get_pattern(strip, int(objectPosition[0]), int(objectPosition[1]), int(objectPosition[2]))
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)
