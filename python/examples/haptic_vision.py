@@ -16,54 +16,64 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
-elevationl = [[0,1,2,3,4,5, 6, 7],[15, 14, 13, 12, 11, 10, 9, 8],[16, 17, 18, 19, 20, 21, 22, 23]]
 heart_beat_pulse = 3
-heart_beat_gap = 0.05
+heart_beat_gap = 0.05 # gap between beats
+
 
 # Dictionary containing object positions
 patterns = {
   'elevation' : [1, 2, 3],
   'distance' : [10, 15, 20, 25], 
-  'direction' : [[0,1,2,3,4,5, 6, 7],[15, 14, 13, 12, 11, 10, 9, 8],[16, 17, 18, 19, 20, 21, 22, 23]]
+  'direction' : [[0, 45, 90, 135, 180, 225, 270, 360],[360, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 360]]
 }
 
 
 def heart_beat(strip, elevation, distance, direction):
   pix = direction
-  
-  for _ in xrange(heart_beat_pulse): 
+  count = 1
+  beat = 0
 
+  if (distance == 10):
+    beat = 0.35
+  elif (distance == 15):
+    beat = 0.70
+  elif (distance == 20):
+    beat = 1.05
+  elif (distance == 25):
+    beat = 1.40
+
+  for _ in xrange(heart_beat_pulse): 
     strip.setPixelColor(pix,pulse_on)
     print ("beat1")
     strip.show()
     time.sleep(heart_beat_gap)
 
     strip.setPixelColor(pix,pulse_off)
-    print ('gap')
     strip.show()
-    time.sleep(heart_beat_gap)
+    time.sleep(beat)
+    print ('gap1')
+    print('Heart Beat Sleep: ' + str(beat))
 
     strip.setPixelColor(pix,pulse_on)
-    print ('beat2')
     strip.show()
     time.sleep(heart_beat_gap)
+    print ('beat2' + str(heart_beat_gap))
 
     strip.setPixelColor(pix,pulse_off)
-    print ('gap')
     strip.show()
-    time.sleep(0.35)
-    print ('heart beat1')
-
+    time.sleep(heart_beat_gap)
+    print ('gap2' + str(heart_beat_gap))
+    print ('heart beat: ',+ count)
+    count+=1
 
 def get_pattern(strip, ele, dist, dir):
   elevation = patterns.get('elevation')[ele]
   distance = patterns.get('distance')[dist]
-  direction = patterns.get('direction')[elevation-1][dir-1]
+  direction = patterns.get('direction')[elevation-1][dir]
 
-  #print (elevation, distance, direction)
+  print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
   heart_beat(strip, elevation, distance, direction)
 
 
