@@ -18,7 +18,7 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
-heart_beat_pulse = 3
+heartbeat_pulse = 3
 heartbeat_gap = 0.050 # gap between beats
 
 # Dictionary containing object positions
@@ -50,8 +50,6 @@ def heart_beat(strip, elevation, distance, direction):
       strip.setPixelColor(pix,pulse_off)
       strip.show()
       time.sleep(beat)
-=======
->>>>>>> ed4fd1fa2d20701c4978cc193269b71404780060
 
 
 # Heartbeat pattern for 10 through 20 feet
