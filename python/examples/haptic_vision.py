@@ -19,7 +19,7 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
 heartbeat_pulse = 3
-heartbeat_gap = 0.050 # gap between beats
+heartbeat_gap = 0.07 # gap between beats
 
 # Dictionary containing object positions
 patterns = {
@@ -37,15 +37,16 @@ def heart_beat(strip, elevation, distance, direction):
   elif (distance == 15):
     beat = 0.650
   elif (distance == 20):
-    beat = 1.500
+    beat = 1.000
   elif (distance == 25):
-    beat = 1.500
+    beat = 1.00
+    heart_gap = 0.5
 
 # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
       strip.setPixelColor(pix,pulse_on)
       strip.show()
-      time.sleep(heartbeat_gap)
+      time.sleep(heart_gap)
 
       strip.setPixelColor(pix,pulse_off)
       strip.show()
