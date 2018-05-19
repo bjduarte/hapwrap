@@ -18,9 +18,8 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
-heart_beat_pulse = 3
-heart_beat_gap = 0.05 # gap between beats
-
+heartbeat_pulse = 3
+heartbeat_gap = 0.050 
 
 # Dictionary containing object positions
 patterns = {
@@ -29,44 +28,48 @@ patterns = {
   'direction' : [[0, 45, 90, 135, 180, 225, 270, 360],[360, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 360]]
 }
 
-
 def heart_beat(strip, elevation, distance, direction):
-  pix = direction
-  count = 1
+  pix = direction/45
   beat = 0
 
   if (distance == 10):
-    beat = 0.35
+    beat = 0.300
   elif (distance == 15):
-    beat = 0.70
+    beat = 0.650
   elif (distance == 20):
-    beat = 1.05
+    beat = 1.500
   elif (distance == 25):
-    beat = 1.40
+    beat = 1.500
 
-  for _ in xrange(heart_beat_pulse): 
+# sonar pulse for 25 feet
+    for i in range(heartbeat_pulse):
+      strip.setPixelColor(pix,pulse_on)
+      strip.show()
+      time.sleep(heartbeat_gap)
+
+      strip.setPixelColor(pix,pulse_off)
+      strip.show()
+      time.sleep(beat)
+
+
+# Heartbeat pattern for 10 through 20 feet
+  for x in range(heartbeat_pulse): 
     strip.setPixelColor(pix,pulse_on)
-    print ("beat1")
     strip.show()
-    time.sleep(heart_beat_gap)
+    time.sleep(heartbeat_gap)
+
+    strip.setPixelColor(pix,pulse_off)
+    strip.show()
+    time.sleep(heartbeat_gap)
+
+    strip.setPixelColor(pix,pulse_on)
+    strip.show()
+    time.sleep(heartbeat_gap)
 
     strip.setPixelColor(pix,pulse_off)
     strip.show()
     time.sleep(beat)
-    print ('gap1')
-    print('Heart Beat Sleep: ' + str(beat))
 
-    strip.setPixelColor(pix,pulse_on)
-    strip.show()
-    time.sleep(heart_beat_gap)
-    print ('beat2' + str(heart_beat_gap))
-
-    strip.setPixelColor(pix,pulse_off)
-    strip.show()
-    time.sleep(heart_beat_gap)
-    print ('gap2' + str(heart_beat_gap))
-    print ('heart beat: ',+ count)
-    count+=1
 
 def get_pattern(strip, ele, dist, dir):
   elevation = patterns.get('elevation')[ele]
