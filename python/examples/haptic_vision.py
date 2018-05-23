@@ -25,11 +25,12 @@ heartbeat_gap = 0.07 # gap between beats
 patterns = {
   'elevation' : [1, 2, 3],
   'distance' : [10, 15, 20, 25], 
-  'direction' : [[0, 45, 90, 135, 180, 225, 270, 360],[360, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 360]]
+  'direction' : [[0, 45, 90, 135, 180, 225, 270, 360],[360, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 360]],
+  'pin_out' : [[0,1,2,3,4,5,6,7],[8,9,10,11,12,13,14,15],[16,17,18,19,20,21,22,23]]
 }
 
 def heart_beat(strip, elevation, distance, direction):
-  pix = direction/45
+  pix = patterns.get('pin_out')[elevation-1][direction/45]
   beat = 0
 
   if (distance == 10):
