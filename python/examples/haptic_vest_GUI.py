@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 import wx
 
@@ -23,17 +24,17 @@ class Haptic_Vest(wx.Frame):
 
         self.elevationBox = wx.RadioBox(panel, label = 'ElevationRadioBox', choices = elevationList,
             majorDimension = 1, style = wx.RA_SPECIFY_COLS)
-        self.elevationBox.Bind(wx.EVT_RADIOBOX, self.onElevationRadioBox)
+        self.elevationBox.Bind(wx.EVT_RADIOBOX, self.sendPattern)
 
 
         self.distanceBox = wx.RadioBox(panel, label = 'DistanceRadioBox', choices = distanceList,
             majorDimension = 1, style = wx.RA_SPECIFY_COLS)
-        self.distanceBox.Bind(wx.EVT_RADIOBOX, self.onDistanceRadioBox)
+        self.distanceBox.Bind(wx.EVT_RADIOBOX, self.sendPattern)
 
 
         self.directionBox = wx.RadioBox(panel, label = 'directionRadioBox', choices = directionList,
             majorDimension = 1, style = wx.RA_SPECIFY_COLS)
-        self.directionBox.Bind(wx.EVT_RADIOBOX, self.onDirectionRadioBox)
+        self.directionBox.Bind(wx.EVT_RADIOBOX, self.sendPattern)
 
 
         fgs.AddMany([(self.elevationBox, 1, wx.EXPAND), (self.distanceBox, 1, wx.EXPAND), (self.directionBox, 1, wx.EXPAND)])
@@ -42,14 +43,19 @@ class Haptic_Vest(wx.Frame):
         hbox.Add(fgs, proportion = 2, flag = wx.ALL|wx.EXPAND, border = 15)
         panel.SetSizer(hbox)
 
-    def onDistanceRadioBox(self,e):
-        print(self.distanceBox.GetStringSelection(),' is at index ',self.distanceBox.GetSelection())
 
-    def onDirectionRadioBox(self, e):
-        print(self.directionRadioBox.GetStringSelection(), 'is at index ', self.directionRadioBox.GetSelection())
+    def sendPattern(self, e):
+        # print(self.elevationBox.GetStringSelection(),' is at index ',self.elevationBox.GetSelection())
+        
+        ele = self.elevationBox.GetSelection()
+        print(ele)
+        
+        dist = self.distanceBox.GetSelection()
+        print(dist)
+        
+        dir = self.directionBox.GetSelection()
+        print(dir)
 
-    def onElevationRadioBox(self, e):
-        print(self.elevationBox.GetStringSelection(),' is at index ',self.elevationBox.GetSelection())
 
 # Run the program
 if __name__ == "__main__":
