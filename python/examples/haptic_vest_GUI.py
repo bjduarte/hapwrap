@@ -45,16 +45,14 @@ class Haptic_Vest(wx.Frame):
 
 
     def sendPattern(self, e):
-        # print(self.elevationBox.GetStringSelection(),' is at index ',self.elevationBox.GetSelection())
+        print(self.elevationBox.GetStringSelection(),' is at index ',self.elevationBox.GetSelection())
         
         ele = self.elevationBox.GetSelection()
-        print(ele)
         
         dist = self.distanceBox.GetSelection()
-        print(dist)
         
         dir = self.directionBox.GetSelection()
-        print(dir)
+        print('Elevation: ', ele, 'Distance: ', dist, 'Direction: ', dir)
 
 
 # Run the program
