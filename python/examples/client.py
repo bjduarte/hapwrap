@@ -1,4 +1,6 @@
-import bluetooth
+#!/usr/bin/python3
+
+from bluetooth import *
 
 bd_addr = "01:23:45:67:89:AB"
 
