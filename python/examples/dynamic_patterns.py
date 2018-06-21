@@ -25,58 +25,27 @@ heartbeat_gap = 0.07 # gap between beats
 # person begins at 0 degrees 25 feet away
 # walks towards you and moves to the left, 10 feet away
 # continues past to 25 feet
-def person_approaches(strip, ele):
-  motion = [[3, 2, 1, 0, 1, 2, 3],[0, 0, 45, 90, 135, 180, 180]]
-  i=0 
-  j=0
-  beat = 0
+def personApproaches(strip, elevation):
+  distance = [3, 2, 1, 0, 1, 2, 3]
+  direction = [0, 0, 45, 90, 135, 180, 180]
 
+  for i in range(len(distance)):
+    for j in range(len(direction)):
+      strip.setPixelColor(j/45, pulse_on)
+      strip.show()
+      time.sleep(heartbeat_gap)
 
-  for x in range(7): 
-    pix = motion[i][j]
-    
-    if (motion[i][] == 0):
-      beat = 0.300
-    elif (motion[] == 1):
-      beat = 0.650
-    elif (motion == 2):
-      beat = 1.000
-    elif (motion == 3):
-      beat = 1.00
-      heart_gap = 0.5
+      strip.setPixelColor(j/45, pulse_off)
+      strip.show()
+      time.sleep(heartbeat_gap)
 
-  # sonar pulse for 25 feet
-      for i in range(heartbeat_pulse):
-        strip.setPixelColor(pix,pulse_on)
-        strip.show()
-        time.sleep(heart_gap)
+      strip.setPixelColor(j/45, pulse_on)
+      strip.show()
+      time.sleep(heartbeat_gap)
 
-        strip.setPixelColor(pix,pulse_off)
-        strip.show()
-        time.sleep(beat)
-
-    strip.setPixelColor(pix,pulse_on)
-    strip.show()
-    print(pix)
-    time.sleep(heartbeat_gap)
-
-    strip.setPixelColor(pix,pulse_off)
-    strip.show()
-    print(pix)
-    time.sleep(heartbeat_gap)
-
-    strip.setPixelColor(pix,pulse_on)
-    strip.show()
-    print(pix)
-    time.sleep(heartbeat_gap)
-
-    strip.setPixelColor(pix,pulse_off)
-    strip.show()
-    print(pix)
-    time.sleep(beat)
-    i+=1
-    j+=1
-
+      strip.setPixelColor(j/45, pulse_off)
+      strip.show()
+      time.sleep(0.300)
 
 if __name__ == '__main__':
   # Create NeoPixel object with appropriate configuration.
@@ -86,7 +55,7 @@ if __name__ == '__main__':
   print ('Press Ctrl-C to quit.')
   try:
     while(True):
-      person_approaches(strip, 1)
+      personApproaches(strip, 1)
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)
