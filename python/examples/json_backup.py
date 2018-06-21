@@ -25,18 +25,19 @@ for i in elevation:
 # generates a random number and calls a pattern
 # tries to check for duplicate random numbers
 # we will remove the while loop and replace with "next button" event handler from GUI
-while (len(visitedPattern) < len(patternList)):
-  rNum = random.randint(0, 95)
+while (len(visitedPattern) < 48):
+  rNum = random.randint(0, 48)
   while (rNum not in visitedPattern):
     visitedPattern.append(rNum)
     currentPattern = patternList[rNum]
     # print(currentPattern)
+# print(len(visitedPattern))
 
 # keep track of participants answers
 # radio button presses will be read in and saved 
 incorrect_response = [elevation, distance, direction]
 user_response = []
-user_response.appepynd(incorrect_response)
+user_response.append(incorrect_response)
 
 # creates a dictionary to keep track of visited patterns for recall
 patternDict = {
@@ -45,8 +46,6 @@ patternDict = {
   'current pattern' : currentPattern,
   'user response' : user_response
 }
-
-
 
 # write to JSON
 # list of patterns, randomly generated numbers for patterns, current pattern
@@ -61,5 +60,5 @@ f.close()
 # f.close()
 #
 # for i in fin:
-#     print(fin['visited patterns'])
+#     print(fin['visited patterns'], fin['user response'])
 #
