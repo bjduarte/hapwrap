@@ -76,15 +76,6 @@ def heart_beat(strip, elevation, distance, direction):
     strip.show()
     time.sleep(beat)
 
-def get_pattern(strip, ele, dist, dir):
-  elevation = patterns.get('elevation')[ele]
-  distance = patterns.get('distance')[dist]
-  direction = patterns.get('direction')[elevation-1][dir]
-
-  print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-  heart_beat(strip, elevation, distance, direction)
-
-
 def dynamic_pattern_handler(strip):
   personApproachesFront = [
   [2, 3, 0], 
@@ -100,11 +91,8 @@ def dynamic_pattern_handler(strip):
     distance = i[1]
     direction = i[2]
 
-    print('beat: ' + str(i))
     print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
     heart_beat(strip, elevation, distance, direction)
-
-
 
 
 if __name__ == '__main__':
