@@ -28,22 +28,23 @@ heartbeat_gap = 0.07 # gap between beats
 def personApproaches(strip, elevation):
   distance = [3, 2, 1, 0, 1, 2, 3]
   direction = [0, 0, 45, 90, 135, 180, 180]
+  motion = [[3, 2, 1, 0, 1, 2, 3], [0, 0, 45, 90, 135, 180, 180]]
 
   for i in range(len(distance)):
     for j in range(len(direction)):
-      strip.setPixelColor(j/45, pulse_on)
+      strip.setPixelColor(motion[i][j/45], pulse_on)
       strip.show()
       time.sleep(heartbeat_gap)
 
-      strip.setPixelColor(j/45, pulse_off)
+      strip.setPixelColor(motion[i][j/45], pulse_off)
       strip.show()
       time.sleep(heartbeat_gap)
 
-      strip.setPixelColor(j/45, pulse_on)
+      strip.setPixelColor(motion[i][j/45], pulse_on)
       strip.show()
       time.sleep(heartbeat_gap)
 
-      strip.setPixelColor(j/45, pulse_off)
+      strip.setPixelColor(motion[i][j/45], pulse_off)
       strip.show()
       time.sleep(0.300)
 
@@ -55,7 +56,7 @@ if __name__ == '__main__':
   print ('Press Ctrl-C to quit.')
   try:
     while(True):
-      personApproaches(strip, 1)
+      personApproaches(strip, 2)
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)

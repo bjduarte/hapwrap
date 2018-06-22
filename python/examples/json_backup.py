@@ -6,8 +6,11 @@ import random
 
 # lists of all the possible components that make up a pattern
 elevation = ['chair', 'vehicle', 'person']
+# elevation = [0, 1, 2]
+# distance = [0, 1, 2, 3]
 distance = [10, 15, 20, 25]
 direction = [0, 45, 90, 135, 180, 225, 270, 315]
+# direction = [0, 1, 2, 3, 4, 5, 6, 7]
 randNumList = []
 visitedPattern = []
 
@@ -24,7 +27,7 @@ for i in elevation:
     for k in direction:
       pattern = [num, i, j, k]
       patternList.append(pattern)
-      # patternDict['pattern list'] = patternList
+      patternDict['pattern list'] = patternList
       num += 1
 
 # generates a random number and calls a pattern
