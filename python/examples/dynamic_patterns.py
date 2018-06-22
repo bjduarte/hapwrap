@@ -18,35 +18,94 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
-
+heartbeat_pulse = 3
 heartbeat_gap = 0.07 # gap between beats
 
-# person approaching
-# person begins at 0 degrees 25 feet away
-# walks towards you and moves to the left, 10 feet away
-# continues past to 25 feet
-def personApproaches(strip, elevation):
-  distance = [3, 2, 1, 0, 1, 2, 3]
-  direction = [0, 0, 45, 90, 135, 180, 180]
-  motion = [[3, 2, 1, 0, 1, 2, 3], [0, 0, 45, 90, 135, 180, 180]]
+# Dictionary containing object positions
+patterns = {
+  'elevation' : [1, 2, 3],
+  'distance' : [10, 15, 20, 25], 
+  'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
+  'pin_out' : [[0,1,2,3,4,5,6,7],[8,9,10,11,12,13,14,15],[16,17,18,19,20,21,22,23]]
+}
 
-  for i in range(len(distance)):
-    for j in range(len(direction)):
-      strip.setPixelColor(motion[i][j/45], pulse_on)
-      strip.show()
-      time.sleep(heartbeat_gap)
+def heart_beat(strip, elevation, distance, direction):
+  print(elevation)
+  print(distance)
+  print(direction)
+  pix = patterns.get('pin_out')[elevation-1][direction/45]
+  print(pix)
+  beat = 0
 
-      strip.setPixelColor(motion[i][j/45], pulse_off)
-      strip.show()
-      time.sleep(heartbeat_gap)
+  if (distance == 10):
+    beat = 0.300
+  elif (distance == 15):
+    beat = 0.650
+  elif (distance == 20):
+    beat = 1.000
+  elif (distance == 25):
+    beat = 1.00
+    heart_gap = 0.5
 
-      strip.setPixelColor(motion[i][j/45], pulse_on)
+# sonar pulse for 25 feet
+    for i in range(heartbeat_pulse):
+      strip.setPixelColor(pix,pulse_on)
       strip.show()
-      time.sleep(heartbeat_gap)
+      time.sleep(heart_gap)
 
-      strip.setPixelColor(motion[i][j/45], pulse_off)
+      strip.setPixelColor(pix,pulse_off)
       strip.show()
-      time.sleep(0.300)
+      time.sleep(beat)
+
+
+# Heartbeat pattern for 10 through 20 feet
+  for x in range(heartbeat_pulse): 
+    strip.setPixelColor(pix,pulse_on)
+    strip.show()
+    time.sleep(heartbeat_gap)
+
+    strip.setPixelColor(pix,pulse_off)
+    strip.show()
+    time.sleep(heartbeat_gap)
+
+    strip.setPixelColor(pix,pulse_on)
+    strip.show()
+    time.sleep(heartbeat_gap)
+
+    strip.setPixelColor(pix,pulse_off)
+    strip.show()
+    time.sleep(beat)
+
+def get_pattern(strip, ele, dist, dir):
+  elevation = patterns.get('elevation')[ele]
+  distance = patterns.get('distance')[dist]
+  direction = patterns.get('direction')[elevation-1][dir]
+
+  print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+  heart_beat(strip, elevation, distance, direction)
+
+
+def dynamic_pattern_handler(strip):
+  personApproachesFront = [
+  [2, 3, 0], 
+  [2, 2, 0], 
+  [2, 1, 1], 
+  [2, 0, 2], 
+  [2, 1, 3], 
+  [2, 2, 4], 
+  [2, 3, 4]]
+
+  for i in personApproachesFront:
+    elevation = i[0]
+    distance = i[1]
+    direction = i[2]
+
+    print('beat: ' + str(i))
+    print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+    heart_beat(strip, elevation, distance, direction)
+
+
+
 
 if __name__ == '__main__':
   # Create NeoPixel object with appropriate configuration.
@@ -54,9 +113,12 @@ if __name__ == '__main__':
   # Initialize the library (must be called once before other functions).
   strip.begin()
   print ('Press Ctrl-C to quit.')
+
+
   try:
-    while(True):
-      personApproaches(strip, 2)
+    dynamic_pattern_handler(strip)
+
+
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)
