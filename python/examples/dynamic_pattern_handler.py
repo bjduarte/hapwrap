@@ -4,6 +4,7 @@ import time
 import json
 import sys
 from neopixel import *
+from dynamic_pattern_list_builder import dynamic_pattern_list_builder
 
 
 # LED strip configuration:
@@ -88,22 +89,15 @@ def heart_beat(strip, elevation, distance, direction):
     time.sleep(beat)
 
 def dynamic_pattern_handler(strip):
-  personApproachesFront = [
-  [2, 3, 0], 
-  [2, 2, 0], 
-  [2, 1, 1], 
-  [2, 0, 2], 
-  [2, 1, 3], 
-  [2, 2, 4], 
-  [2, 3, 4]]
+  dynamicPatterns = dynamic_pattern_list_builder
 
-  for i in personApproachesFront:
-    elevation = i[0]
-    distance = i[1]
-    direction = i[2]
+  for beat in dynamicPatterns:
+    elevation = beat[0]
+    distance = beat[1]
+    direction = beat[2]
 
     print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-    heart_beat(strip, elevation, distance, direction)
+    # heart_beat(strip, elevation, distance, direction)
 
 
 if __name__ == '__main__':
