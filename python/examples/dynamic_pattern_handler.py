@@ -3,8 +3,9 @@
 import time
 import json
 import sys
+import random
 from neopixel import *
-from dynamic_pattern_list_builder import dynamic_pattern_list_builder
+from dynamic_pattern_list_builder import *
 
 
 # LED strip configuration:
@@ -30,23 +31,32 @@ patterns = {
   'pin_out' : [[0,1,2,3,4,5,6,7],[8,9,10,11,12,13,14,15],[16,17,18,19,20,21,22,23]]
 }
 
-DynamicPatternDict = {}
+# global list declarations and class initialization
+dynamicPattern = Dynamic_pattern_list_builder() # class initialization
+pat = dynamicPattern.pattern_builder() # dynamic_pattern declaration
+randNumList = [] # list of random numbers
+visitedPattern = [] # list of visited patterns
+dList = [] # list of keys
 
-f = open('dynamic_pattern_list.json', 'r')
-fin = json.load(f)
-f.close()
-
-for i in fin:
-    print(fin['dynamic patterns'])
+# create list of dictionary keys
+for i in pat:
+  dList.append(i)
 
 
+# json handler to read in dictionary of dynamic patterns
+#f = open('dynamic_pattern_list.json', 'r')
+#fin = json.load(f)
+#f.close()
 
+#for i in fin:
+#    print(fin['dynamic patterns'])
+
+# creates the heartbeat pulse
+# handles 10, 15, 20  feet heartbeat patterns
+# if 25 feet, creates sonar pulse
 def heart_beat(strip, elevation, distance, direction):
-  print(elevation)
-  print(distance)
-  print(direction)
   pix = patterns.get('pin_out')[elevation-1][direction/45]
-  print(pix)
+
   beat = 0
 
   if (distance == 10):
@@ -69,7 +79,6 @@ def heart_beat(strip, elevation, distance, direction):
       strip.show()
       time.sleep(beat)
 
-
 # Heartbeat pattern for 10 through 20 feet
   for x in range(heartbeat_pulse): 
     strip.setPixelColor(pix,pulse_on)
@@ -88,19 +97,30 @@ def heart_beat(strip, elevation, distance, direction):
     strip.show()
     time.sleep(beat)
 
+# handler for dynamic patterns
+# calls dynamic_pattern_list_builder.py
+# randomly selects a dynamic pattern and calls all the beats to simulate that pattern
 def dynamic_pattern_handler(strip):
-  dynamicPatterns = dynamic_pattern_list_builder
+  while (len(randNumList) < 23):
+    rNum = random.randint(0, 22)
+    while (rNum not in randNumList):
+      randNumList.append(rNum)
+      dBeat = dList[rNum]
+      visitedPattern.append(dBeat)
 
-  for beat in dynamicPatterns:
-    elevation = beat[0]
-    distance = beat[1]
-    direction = beat[2]
 
-    print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-    # heart_beat(strip, elevation, distance, direction)
+  for dPat in visitedPattern:
+    print(dPat)
+    for beat in pat.get(dPat):
+      elevation = beat[0]
+      distance = beat[1]
+      direction = beat[2]
+      print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+    heart_beat(strip, elevation, distance, direction)
 
 
 if __name__ == '__main__':
+
   # Create NeoPixel object with appropriate configuration.
   strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
   # Initialize the library (must be called once before other functions).
