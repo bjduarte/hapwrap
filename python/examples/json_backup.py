@@ -5,16 +5,16 @@ import io
 import random
 
 # lists of all the possible components that make up a pattern
-elevation = ['chair', 'vehicle', 'person']
-# elevation = [0, 1, 2]
-# distance = [0, 1, 2, 3]
-distance = [10, 15, 20, 25]
-direction = [0, 45, 90, 135, 180, 225, 270, 315]
+# elevation = ['chair', 'vehicle', 'person']
+elevation = [0, 1, 2]
+distance = [0, 1, 2, 3]
+# distance = [10, 15, 20, 25]
+# direction = [0, 45, 90, 135, 180, 225, 270, 315]
 # direction = [0, 1, 2, 3, 4, 5, 6, 7]
 randNumList = []
 visitedPattern = []
 
-# dictionary of all data
+# dictionary containning all static patterns
 patternDict = {}
 
 
@@ -40,8 +40,7 @@ while (len(randNumList) < 48):
     currentPattern = patternList[rNum]
     visitedPattern.append(currentPattern)
     patternDict['visited patterns'] = visitedPattern
-    print(currentPattern)
-
+    # print(currentPattern)
 
 # keep track of participants answers
 # radio button presses will be read in and saved 
@@ -51,7 +50,7 @@ user_response.append(incorrect_response)
 patternDict['user response'] = user_response
 
 # write to JSON
-# list of patterns, randomly generated numbers for patterns, current pattern
+# list of patterns, randomly generated numbers, current pattern, user response
 json = json.dumps(patternDict)
 f = open("visited.json","w")
 f.write(json)
