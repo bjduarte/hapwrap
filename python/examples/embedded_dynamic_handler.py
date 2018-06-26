@@ -126,12 +126,8 @@ if __name__ == '__main__':
   # Initialize the library (must be called once before other functions).
   strip.begin()
   print ('Press Ctrl-C to quit.')
-
-
   try:
     dynamic_pattern_handler(strip)
-
-
 
   except KeyboardInterrupt:
     colorWipe(strip, Color(0,0,0), 10)
