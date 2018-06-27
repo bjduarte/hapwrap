@@ -4,6 +4,8 @@ import time
 import json
 import sys
 from neopixel import *
+from dynamic_pattern_list_builder import *
+from complete_hapwrap_handler import *
 
 # LED strip configuration:
 LED_COUNT = 24 # Number of LED pixels.
@@ -18,10 +20,11 @@ LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 pulse_on = Color(255, 255, 255)
 pulse_off = Color(0, 0, 0)
 
-class Hapwrap_static_handler:
+class Hapwrap_handler:
+  hapwrap = Complete_hapwrap_handler()
   heartbeat_pulse = 3
   heartbeat_gap = 0.07 # gap between beats
-  
+
   # Dictionary containing object positions
   patterns = {
     'elevation' : [1, 2, 3],
@@ -78,7 +81,24 @@ class Hapwrap_static_handler:
       strip.show()
       time.sleep(beat)
 
-  def get_pattern(self, strip, ele, dist, dir):
+
+  def get_dynamic_pattern(self):
+    dynamicPattern = Dynamic_pattern_list_builder()
+    pat = dynamicPattern.pattern_builder()
+
+    for dPat in self.hapwrap.visitedDynamicPattern:
+      print(dPat)
+      for currentBeat in pat.get(dPat):
+        elevation = currentBeat[0]
+        distance = currentBeat[1]
+        direction = currentBeat[2]
+        print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+        
+        self.heart_beat(strip, elevation, distance, direction)
+
+
+  def get_static_pattern(self, strip, ele, dist, dir):
+
     elevation = self.patterns.get('elevation')[ele]
     distance = self.patterns.get('distance')[dist]
     direction = self.patterns.get('direction')[elevation-1][dir]
@@ -88,7 +108,7 @@ class Hapwrap_static_handler:
 
 
 if __name__ == '__main__':
-  hapwrap = Hapwrap_static_handler()
+  hapwrap = Hapwrap_handler()
 
   # Create NeoPixel object with appropriate configuration.
   strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
