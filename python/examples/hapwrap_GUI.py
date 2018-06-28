@@ -143,8 +143,8 @@ patternDict = {}
 #elevation, distance, direction
 
 # create list of keys, necessary for calling dynamic patterns
-#for i in pat:
-#    dKeyList.append(i)
+for i in pat:
+    dKeyList.append(i)
 
 num = 0
 patternList = []
@@ -325,6 +325,7 @@ def nextStaticClick():
 
 def nextDynamicClick(): 
     global dynamic_incorrect_response
+    global dKeyList
 
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
@@ -365,7 +366,7 @@ def nextDynamicClick():
 
         pat = dynamicPattern.pattern_builder()
 
-        for dPat in self.hapwrap.visitedDynamicPattern:
+        for dPat in hapwrap.visitedDynamicPattern:
             print(dPat)
             for currentBeat in pat.get(dPat):
                 elevation = currentBeat[0]
@@ -373,7 +374,7 @@ def nextDynamicClick():
                 direction = currentBeat[2]
                 print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
             
-                pix = self.patterns.get('pin_out')[elevation-1][direction/45]
+                pix = patterns.get('pin_out')[elevation-1][direction/45]
                 # print(pix)
                 beat = 0
 
