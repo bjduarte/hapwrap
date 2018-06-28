@@ -193,7 +193,7 @@ def nextStaticClick():
         user_static_response.append(static_incorrect_response)
     patternDict['user static response'] = user_static_response
     #create elevation buttons
-    staticNextButton.configure(state=DISABLED)
+    staticNextButton.configure(state=tk.DISABLED)
     staticNumGenerated = False
     buttonSpacing = 0
 
@@ -224,7 +224,7 @@ def nextStaticClick():
         pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
         print(pix)
         beat = 0
-        
+
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
             print("10 feet = beat of 0.3")
@@ -298,7 +298,7 @@ def nextStaticClick():
 
     #create pattern text to display current pattern 
     if (staticPatternNum < 49):
-        #dynamicNextButton.configure(state=DISABLED)
+        #dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(staticPage, height=1, width=15, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
@@ -319,7 +319,7 @@ def nextStaticClick():
 def nextDynamicClick(): 
     global dynamic_incorrect_response
 
-    dynamicNextButton.configure(state=DISABLED)
+    dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
@@ -362,8 +362,8 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
     if (dynamicPatternNum >= 24):
-        dynamicSaveButton.configure(state=DISABLED)
-        dynamicNextButton.configure(state=DISABLED)
+        dynamicSaveButton.configure(state=tk.DISABLED)
+        dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(dynamicPage, height=1, width=15, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
         currentStaticPatternMessage = ttk.Label(dynamicPage, height=5, width=25, text="All 23 patterns have been done")
@@ -371,7 +371,7 @@ def nextDynamicClick():
  
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
-        dynamicNextButton.configure(state=NORMAL)
+        dynamicNextButton.configure(state=tk.NORMAL)
 
     statusMessage = ttk.Label(dynamicPage, height=1, width=15, text="Status: SAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
@@ -379,9 +379,9 @@ def staticSaveClick():
     global static_incorrect_response
 
     if (staticPatternNum < 49 ):
-        staticNextButton.configure(state=NORMAL)
+        staticNextButton.configure(state=tk.NORMAL)
     else:
-        staticSaveButton.configure(state=DISABLED)
+        staticSaveButton.configure(state=tk.DISABLED)
 
     statusMessage = ttk.Label(staticPage, height=1, width=15, text="Status: SAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
