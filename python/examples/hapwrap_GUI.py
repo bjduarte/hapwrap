@@ -223,6 +223,7 @@ def nextStaticClick():
 
         pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
         print(currentStaticPattern)
+        print("pix = " + str(pix))
         beat = 0
 
         #Heart beat code
