@@ -75,7 +75,7 @@ elevationChoice.set(20)
 #button options
 elevations = [("Person",1), ("Vehicle",2), ("Chair  ",3)]        
 distances = [("10 feet",1), ("15 feet",2), ("20 feet",3), ("25 feet",4)]        
-directions = [("0°",1), ("45°",2), ("90°",3), ("135°",4), ("180°",5), ("225°",6), ("270°",7), ("315°",8)]
+directions = [("0\°",1), ("45\°",2), ("90\°",3), ("135\°",4), ("180\°",5), ("225\°",6), ("270\°",7), ("315\°",8)]
 
 
 # lists of all the possible components that make up a pattern
@@ -118,8 +118,7 @@ for i in elevation:
 
 # Create NeoPixel object with appropriate configuration.
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-# Initialize the library (must be called once before other functions).
-strip.begin()
+# Initialize the library (must be called once before other functions).strip.begin()
 
 # Dictionary containing object positions
 patterns = {
