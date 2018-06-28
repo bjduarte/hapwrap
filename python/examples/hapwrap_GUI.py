@@ -75,7 +75,7 @@ elevationChoice.set(20)
 #button options
 elevations = [("Person",1), ("Vehicle",2), ("Chair  ",3)]        
 distances = [("10 feet",1), ("15 feet",2), ("20 feet",3), ("25 feet",4)]        
-directions = [("0\°",1), ("45\°",2), ("90\°",3), ("135\°",4), ("180\°",5), ("225\°",6), ("270\°",7), ("315\°",8)]
+directions = [("0",1), ("45",2), ("90",3), ("135",4), ("180",5), ("225",6), ("270",7), ("315",8)]
 
 
 # lists of all the possible components that make up a pattern
