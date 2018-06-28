@@ -68,15 +68,42 @@ eyesOnScreen.add(dynamicPage, text='Dynamic Patterns')
  
 
 #create variable for button selection
-staticPatternNum = IntVar()
-dynamicPatternNum = IntVar()
-buttonSpacing = IntVar()
-distanceChoice = IntVar()
-directionChoice = IntVar()
-elevationChoice = IntVar()
-userDynamicChoice = StringVar()
-staticNumGenerated = BooleanVar()
-dynamicNumGenerated = BooleanVar()
+try:
+    staticPatternNum = IntVar()
+except:
+    staticPatternNum = tk.IntVar()    
+try:
+    dynamicPatternNum = IntVar()
+except:
+    dynamicPatternNum = tk.IntVar()
+try:
+    buttonSpacing = IntVar()
+except:
+    buttonSpacing = tk.IntVar()
+try:
+    distanceChoice = IntVar()
+except:
+    distanceChoice = tk.IntVar()
+try:
+    directionChoice = IntVar()
+except:
+    directionChoice = tk.IntVar()
+try:
+    elevationChoice = IntVar()
+except:
+    elevationChoice = tk.IntVar()
+try:
+    userDynamicChoice = StringVar()
+except:
+    userDynamicChoice = tk.StringVar()
+try:
+    staticNumGenerated = BooleanVar()
+except:
+    staticNumGenerated = tk.BooleanVar()
+try:
+    dynamicNumGenerated = BooleanVar()
+except:
+    dynamicNumGenerated = tk.BooleanVar()    
 
 #nitialize variables
 buttonSpacing = 0
