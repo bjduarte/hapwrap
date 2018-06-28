@@ -343,7 +343,7 @@ def nextDynamicClick():
         f.close()
 
     #clear the entry field
-    dynamicUserResponse.delete(0,END)
+    dynamicUserResponse.delete(0,tk.END)
 
     if (dynamicPatternNum < 24):
         while dynamicNumGenerated == False:
