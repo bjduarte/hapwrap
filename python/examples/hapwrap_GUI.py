@@ -432,35 +432,35 @@ dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command
 dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic Save button
-dynamicSaveButton = Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
+dynamicSaveButton = Root.Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
 dynamicSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static Save button
-staticSaveButton = Button(staticPage, text = "Save", command=staticSaveClick, width = 15)
+staticSaveButton = Root.Button(staticPage, text = "Save", command=staticSaveClick, width = 15)
 staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic restore button
-restoreButton = Button(dynamicPage, text = "Restore", command=restoreClick, width = 15)
+restoreButton = Root.Button(dynamicPage, text = "Restore", command=restoreClick, width = 15)
 restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static restore button
-restoreButton = Button(staticPage, text = "Restore", command=restoreClick, width = 15)
+restoreButton = Root.Button(staticPage, text = "Restore", command=restoreClick, width = 15)
 restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
-repeatButton = Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
+repeatButton = Root.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
 repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static repeat button
-repeatButton = Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
+repeatButton = Root.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
 repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
  #create static status text
-statusMessage = Label(staticPage, text="Status: UNSAVED")
+statusMessage = Root.Label(staticPage, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, anchor=tk.CENTER)
 
  #create dynamic status text
-statusMessage = Label(dynamicPage, text="Status: UNSAVED")
+statusMessage = Root.Label(dynamicPage, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, anchor=tk.CENTER)
 
 # Create NeoPixel object with appropriate configuration.
