@@ -329,7 +329,7 @@ def nextDynamicClick():
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, height=1, width=25, anchor=tk.CENTER) 
 
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
-    dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = CENTER)  
+    dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tkCENTER)  
     
     if (dynamicPatternNum != 1 & dynamicPatternNum < 24):
         #save user response when next is clicked
