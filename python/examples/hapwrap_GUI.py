@@ -157,10 +157,6 @@ for i in elevation:
       patternDict['pattern list'] = patternList
       num += 1
 
-# Create NeoPixel object with appropriate configuration.
-strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-# Initialize the library (must be called once before other functions).strip.begin()
-
 # Dictionary containing object positions
 patterns = {
     'elevation' : [1, 2, 3],
@@ -220,6 +216,11 @@ def nextStaticClick():
                 visitedStaticPattern.append(currentStaticPattern)
                 patternDict['visited static patterns'] = visitedStaticPattern
                 staticNumGenerated = True
+
+        pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
+        print(currentStaticPattern)
+        print("pix = " + str(pix))
+        beat = 0
 
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
@@ -457,9 +458,9 @@ statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, an
 statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, anchor=tk.CENTER)
 
-pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
-print(currentStaticPattern)
-print("pix = " + str(pix))
-beat = 0
+# Create NeoPixel object with appropriate configuration.
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+# Initialize the library (must be called once before other functions).
+strip.begin()
  
 Root.mainloop()
