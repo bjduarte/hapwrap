@@ -204,7 +204,7 @@ def nextStaticClick():
     staticPatternNum = staticPatternNum + 1
 
     #Each time next button is clicked status message is changed back to unsaved
-    statusMessage = Label(staticPage, height=1, width=15, text="Status: UNSAVED")
+    statusMessage = ttk.Label(staticPage, height=1, width=15, text="Status: UNSAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
 
     # write patternDict to json file called userData.json
@@ -299,16 +299,16 @@ def nextStaticClick():
     #create pattern text to display current pattern 
     if (staticPatternNum < 49):
         #dynamicNextButton.configure(state=DISABLED)
-        patternMessage = Label(staticPage, height=1, width=15, text="Pattern " + str(staticPatternNum))
+        patternMessage = ttk.Label(staticPage, height=1, width=15, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=CENTER)
 
-        currentStaticPatternMessage = Label(staticPage, height=5, width=25, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
+        currentStaticPatternMessage = ttk.Label(staticPage, height=5, width=25, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=CENTER)  
 
     if (staticPatternNum >= 49):
-        patternMessage = Label(staticPage, height=1, width=25, text="Done")
+        patternMessage = ttk.Label(staticPage, height=1, width=25, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=CENTER)
-        currentStaticPatternMessage = Label(staticPage, height=5, width=25, text="All 48 patterns have been done")
+        currentStaticPatternMessage = ttk.Label(staticPage, height=5, width=25, text="All 48 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
@@ -324,7 +324,7 @@ def nextDynamicClick():
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
 
-    InformationMessage = Label(dynamicPage, height=1, width=25, text="Enter User Response:")
+    InformationMessage = ttk.Label(dynamicPage, height=1, width=25, text="Enter User Response:")
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=CENTER) 
 
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
@@ -354,26 +354,26 @@ def nextDynamicClick():
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
         #create dynamic status text
-        statusMessage = Label(dynamicPage, height=1, width=15, text="Status: UNSAVED")
+        statusMessage = ttk.Label(dynamicPage, height=1, width=15, text="Status: UNSAVED")
         statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
-        patternMessage = Label(dynamicPage, height=1, width=15, text="Pattern " + str(dynamicPatternNum))
+        patternMessage = ttk.Label(dynamicPage, height=1, width=15, text="Pattern " + str(dynamicPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=CENTER)
-        currentStaticPatternMessage = Label(dynamicPage, height=5, width=25, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
+        currentStaticPatternMessage = ttk.Label(dynamicPage, height=5, width=25, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=CENTER) 
 
     if (dynamicPatternNum >= 24):
         dynamicSaveButton.configure(state=DISABLED)
         dynamicNextButton.configure(state=DISABLED)
-        patternMessage = Label(dynamicPage, height=1, width=15, text="Done")
+        patternMessage = ttk.Label(dynamicPage, height=1, width=15, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=CENTER)
-        currentStaticPatternMessage = Label(dynamicPage, height=5, width=25, text="All 23 patterns have been done")
+        currentStaticPatternMessage = ttk.Label(dynamicPage, height=5, width=25, text="All 23 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=CENTER) 
  
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
         dynamicNextButton.configure(state=NORMAL)
 
-    statusMessage = Label(dynamicPage, height=1, width=15, text="Status: SAVED")
+    statusMessage = ttk.Label(dynamicPage, height=1, width=15, text="Status: SAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
 def staticSaveClick():
     global static_incorrect_response
@@ -383,7 +383,7 @@ def staticSaveClick():
     else:
         staticSaveButton.configure(state=DISABLED)
 
-    statusMessage = Label(staticPage, height=1, width=15, text="Status: SAVED")
+    statusMessage = ttk.Label(staticPage, height=1, width=15, text="Status: SAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
 
 def restoreClick():
@@ -406,9 +406,9 @@ def clearDistanceSelection():
 
 
 #Labels
-elevationLabel= Label(staticPage, text= "Elevation:", font=("Verdana", 15))
-DistanceLabel= Label(staticPage, text= "Distance:", font=("Verdana", 15))
-DirectionLabel= Label(staticPage, text= "Direction:", font=("Verdana", 15))
+elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
+DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
+DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
 
 #Set labels and placement
 elevationLabel.place(x=RWidth/4, y=RHeight/4, anchor="center")
@@ -448,11 +448,11 @@ repeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, widt
 repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=CENTER)
 
  #create static status text
-statusMessage = Label(staticPage, height=1, width=15, text="Status: UNSAVED")
+statusMessage = ttk.Label(staticPage, height=1, width=15, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
 
  #create dynamic status text
-statusMessage = Label(dynamicPage, height=1, width=15, text="Status: UNSAVED")
+statusMessage = ttk.Label(dynamicPage, height=1, width=15, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=CENTER)
  
 Root.mainloop()
