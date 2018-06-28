@@ -141,7 +141,7 @@ visitedDynamicPattern = [] # list of visited dynamic patterns
 #dictionary containning all static patterns
 patternDict = {}
 #iterate through each component to create a list of patterns
-elevation, distance, direction
+#elevation, distance, direction
 
 # create list of keys, necessary for calling dynamic patterns
 for i in pat:
@@ -171,10 +171,6 @@ patterns = {
 def nextStaticClick(): 
     
     global patterns
-
-    pix = patterns.get('pin_out')[elevation-1][direction/45]
-    # print(pix)
-    beat = 0
 
     global staticPatternNum
     if (staticPatternNum != 0):
@@ -225,6 +221,10 @@ def nextStaticClick():
                 patternDict['visited static patterns'] = visitedStaticPattern
                 staticNumGenerated = True
 
+        pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
+        print(pix)
+        beat = 0
+        
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
             print("10 feet = beat of 0.3")
