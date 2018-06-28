@@ -356,6 +356,7 @@ def nextDynamicClick():
             rNum = random.randint(0, 22)
             while (rNum not in dRandNumList):
                 dRandNumList.append(rNum)
+                print (rNum)
                 currentDynamicPattern = dKeyList[rNum]
                 visitedDynamicPattern.append(currentDynamicPattern)
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
