@@ -381,7 +381,7 @@ def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
         dynamicNextButton.configure(state=tk.NORMAL)
 
-    statusMessage = ttk.Label(dynamicPage, text=" Status: SAVED ")
+    statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 def staticSaveClick():
     global static_incorrect_response
@@ -391,7 +391,7 @@ def staticSaveClick():
     else:
         staticSaveButton.configure(state=tk.DISABLED)
 
-    statusMessage = ttk.Label(staticPage, text=" Status: SAVED ")
+    statusMessage = ttk.Label(staticPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreClick():
