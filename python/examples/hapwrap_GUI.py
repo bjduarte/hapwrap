@@ -240,11 +240,12 @@ def nextStaticClick():
         # sonar pulse for 25 feet
         for i in range(heartbeat_pulse):
             strip.setPixelColor(pix,pulse_on)
+            print ("On")
             strip.show()
-            print (beat)
-            time.sleep(heart_gap)
+            time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_off)
+            print ("Off")
             strip.show()
             print(beat)
             time.sleep(beat)
@@ -252,21 +253,25 @@ def nextStaticClick():
         # Heartbeat pattern for 10 through 20 feet
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
+            print ("On")
             strip.show()
             print(beat)
             time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_off)
+            print ("Off")
             strip.show()
             print(beat)
             time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_on)
+            print ("On")
             strip.show()
             print(beat)
             time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_off)
+            print ("Off")
             strip.show()
             print(beat)
             time.sleep(beat)
