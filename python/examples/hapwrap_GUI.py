@@ -252,18 +252,18 @@ def nextStaticClick():
             time.sleep(beat)
 
         # Heartbeat pattern for 10 through 20 feet
-        for x in range(self.heartbeat_pulse): 
+        for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             strip.show()
-            time.sleep(self.heartbeat_gap)
+            time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_off)
             strip.show()
-            time.sleep(self.heartbeat_gap)
+            time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_on)
             strip.show()
-            time.sleep(self.heartbeat_gap)
+            time.sleep(heartbeat_gap)
 
             strip.setPixelColor(pix,pulse_off)
             strip.show()
