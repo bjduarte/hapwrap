@@ -360,6 +360,7 @@ def nextDynamicClick():
                 visitedDynamicPattern.append(currentDynamicPattern)
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
+                print (rNum)
 
         pat = dynamicPattern.pattern_builder()
 
