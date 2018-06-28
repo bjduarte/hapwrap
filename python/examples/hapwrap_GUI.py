@@ -448,8 +448,8 @@ repeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, widt
 repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
  #create static status text
-statusMessage = ttk.Label(staticPage, height=1, width=15, text="Status: UNSAVED")
-statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
+statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
+statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, anchor=tk.CENTER)
 
  #create dynamic status text
 statusMessage = ttk.Label(dynamicPage, height=1, width=15, text="Status: UNSAVED")
