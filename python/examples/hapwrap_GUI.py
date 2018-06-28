@@ -310,14 +310,14 @@ def nextStaticClick():
         patternMessage = ttk.Label(staticPage, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, height=1, width=15, anchor=tk.CENTER)
 
-        currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = ")
-        currentStaticPatternMessage.place(x=100, y=100, anchor=tk.CENTER)  
+        currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
+        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     if (staticPatternNum >= 49):
         patternMessage = ttk.Label(staticPage, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, height=1, width=25, anchor=tk.CENTER)
         currentStaticPatternMessage = ttk.Label(staticPage, text="All 48 patterns have been done")
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, height=5, width=25, anchor=tk.CENTER)  
+        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
     elevationChoice.set(20)
