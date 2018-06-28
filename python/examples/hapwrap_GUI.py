@@ -127,7 +127,6 @@ direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #Display button selection 
 dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
-pat = dynamicPattern.pattern_builder() # dynamic_pattern is method to get dynamic pattern lists
 static_incorrect_response = []
 dynamic_incorrect_response = []
 randNumList = []
@@ -144,8 +143,8 @@ patternDict = {}
 #elevation, distance, direction
 
 # create list of keys, necessary for calling dynamic patterns
-for i in pat:
-    dKeyList.append(i)
+#for i in pat:
+#    dKeyList.append(i)
 
 num = 0
 patternList = []
@@ -361,6 +360,67 @@ def nextDynamicClick():
                 visitedDynamicPattern.append(currentDynamicPattern)
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
+
+        pat = dynamicPattern.pattern_builder()
+
+        for dPat in self.hapwrap.visitedDynamicPattern:
+            print(dPat)
+            for currentBeat in pat.get(dPat):
+                elevation = currentBeat[0]
+                distance = currentBeat[1]
+                direction = currentBeat[2]
+                print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+            
+                pix = self.patterns.get('pin_out')[elevation-1][direction/45]
+                # print(pix)
+                beat = 0
+
+                if (distance == 10):
+                    beat = 0.300
+                elif (distance == 15):
+                    beat = 0.650
+                elif (distance == 20):
+                    beat = 1.000
+                elif (distance == 25):
+                    beat = 1.00
+                    heart_gap = 0.5
+
+                # sonar pulse for 25 feet
+                for i in range(heartbeat_pulse):
+                    strip.setPixelColor(pix,pulse_on)
+                    strip.show()
+                    time.sleep(heartbeat_gap)
+
+                    strip.setPixelColor(pix,pulse_off)
+                    strip.show()
+                    time.sleep(beat)
+
+                # Heartbeat pattern for 10 through 20 feet
+                for x in range(heartbeat_pulse): 
+                    strip.setPixelColor(pix,pulse_on)
+                    print ("On")
+                    strip.show()
+                    print(beat)
+                    time.sleep(heartbeat_gap)
+
+                    strip.setPixelColor(pix,pulse_off)
+                    print ("Off")
+                    strip.show()
+                    print(beat)
+                    time.sleep(heartbeat_gap)
+
+                    strip.setPixelColor(pix,pulse_on)
+                    print ("On")
+                    strip.show()
+                    print(beat)
+                    time.sleep(heartbeat_gap)
+
+                    strip.setPixelColor(pix,pulse_off)
+                    print ("Off")
+                    strip.show()
+                    print(beat)
+                    time.sleep(beat)
+
         #create dynamic status text
         statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
         statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
