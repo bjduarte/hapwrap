@@ -221,11 +221,6 @@ def nextStaticClick():
                 patternDict['visited static patterns'] = visitedStaticPattern
                 staticNumGenerated = True
 
-        pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
-        print(currentStaticPattern)
-        print("pix = " + str(pix))
-        beat = 0
-
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
             print("10 feet = beat of 0.3")
@@ -461,5 +456,10 @@ statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, an
  #create dynamic status text
 statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
 statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, height=1, width=15, anchor=tk.CENTER)
+
+pix = patterns.get('pin_out')[currentStaticPattern[1]-1][currentStaticPattern[3]]
+print(currentStaticPattern)
+print("pix = " + str(pix))
+beat = 0
  
 Root.mainloop()
