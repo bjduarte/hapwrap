@@ -1,12 +1,14 @@
+#!/usr/bin/python3
+
 from tkinter import *
 from tkinter import ttk
-from dynamic_pattern_list_builder import *
 from neopixel import *
-from complete_hapwrap_handler import *
 import sys
 import json
 import random
 import time
+from complete_hapwrap_handler import *
+from dynamic_pattern_list_builder import *
 
 Root=Tk()
 RTitle=Root.title("HapWrap")
