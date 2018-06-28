@@ -141,6 +141,7 @@ visitedDynamicPattern = [] # list of visited dynamic patterns
 patternDict = {}
 #iterate through each component to create a list of patterns
 #elevation, distance, direction
+pat = dynamicPattern.pattern_builder()
 
 # create list of keys, necessary for calling dynamic patterns
 for i in pat:
@@ -363,8 +364,6 @@ def nextDynamicClick():
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
                 print (rNum)
-
-        pat = dynamicPattern.pattern_builder()
 
         for dPat in hapwrap.visitedDynamicPattern:
             print(dPat)
