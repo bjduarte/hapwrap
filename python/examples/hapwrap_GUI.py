@@ -1,7 +1,17 @@
 #!/usr/bin/python3
 
-from Tkinter import *
-from ttk import *
+#from kinter import *
+#from tkinter import ttk
+
+try:
+    import Tkinter as tk
+except:
+    import tkinter as tk
+try:
+    import ttk
+except:
+    from tkinter import ttk
+
 from neopixel import *
 import sys
 import json
