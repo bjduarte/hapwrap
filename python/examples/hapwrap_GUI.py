@@ -358,14 +358,12 @@ def nextDynamicClick():
             rNum = random.randint(0, 22)
             while (rNum not in dRandNumList):
                 dRandNumList.append(rNum)
-                print (rNum)
                 currentDynamicPattern = dKeyList[rNum]
                 visitedDynamicPattern.append(currentDynamicPattern)
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
-                print (rNum)
 
-        for dPat in hapwrap.visitedDynamicPattern:
+        for dPat in visitedDynamicPattern:
             print(dPat)
             for currentBeat in pat.get(dPat):
                 elevation = currentBeat[0]
