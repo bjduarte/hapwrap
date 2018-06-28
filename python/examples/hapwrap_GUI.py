@@ -311,7 +311,7 @@ def nextStaticClick():
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, height=1, width=15, anchor=tk.CENTER)
 
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = ")
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, height=5, width=25, anchor=tk.CENTER)  
+        currentStaticPatternMessage.place(x=100, y=100, anchor=tk.CENTER)  
 
     if (staticPatternNum >= 49):
         patternMessage = ttk.Label(staticPage, text="Done")
