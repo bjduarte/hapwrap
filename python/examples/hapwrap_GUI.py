@@ -37,7 +37,11 @@ hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
 heartbeat_gap = 0.07 # gap between beats
 
-Root=Tk()
+try:
+    Root=Tk()
+except:
+    Root = tk.Tk()
+
 RTitle=Root.title("HapWrap")
 RWidth=Root.winfo_screenwidth()
 RHeight=Root.winfo_screenheight()
