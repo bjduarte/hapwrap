@@ -467,17 +467,17 @@ def restoreStaticClick():
     staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
     staticRepeatButton.configure(state=tk.NORMAL)
-    print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
     f.close()
-    print("in loop")
+    #type(fin)
     try:
         print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
         patternDict['visited static patterns'] = fin['visited static patterns']
         patternDict['user static response'] = fin['user static response']
         patternDict['static counter'] = fin['static counter']
         staticPatternNum = fin['static counter'][-1] - 1
+        print(patternDict)
     except:
             print("nothing to restore")
             tkMessageBox.showinfo("Restore", "Nothing to restore")
@@ -487,16 +487,13 @@ def restoreDynamicClick():
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
     dynamicRepeatButton.configure(state=tk.NORMAL)
-
-    print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
     f.close()
-    print("in loop")
     try:
         print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
         patternDict['visited static patterns'] = fin['visited static patterns']
-        patternDict['user static response'] = fin['user dynamic response']
+        patternDict['user static response'] = fin['user static response']
         patternDict['visited dynamic patterns'] = fin['visited dynamic patterns']
         patternDict['user dynamic response'] = fin['user dynamic response']
         patternDict['dynamic counter'] = fin['dynamic counter']
@@ -506,7 +503,7 @@ def restoreDynamicClick():
         try:
             print(fin['visited static patterns'], fin['user static response'])
             patternDict['visited static patterns'] = fin['visited static patterns']
-            patternDict['user static response'] = fin['user dynamic response']
+            patternDict['user static response'] = fin['user static response']
             patternDict['static counter'] = fin['static counter']
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
