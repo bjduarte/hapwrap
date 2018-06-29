@@ -335,6 +335,7 @@ def nextDynamicClick():
     global dynamic_incorrect_response
     global dKeyList
     global pix
+    global beat
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     global dynamicPatternNum
@@ -535,9 +536,7 @@ def restoreDynamicClick():
                 tkMessageBox.showinfo("Restore", "Nothing to restore")
 
 def repeatDynamicClick():
-    global pix
-    global heartbeat_pulse
-    global beat
+
     print ("pattern repeated")  
     # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
