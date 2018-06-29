@@ -584,7 +584,7 @@ def clearDistanceSelection():
 
 
 #Labels
-elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15), visible = 'no')
+elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15), tk.visible = 'no')
 DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
 DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
 
