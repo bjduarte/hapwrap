@@ -474,6 +474,9 @@ def restoreStaticClick():
         print("in loop")
         try:
             print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
+            patternDict['visited static patterns'] = fin['visited static patterns']
+            patternDict['user static response'] = fin['user static response']
+            patternDict['static counter'] = fin['static counter']
             staticPatternNum = fin['static counter'][-1] - 1
         except:
                 print("nothing to restore")
@@ -492,14 +495,26 @@ def restoreDynamicClick():
         print("in loop")
         try:
             print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
+            patternDict['visited static patterns'] = fin['visited static patterns']
+            patternDict['user static response'] = fin['user dynamic response']
+            patternDict['visited dynamic patterns'] = fin['visited dynamic patterns']
+            patternDict['user dynamic response'] = fin['user dynamic response']
+            patternDict['dynamic counter'] = fin['dynamic counter']
+            patternDict['static counter'] = fin['static counter']
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
                 print(fin['visited static patterns'], fin['user static response'])
+                patternDict['visited static patterns'] = fin['visited static patterns']
+                patternDict['user static response'] = fin['user dynamic response']
+                patternDict['static counter'] = fin['static counter']
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 try:
                     print(fin['visited dynamic patterns'], fin['user dynamic response'])
+                    patternDict['visited dynamic patterns'] = fin['visited dynamic patterns']
+                    patternDict['user dynamic response'] = fin['user dynamic response']
+                    patternDict['dynamic counter'] = fin['dynamic counter']
                     dynamicPatternNum = fin['dynamic counter'][-1] - 1
                 except:
                     print("nothing to restore")
