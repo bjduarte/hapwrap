@@ -537,6 +537,7 @@ def restoreDynamicClick():
 def repeatDynamicClick():
     global pix
     global heartbeat_pulse
+    global beat
     print ("pattern repeated")  
     # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
