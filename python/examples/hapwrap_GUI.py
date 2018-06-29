@@ -473,11 +473,12 @@ def restoreStaticClick():
         fin = json.load(f)
         f.close()
         #type(fin)
-        print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
-        visitedStaticPattern.append(fin['visited static patterns'])
-        user_static_response.append(fin['user static response'])
-        patternDict['static counter'] = fin['static counter']
-        staticCounter.append(fin['static counter'])
+        for i in fin['visited static patterns']:
+            visitedStaticPattern.append(i)
+        for i in fin['user static response']:
+            user_static_response.append(i)
+        for i in fin['static counter']:
+            staticCounter.append(i)
         staticPatternNum = fin['static counter'][-1] - 1
         print(patternDict)
     except:
