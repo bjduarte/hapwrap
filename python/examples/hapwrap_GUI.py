@@ -498,7 +498,11 @@ def restoreDynamicClick():
                 print(fin['visited static patterns'], fin['user static response'])
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
-                print("nothing to restore")
+                try:
+                    print(fin['visited dynamic patterns'], fin['user dynamic response'])
+                    dynamicPatternNum = fin['dynamic counter'][-1] - 1
+                except:
+                    print("nothing to restore")
 
 def repeatClick():
     print ("pattern repeated")  
