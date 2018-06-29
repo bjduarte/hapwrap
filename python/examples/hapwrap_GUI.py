@@ -454,14 +454,32 @@ def staticSaveClick():
     statusMessage = ttk.Label(staticPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
-def restoreClick():
+def restoreStaticClick():
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
     f.close()
     for i in fin:
         print("in loop")
-        print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
+        try:
+            print(fin['visited static patterns'], fin['user static response'])
+        except:
+                print("nothing to restore")
+
+def restoreDynamicClick():
+    print ("updated pattern restore")
+    f = open('userData.json', 'r')
+    fin = json.load(f)
+    f.close()
+    for i in fin:
+        print("in loop")
+        try:
+            print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
+        except:
+            try:
+                print(fin['visited static patterns'], fin['user static response'])
+            except:
+                print("nothing to restore")
 
 def repeatClick():
     print ("pattern repeated")  
@@ -506,11 +524,11 @@ staticSaveButton = ttk.Button(staticPage, text = "Save", command=staticSaveClick
 staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic restore button
-restoreButton = ttk.Button(dynamicPage, text = "Restore", command=restoreClick, width = 15)
+restoreButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
 restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static restore button
-restoreButton = ttk.Button(staticPage, text = "Restore", command=restoreClick, width = 15)
+restoreButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
 restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
