@@ -467,11 +467,12 @@ def restoreStaticClick():
     staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
     staticRepeatButton.configure(state=tk.NORMAL)
-    f = open('userData.json', 'r')
-    fin = json.load(f)
-    f.close()
-    #type(fin)
+
     try:
+         f = open('userData.json', 'r')
+        fin = json.load(f)
+        f.close()
+        #type(fin)
         print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
         patternDict['visited static patterns'] = fin['visited static patterns']
         patternDict['user static response'] = fin['user static response']
