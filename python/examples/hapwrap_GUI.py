@@ -469,7 +469,7 @@ def restoreStaticClick():
     staticRepeatButton.configure(state=tk.NORMAL)
 
     try:
-         f = open('userData.json', 'r')
+        f = open('userData.json', 'r')
         fin = json.load(f)
         f.close()
         #type(fin)
