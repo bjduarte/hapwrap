@@ -130,6 +130,8 @@ dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynam
 static_incorrect_response = []
 dynamic_incorrect_response = []
 randNumList = []
+staticCounter = []
+dynamicCounter = []
 visitedStaticPattern = []
 user_static_response = []
 user_dynamic_response = []
@@ -187,13 +189,16 @@ def nextStaticClick():
                                 try: static_incorrect_response = [0, 0, directions[directionChoice.get() - 1][0]]
                                 except IndexError: static_incorrect_response = [0,0,0]
         user_static_response.append(static_incorrect_response)
+
+    staticPatternNum = staticPatternNum + 1
+    staticCounter.append(staticPatternNum)
     patternDict['user static response'] = user_static_response
+    patternDict['static counter'] = staticCounter
     #create elevation buttons
     staticNextButton.configure(state=tk.DISABLED)
     staticNumGenerated = False
     buttonSpacing = 0
 
-    staticPatternNum = staticPatternNum + 1
 
     #Each time next button is clicked status message is changed back to unsaved
     statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
@@ -332,6 +337,8 @@ def nextDynamicClick():
     dynamicNumGenerated = False
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
+    dynamicCounter.append(dynamicPatternCounter)
+
 
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
@@ -344,7 +351,7 @@ def nextDynamicClick():
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
         patternDict['user dynamic response'] = user_dynamic_response
-
+        patternDict['dynamic counter'] = dynamicCounter
         # write patternDict to json file called userData.json
         f = open("userData.json","w")
         f.write(json.dumps(patternDict))
@@ -455,6 +462,7 @@ def staticSaveClick():
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreStaticClick():
+    nextStaticClick.configure(state=tk.NORMAL)
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
@@ -467,6 +475,7 @@ def restoreStaticClick():
                 print("nothing to restore")
 
 def restoreDynamicClick():
+    nextStaticClick.configure(state=tk.NORMAL)
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
