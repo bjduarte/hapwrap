@@ -459,7 +459,9 @@ def restoreClick():
     f = open('userData.json', 'r')
     fin = json.load(f)
     f.close()
+    print("updated")
     for i in fin:
+        print("in loop")
         print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
 
 def repeatClick():
