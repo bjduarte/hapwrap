@@ -534,6 +534,7 @@ def restoreDynamicClick():
                 tkMessageBox.showinfo("Restore", "Nothing to restore")
 
 def repeatDynamicClick():
+    global pix
     print ("pattern repeated")  
     # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
