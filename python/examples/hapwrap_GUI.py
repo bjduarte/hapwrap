@@ -542,12 +542,12 @@ staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticSaveButton.configure(state=tk.DISABLED)
 
 #create dynamic restore button
-restoreButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
-restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+restoreDynamicButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
+restoreDynamicButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static restore button
-restoreButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
-restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
+restoreStaticButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
 staticRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
