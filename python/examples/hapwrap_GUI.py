@@ -170,6 +170,7 @@ patterns = {
 def nextStaticClick(): 
     
     global patterns
+    global pix
 
     global staticPatternNum
     if (staticPatternNum != 0):
@@ -535,6 +536,7 @@ def restoreDynamicClick():
 
 def repeatDynamicClick():
     global pix
+    global heartbeat_pulse
     print ("pattern repeated")  
     # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
@@ -574,6 +576,7 @@ def repeatDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+
 def repeatStaticClick():
     print ("pattern repeated")      
 
