@@ -341,6 +341,7 @@ def nextDynamicClick():
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
+    repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER, commend=hide)
 
 
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
