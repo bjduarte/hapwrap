@@ -19,6 +19,7 @@ import random
 import time
 from complete_hapwrap_handler import *
 from dynamic_pattern_list_builder import *
+import tkMessageBox
 
 # LED strip configuration:
 LED_COUNT = 24 # Number of LED pixels.
@@ -480,6 +481,7 @@ def restoreStaticClick():
             staticPatternNum = fin['static counter'][-1] - 1
         except:
                 print("nothing to restore")
+                tkMessageBox.showinfo("Restore", "Nothing to restore")
 
 def restoreDynamicClick():
     global dynamicPatternNum
@@ -518,6 +520,7 @@ def restoreDynamicClick():
                     dynamicPatternNum = fin['dynamic counter'][-1] - 1
                 except:
                     print("nothing to restore")
+                    tkMessageBox.showinfo("Restore", "Nothing to restore")
 
 def repeatClick():
     print ("pattern repeated")  
