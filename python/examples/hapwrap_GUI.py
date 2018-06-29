@@ -474,12 +474,12 @@ def restoreStaticClick():
         print("in loop")
         try:
             print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
-            staticPatternNum = fin['static counter'][-1]
-            print(staticPatternNum)
+            staticPatternNum = fin['static counter'][-1] - 1
         except:
                 print("nothing to restore")
 
 def restoreDynamicClick():
+    global dynamicPatternNum
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
     dynamicRepeatButton.configure(state=tk.NORMAL)
@@ -492,9 +492,11 @@ def restoreDynamicClick():
         print("in loop")
         try:
             print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
+            dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
                 print(fin['visited static patterns'], fin['user static response'])
+                dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
 
