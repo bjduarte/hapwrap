@@ -524,13 +524,51 @@ def restoreDynamicClick():
                 for i in fin['user dynamic response']:
                     user_dynamic_response.append(i)
                 for i in fin['dynamic counter']:
+                    dynamicCounter.append(i)
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
                 tkMessageBox.showinfo("Restore", "Nothing to restore")
 
-def repeatClick():
+def repeatDynamicClick():
     print ("pattern repeated")  
+    # sonar pulse for 25 feet
+    for i in range(heartbeat_pulse):
+        strip.setPixelColor(pix,pulse_on)
+        strip.show()
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        strip.show()
+        time.sleep(beat)
+
+    # Heartbeat pattern for 10 through 20 feet
+    for x in range(heartbeat_pulse): 
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(beat)
+def repeatStaticClick():
+    print ("pattern repeated")      
 
 #function to deselect the elevation button
 def clearElevationSelection():
@@ -546,7 +584,7 @@ def clearDistanceSelection():
 
 
 #Labels
-elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
+elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15), visible = 'no')
 DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
 DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
 
@@ -584,12 +622,12 @@ restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreSt
 restoreStaticButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
-staticRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
+staticRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatStaticClick, width = 15)
 staticRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticRepeatButton.configure(state=tk.DISABLED)
 
 #create static repeat button
-dynamicRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
+dynamicRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatDynamicClick, width = 15)
 dynamicRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicRepeatButton.configure(state=tk.DISABLED)
 
