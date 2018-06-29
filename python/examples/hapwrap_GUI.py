@@ -474,9 +474,10 @@ def restoreStaticClick():
         f.close()
         #type(fin)
         print(fin['visited static patterns'], fin['user static response'], fin['static counter'])
-        patternDict['visited static patterns'] = fin['visited static patterns']
-        patternDict['user static response'] = fin['user static response']
+        visitedStaticPattern.append(fin['visited static patterns'])
+        user_static_response.append(fin['user static response'])
         patternDict['static counter'] = fin['static counter']
+        staticCounter.append(fin['static counter'])
         staticPatternNum = fin['static counter'][-1] - 1
         print(patternDict)
     except:
