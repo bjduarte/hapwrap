@@ -473,6 +473,7 @@ def restoreStaticClick():
         print("in loop")
         try:
             print(fin['visited static patterns'], fin['user static response'])
+            staticPatternNum = fin['static counter']
         except:
                 print("nothing to restore")
 
