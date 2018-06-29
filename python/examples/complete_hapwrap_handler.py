@@ -46,7 +46,7 @@ class Complete_hapwrap_handler:
         for k in self.direction:
           pattern = [i, j, k]
           self.patternList.append(pattern)
-          self.patternDict['pattern list'] = self.patternList
+          # self.patternDict['pattern list'] = self.patternList
           num += 1
 
 # STATIC Pattern Selector
@@ -61,7 +61,7 @@ class Complete_hapwrap_handler:
         self.sRandNumList.append(rNum)
         currentPattern = self.patternList[rNum]
         self.visitedStaticPattern.append(currentPattern)
-        self.patternDict['visited dynamic patterns'] = self.visitedStaticPattern
+        self.patternDict['visited static patterns'] = self.visitedStaticPattern
         # print(currentPattern)
 
     return currentPattern
@@ -89,17 +89,16 @@ class Complete_hapwrap_handler:
   # keep track of participants answers
   # radio button presses will be read in and saved 
   def user_response(self):
-    incorrect_response = [ele, dist, dir] # comes from radiobuttons
-    user_response = []
+    incorrect_response = ['chair', 10, 315] # comes from radiobuttons
+    user_static_response = []
     user_response.append(incorrect_response)
-    patternDict['user response'] = user_response
+    self.patternDict['user response'] = user_response
 
   # write to JSON
   # visited dynamic patterns, visited static patterns, current pattern, user response
   def write_data(self):
-    json = json.dumps(self.patternDict)
-    f = open("userData.json","w")
-    f.write(json)
+    f = open("visited.json","w")
+    f.write(json.dumps(self.patternDict))
     f.close()
 
   # read in visited patterns
@@ -108,8 +107,19 @@ class Complete_hapwrap_handler:
     fin = json.load(f)
     f.close()
 
+# repopulates the lists with data written to the json file
     for i in fin:
-        print(fin['visited static patterns'], fin['user response'], fin['visited dynamic patterns'], fin['user response'])
+      self.visitedStaticPattern.append(fin['visited static patterns'])
+      self.user_static_response.append(fin['user static response'])
+      self.visitedDynamicPattern.append(fin['visited dynamic patterns'])
+      self.user_dynamic_response.append(fin['user dynamic response'])
+
+      self.patternDict['visited static patterns'] = visitedStaticPatterns
+      self.patternDict['user static response'] = userStaticResponse
+      self.patternDict['visited dynamic patterns'] = visitedDynamicPattern
+      self.patternDict['userDynamicResponse'] = userDynamicResponse
+      print(self.patternDict)
+
 
 if __name__ == '__main__':
   dPattern = Complete_hapwrap_handler()
@@ -117,11 +127,12 @@ if __name__ == '__main__':
   
   try:
     dPattern.create_patterns()
-    # test = dPattern.static_handler()
-    # print (test)
-    
-    test2 = dPattern.dynamic_handler()
-    print(test2)
+    dPattern.static_handler()
+    dPattern.dynamic_handler()
+    dPattern.user_response()
+    dPattern.write_data()
+    test2 = dPattern.read_data()
+    # print(test2)
 
   except KeyboardInterrupt:
     print 'Interrupted'
