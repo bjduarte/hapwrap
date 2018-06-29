@@ -479,7 +479,7 @@ def restoreStaticClick():
 def restoreDynamicClick():
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
-    dyanmicRepeatButton.configure(state=tk.NORMAL)
+    dynamicRepeatButton.configure(state=tk.NORMAL)
 
     print ("updated pattern restore")
     f = open('userData.json', 'r')
@@ -555,7 +555,7 @@ staticRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTE
 staticRepeatButton.configure(state=tk.DISABLED)
 
 #create static repeat button
-dynamicRepeatButton = ttk.Button(dyanmicPage, text = "Repeat", command=repeatClick, width = 15)
+dynamicRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
 dynamicRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicRepeatButton.configure(state=tk.DISABLED)
 
