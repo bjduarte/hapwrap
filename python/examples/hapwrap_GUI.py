@@ -337,7 +337,7 @@ def nextDynamicClick():
     dynamicNumGenerated = False
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
-    dynamicCounter.append(dynamicPatternCounter)
+    dynamicCounter.append(dynamicPatternNum)
 
 
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
