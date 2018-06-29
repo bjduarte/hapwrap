@@ -462,7 +462,7 @@ def staticSaveClick():
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreStaticClick():
-    nextStaticButton.configure(state=tk.NORMAL)
+    staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
     staticRepeatButton.configure(state=tk.NORMAL)
     print ("updated pattern restore")
@@ -477,7 +477,7 @@ def restoreStaticClick():
                 print("nothing to restore")
 
 def restoreDynamicClick():
-    nextdyanmicButton.configure(state=tk.NORMAL)
+    dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
     dyanmicRepeatButton.configure(state=tk.NORMAL)
 
