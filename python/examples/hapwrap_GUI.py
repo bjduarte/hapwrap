@@ -550,12 +550,12 @@ restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreSt
 restoreStaticButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
-staticRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
+staticRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
 staticRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticRepeatButton.configure(state=tk.DISABLED)
 
 #create static repeat button
-dynamicRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
+dynamicRepeatButton = ttk.Button(dyanmicPage, text = "Repeat", command=repeatClick, width = 15)
 dynamicRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicRepeatButton.configure(state=tk.DISABLED)
 
