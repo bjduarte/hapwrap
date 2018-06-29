@@ -463,6 +463,8 @@ def staticSaveClick():
 
 def restoreStaticClick():
     nextStaticClick.configure(state=tk.NORMAL)
+    staticSaveButton.configure(state=tk.NORMAL)
+    staticRepeatButton.condfigure(state=tk.NORMAL)
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
@@ -475,7 +477,10 @@ def restoreStaticClick():
                 print("nothing to restore")
 
 def restoreDynamicClick():
-    nextStaticClick.configure(state=tk.NORMAL)
+    nextdyanmiclick.configure(state=tk.NORMAL)
+    dynamicSaveButton.configure(state=tk.NORMAL)
+    dyanmicRepeatButton.condfigure(state=tk.NORMAL)
+
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
@@ -519,18 +524,22 @@ DirectionLabel.place(x=3*RWidth/4, y=RHeight/4, anchor="center")
 #create Static Next button
 staticNextButton = ttk.Button(staticPage, text='Next Static Pattern', command=nextStaticClick, default='active')
 staticNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+staticNextButton.configure(state=tk.DISABLED)
 
 #create Dynamic Next button
 dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command=nextDynamicClick, default='active')
 dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+dynamicNextButton.configure(state=tk.DISABLED)
 
 #create dynamic Save button
 dynamicSaveButton = ttk.Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
 dynamicSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+dynamicSaveButton.configure(state=tk.DISABLED)
 
 #create static Save button
 staticSaveButton = ttk.Button(staticPage, text = "Save", command=staticSaveClick, width = 15)
 staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+staticSaveButton.configure(state=tk.DISABLED)
 
 #create dynamic restore button
 restoreButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
@@ -541,12 +550,14 @@ restoreButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticCl
 restoreButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
-repeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
-repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+staticRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatClick, width = 15)
+staticRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+staticRepeatButton.configure(state=tk.DISABLED)
 
 #create static repeat button
-repeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
-repeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+dynamicRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatClick, width = 15)
+dynamicRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
+dynamicRepeatButton.configure(state=tk.DISABLED)
 
  #create static status text
 #statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
