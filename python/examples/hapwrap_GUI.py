@@ -334,7 +334,7 @@ def nextStaticClick():
 def nextDynamicClick(): 
     global dynamic_incorrect_response
     global dKeyList
-
+    global pix
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     global dynamicPatternNum
