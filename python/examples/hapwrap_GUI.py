@@ -462,9 +462,9 @@ def staticSaveClick():
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreStaticClick():
-    nextStaticClick.configure(state=tk.NORMAL)
+    nextStaticButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
-    staticRepeatButton.condfigure(state=tk.NORMAL)
+    staticRepeatButton.configure(state=tk.NORMAL)
     print ("updated pattern restore")
     f = open('userData.json', 'r')
     fin = json.load(f)
@@ -477,9 +477,9 @@ def restoreStaticClick():
                 print("nothing to restore")
 
 def restoreDynamicClick():
-    nextdyanmiclick.configure(state=tk.NORMAL)
+    nextdyanmicButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
-    dyanmicRepeatButton.condfigure(state=tk.NORMAL)
+    dyanmicRepeatButton.configure(state=tk.NORMAL)
 
     print ("updated pattern restore")
     f = open('userData.json', 'r')
