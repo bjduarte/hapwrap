@@ -462,6 +462,7 @@ def staticSaveClick():
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreStaticClick():
+    global staticPatternNum
     staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
     staticRepeatButton.configure(state=tk.NORMAL)
