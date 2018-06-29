@@ -445,6 +445,9 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
+def hide(event):
+    event.widget.pack_forget()
+
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
         dynamicNextButton.configure(state=tk.NORMAL)
@@ -567,6 +570,9 @@ def repeatDynamicClick():
         strip.show()
         print(beat)
         time.sleep(beat)
+
+    repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
+    repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 def repeatStaticClick():
     print ("pattern repeated")      
 
@@ -584,7 +590,7 @@ def clearDistanceSelection():
 
 
 #Labels
-elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15), tk.visible = 'no')
+elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
 DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
 DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
 
