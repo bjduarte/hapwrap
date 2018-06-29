@@ -154,7 +154,7 @@ for i in elevation:
     for k in direction:
       pattern = [num, i, j, k]
       patternList.append(pattern)
-      patternDict['pattern list'] = patternList
+      #patternDict['pattern list'] = patternList
       num += 1
 
 # Dictionary containing object positions
@@ -455,7 +455,12 @@ def staticSaveClick():
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 def restoreClick():
-    print ("patterns restored") 
+    print ("patterns restored")
+    f = open('userData.json', 'r')
+    fin = json.load(f)
+    f.close()
+    for i in fin:
+        print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
 
 def repeatClick():
     print ("pattern repeated")  
