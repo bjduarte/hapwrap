@@ -480,7 +480,6 @@ def restoreStaticClick():
         for i in fin['static counter']:
             staticCounter.append(i)
         staticPatternNum = fin['static counter'][-1] - 1
-        print(patternDict)
     except:
             print("nothing to restore")
             tkMessageBox.showinfo("Restore", "Nothing to restore")
@@ -490,31 +489,41 @@ def restoreDynamicClick():
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
     dynamicRepeatButton.configure(state=tk.NORMAL)
-    f = open('userData.json', 'r')
-    fin = json.load(f)
-    f.close()
+
     try:
-        print(fin['visited static patterns'], fin['user static response'], fin['visited dynamic patterns'], fin['user dynamic response'])
-        patternDict['visited static patterns'] = fin['visited static patterns']
-        patternDict['user static response'] = fin['user static response']
-        patternDict['visited dynamic patterns'] = fin['visited dynamic patterns']
-        patternDict['user dynamic response'] = fin['user dynamic response']
-        patternDict['dynamic counter'] = fin['dynamic counter']
-        patternDict['static counter'] = fin['static counter']
+        f = open('userData.json', 'r')
+        fin = json.load(f)
+        f.close()
+
+        for i in fin['visited static patterns']:
+            visitedStaticPattern.append(i)
+        for i in fin['user static response']:
+            user_static_response.append(i)
+        for i in fin['static counter']:
+            staticCounter.append(i)
+        for i in fin['visited dynamic patterns']:
+            visitedDynamicPattern.append(i)
+        for i in fin['user dynamic response']:
+            user_dynamic_response.append(i)
+        for i in fin['dynamic counter']:
+            dynamicCounter.append(i)
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
     except:
         try:
-            print(fin['visited static patterns'], fin['user static response'])
-            patternDict['visited static patterns'] = fin['visited static patterns']
-            patternDict['user static response'] = fin['user static response']
-            patternDict['static counter'] = fin['static counter']
+            for i in fin['visited static patterns']:
+                visitedStaticPattern.append(i)
+            for i in fin['user static response']:
+                user_static_response.append(i)
+            for i in fin['static counter']:
+                staticCounter.append(i)
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
-                print(fin['visited dynamic patterns'], fin['user dynamic response'])
-                patternDict['visited dynamic patterns'] = fin['visited dynamic patterns']
-                patternDict['user dynamic response'] = fin['user dynamic response']
-                patternDict['dynamic counter'] = fin['dynamic counter']
+                for i in fin['visited dynamic patterns']:
+                    visitedDynamicPattern.append(i)
+                for i in fin['user dynamic response']:
+                    user_dynamic_response.append(i)
+                for i in fin['dynamic counter']:
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
