@@ -341,7 +341,6 @@ def nextDynamicClick():
     global dynamicPatternNum
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
-    repeatMessage.lower(dynamicPage)
 
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
@@ -576,6 +575,9 @@ def repeatDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+    time.sleep(3000)
+    repeatMessage = ttk.Label(dynamicPage, text=" ")
+
 
 def repeatStaticClick():
     print ("pattern repeated")      
