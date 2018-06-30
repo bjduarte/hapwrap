@@ -467,8 +467,10 @@ def nextDynamicClick():
  
 def fileButtonClick():
     print("saved!!!!")
+    f = open('userData.json', 'r')
+    fin = json.load(f)
     with open('' + str(fileChoice), 'w') as outfile:
-        json.dump(data, outfile)
+        json.dump(fin, outfile)
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
