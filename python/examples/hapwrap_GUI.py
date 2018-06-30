@@ -457,7 +457,7 @@ def nextDynamicClick():
         fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
         fileInfo.place(x=(RWidth-50)/2, y = RHeight/6 - 45, anchor = tk.CENTER)  
         fileButton = ttk.Button(dynamicPage, text="Save file", command=fileButtonClick)
-        fileButton.place(x=(RWidth-50)/2 + 230, y = RHeight/6, anchor = tk.CENTER)  
+        fileButton.place(x=(RWidth-50)/2 + 200, y = RHeight/6, anchor = tk.CENTER)  
         dynamicSaveButton.configure(state=tk.DISABLED)
         dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(dynamicPage, text="Done          ")
@@ -467,6 +467,8 @@ def nextDynamicClick():
  
 def fileButtonClick():
     print("saved!!!!")
+    with open('' + str(fileChoice), 'w') as outfile:
+        json.dump(data, outfile)
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
