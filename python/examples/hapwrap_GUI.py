@@ -171,8 +171,14 @@ def nextStaticClick():
     
     global patterns
     global pix
-
+    global pix
+    global beat
     global staticPatternNum
+
+
+    repeatMessage = ttk.Label(staticPage, text="                                                    ")
+    repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+
     if (staticPatternNum != 0):
         # keep track of participants answers
         # radio button presses will be read in and saved 
@@ -344,7 +350,6 @@ def nextDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-
 
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
@@ -581,7 +586,46 @@ def repeatDynamicClick():
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
 def repeatStaticClick():
-    print ("pattern repeated")      
+    print ("pattern repeated")   
+        print ("pattern repeated")  
+    # sonar pulse for 25 feet
+    for i in range(heartbeat_pulse):
+        strip.setPixelColor(pix,pulse_on)
+        strip.show()
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        strip.show()
+        time.sleep(beat)
+
+    # Heartbeat pattern for 10 through 20 feet
+    for x in range(heartbeat_pulse): 
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(beat)
+
+    repeatMessage = ttk.Label(staticPage, text="Pattern was repeated")
+    repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)   
 
 #function to deselect the elevation button
 def clearElevationSelection():
