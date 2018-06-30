@@ -575,8 +575,9 @@ def repeatDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-    time.sleep(3000)
-    repeatMessage = ttk.Label(dynamicPage, text=" ")
+    repeatMessage = ttk.Label(dynamicPage, text="                         ")
+        repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+
 
 
 def repeatStaticClick():
