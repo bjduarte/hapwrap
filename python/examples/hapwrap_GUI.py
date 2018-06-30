@@ -587,7 +587,7 @@ def repeatDynamicClick():
 
 def repeatStaticClick():
     print ("pattern repeated")   
-        print ("pattern repeated")  
+    print ("pattern repeated")  
     # sonar pulse for 25 feet
     for i in range(heartbeat_pulse):
         strip.setPixelColor(pix,pulse_on)
