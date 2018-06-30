@@ -375,7 +375,7 @@ def nextDynamicClick():
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
 
-    if (dynamicPatternNum < 4):
+    if (dynamicPatternNum < 2):
         while dynamicNumGenerated == False:
             rNum = random.randint(0, 22)
             while (rNum not in dRandNumList):
@@ -451,18 +451,22 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
-    if (dynamicPatternNum >= 4):
+    if (dynamicPatternNum >= 2):
         fileName = ttk.Entry(dynamicPage, width=30, textvariable=fileChoice)
-        fileName.place(x=(RWidth-50)/2, y = RHeight/5, anchor = tk.CENTER)  
+        fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
+        fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
+        fileInfo.place(x=(RWidth-50)/2, y = RHeight/6 - 75, anchor = tk.CENTER)  
+        fileButton = ttk.Button(dynamicPage, text="Save file", command=fileButtonClick)
+        fileButton.place(x=(RWidth-50)/2 + 300, y = RHeight/6, anchor = tk.CENTER)  
         dynamicSaveButton.configure(state=tk.DISABLED)
         dynamicNextButton.configure(state=tk.DISABLED)
-        patternMessage = ttk.Label(dynamicPage, text="Done")
+        patternMessage = ttk.Label(dynamicPage, text="Done          ")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done")
+        currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
-def hide(event):
-    event.widget.pack_forget()
+def fileButtonClick():
+    print("saved!!!!")
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
