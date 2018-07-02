@@ -340,6 +340,7 @@ def nextStaticClick():
     distanceChoice.set(20)
 
 def nextDynamicClick(): 
+    global fileName
     global dynamic_incorrect_response
     global dKeyList
     global pix
