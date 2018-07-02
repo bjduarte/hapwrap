@@ -471,8 +471,8 @@ def fileButtonClick():
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
         # rename the original file
-        os.rename("userData.json",str(fileChoice))
-    print("saved")
+        os.rename("userData.json", str(fileChoice))
+    print("saved to " + str(fileChoice))
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
