@@ -16,11 +16,12 @@ from neopixel import *
 import sys
 import json
 import random
+import tkMessageBox
 import os
 import time
+from os import path
 from complete_hapwrap_handler import *
 from dynamic_pattern_list_builder import *
-import tkMessageBox
 
 # LED strip configuration:
 LED_COUNT = 24 # Number of LED pixels.
@@ -221,6 +222,13 @@ def nextStaticClick():
     f = open("userData.json","w")
     f.write(json.dumps(patternDict))
     f.close()
+    if path.exists("userData.json"):
+        src = path.realpath("userData.json");
+        # rename the original file
+        os.rename("userData.json","hey.txt")
+        
+if __name__ == "__main__":
+    main()
 
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
