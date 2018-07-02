@@ -468,7 +468,8 @@ def nextDynamicClick():
  
 def fileButtonClick():
     print("saved")
-    os.rename('userData.json', fileChoice)
+    print(str(fileChoice))
+    os.rename('userData.json', str(fileChoice)
     print("saved")
 
 def dynamicSaveClick():
