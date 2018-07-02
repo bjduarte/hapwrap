@@ -467,9 +467,8 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
 def fileButtonClick():
-    print("saved")
-    print(str(fileChoice))
-    os.rename('userData.json', str(fileChoice)
+    print("hey")
+    os.rename('userData.json', str(fileChoice))
     print("saved")
 
 def dynamicSaveClick():
@@ -478,6 +477,7 @@ def dynamicSaveClick():
 
     statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
+
 def staticSaveClick():
     global static_incorrect_response
 
