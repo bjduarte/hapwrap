@@ -98,11 +98,7 @@ except:
 try:
     userDynamicChoice = StringVar()
 except:
-    userDynamicChoice = tk.StringVar()
-try:
-    fileChoice = StringVar()
-except:
-    fileChoice = tk.StringVar()    
+    userDynamicChoice = tk.StringVar()   
 try:
     staticNumGenerated = BooleanVar()
 except:
@@ -454,7 +450,7 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
     if (dynamicPatternNum >= 2):
-        fileName = ttk.Entry(dynamicPage, width=30, textvariable=fileChoice)
+        fileName = ttk.Entry(dynamicPage, width=30)
         fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
         fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
         fileInfo.place(x=(RWidth-50)/2, y = RHeight/6 - 45, anchor = tk.CENTER)  
@@ -468,11 +464,14 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
 def fileButtonClick():
+    fileChoice = fileName.get()
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
         # rename the original file
-        os.rename("userData.json", str(fileChoice))
-    print("saved to " + str(fileChoice))
+        os.rename("userData.json", fileChoice)
+    else:
+        print("error")
+    print("saved to " + fileChoice)
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
