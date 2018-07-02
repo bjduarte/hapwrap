@@ -16,6 +16,7 @@ from neopixel import *
 import sys
 import json
 import random
+import os
 import time
 from complete_hapwrap_handler import *
 from dynamic_pattern_list_builder import *
@@ -466,11 +467,9 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
 def fileButtonClick():
-    print("saved!!!!")
-    f = open('userData.json', 'r')
-    fin = json.load(f)
-    with open('' + str(fileChoice), 'w') as outfile:
-        json.dump(fin, outfile)
+    print("saved")
+    os.rename('userData.json', fileChoice)
+    print("saved")
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
