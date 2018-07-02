@@ -222,13 +222,6 @@ def nextStaticClick():
     f = open("userData.json","w")
     f.write(json.dumps(patternDict))
     f.close()
-    if path.exists("userData.json"):
-        src = path.realpath("userData.json");
-        # rename the original file
-        os.rename("userData.json","hey.txt")
-        
-if __name__ == "__main__":
-    main()
 
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
@@ -475,8 +468,10 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
 def fileButtonClick():
-    print("hey")
-    os.rename('userData.json', str(fileChoice))
+    if path.exists("userData.json"):
+        src = path.realpath("userData.json");
+        # rename the original file
+        os.rename("userData.json","hey.txt")
     print("saved")
 
 def dynamicSaveClick():
