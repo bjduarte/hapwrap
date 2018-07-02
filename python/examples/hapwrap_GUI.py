@@ -472,8 +472,9 @@ def fileButtonClick():
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
         # rename the original file
-        shutil.move("Eyes_on/python/examples/userData.json", "Eyes_On/python/examples/completedStudies/userData.json")
         os.rename("userData.json", fileChoice + ".txt")
+        shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+
 
     else:
         print("error")
