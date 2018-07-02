@@ -17,6 +17,7 @@ import sys
 import json
 import random
 import tkMessageBox
+import shutil
 import os
 import time
 from os import path
@@ -466,11 +467,14 @@ def nextDynamicClick():
  
 def fileButtonClick():
     fileChoice = fileName.get()
+    save_path = 'C:/example/'
+
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
         # rename the original file
-        os.rename("userData.json", fileChoice)
-        os.makedirs(completedStudies)
+        shutil.move("Eyes_on/python/examples/userData.json", "Eyes_On/python/examples/completedStudies/userData.json")
+        os.rename("userData.json", fileChoice + ".txt")
+
     else:
         print("error")
     print("saved to " + fileChoice)
