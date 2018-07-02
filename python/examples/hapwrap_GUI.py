@@ -470,6 +470,7 @@ def fileButtonClick():
         src = path.realpath("userData.json");
         # rename the original file
         os.rename("userData.json", fileChoice)
+        os.makedirs(completedStudies)
     else:
         print("error")
     print("saved to " + fileChoice)
