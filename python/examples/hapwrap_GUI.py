@@ -69,6 +69,10 @@ eyesOnScreen.add(staticPage, text='Static Patterns')
 # Adds tab 2 of the notebook
 dynamicPage = ttk.Frame(eyesOnScreen)
 eyesOnScreen.add(dynamicPage, text='Dynamic Patterns')
+
+# Adds tab 3 of the notebook
+trainingPage = ttk.Frame(eyesOnScreen)
+eyesOnScreen.add(trainingPage, text='Training Patterns')
  
 
 #create variable for button selection
@@ -122,16 +126,15 @@ elevations = [("Person",1), ("Vehicle",2), ("Chair  ",3)]
 distances = [("10 feet",1), ("15 feet",2), ("20 feet",3), ("25 feet",4)]        
 directions = [("0",1), ("45",2), ("90",3), ("135",4), ("180",5), ("225",6), ("270",7), ("315",8)]
 
-
 # lists of all the possible components that make up a pattern
 elevation = [0, 1, 2]
 distance = [0, 1, 2, 3]
 direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
-
 #Display button selection 
-dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
+#dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
 static_incorrect_response = []
+trainingPattern = []
 dynamic_incorrect_response = []
 randNumList = []
 staticCounter = []
@@ -170,6 +173,89 @@ patterns = {
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
     'pin_out' : [[0,1,2,3,4,5,6,7],[8,9,10,11,12,13,14,15],[16,17,18,19,20,21,22,23]] }
 
+def enterTestingPatterns(): 
+    global patterns
+    global pix
+    global pix
+    global beat
+    global staticPatternNum
+
+    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
+    except IndexError: 
+        try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1,0]
+        except IndexError: 
+            try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
+            except IndexError: 
+                try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, directions[directionChoice.get() - 1][1]-1]
+                except IndexError:
+                    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, 0]
+                    except IndexError:
+                        try: [0, distances[distanceChoice.get() - 1][1]-1, 0]
+                        except IndexError:
+                            try: trainingPattern = [0, 0, directions[directionChoice.get() - 1][1]-1]
+                            except IndexError: trainingPattern = [0,0,0]
+
+    buttonSpacing = 0
+    print(trainingPattern)
+
+    pix = patterns.get('pin_out')[trainingPattern[0]-1][trainingPattern[2]]
+    print("pix = " + str(pix))
+    beat = 0
+
+    #Heart beat code
+    if (trainingPattern[1] == "10 feet"):
+        beat = 0.300
+    elif (trainingPattern[1] == "15 feet"):
+        beat = 0.650
+    elif (trainingPattern[1] == "20 feet"):
+        beat = 1.000
+    elif (trainingPattern[1] == "25 feet"):
+        beat = 1.00
+        heart_gap = 0.5
+    # sonar pulse for 25 feet
+    for i in range(heartbeat_pulse):
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(beat)
+
+    # # Heartbeat pattern for 10 through 20 feet
+    for x in range(heartbeat_pulse): 
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_on)
+        print ("On")
+        strip.show()
+        print(beat)
+        time.sleep(heartbeat_gap)
+
+        strip.setPixelColor(pix,pulse_off)
+        print ("Off")
+        strip.show()
+        print(beat)
+        time.sleep(beat)
+
+    #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
+    elevationChoice.set(20)
+    directionChoice.set(20)
+    distanceChoice.set(20)
+
 def nextStaticClick(): 
     
     global patterns
@@ -177,8 +263,6 @@ def nextStaticClick():
     global pix
     global beat
     global staticPatternNum
-
-
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
@@ -210,7 +294,6 @@ def nextStaticClick():
     staticNumGenerated = False
     buttonSpacing = 0
 
-
     #Each time next button is clicked status message is changed back to unsaved
     statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
@@ -240,16 +323,12 @@ def nextStaticClick():
 
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
-            print("10 feet = beat of 0.3")
             beat = 0.300
         elif (distances[currentStaticPattern[2]][0] == "15 feet"):
-            print("15 feet = beat of 0.65")
             beat = 0.650
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
-            print("20 feet = beat of 1")
             beat = 1.000
         elif (distances[currentStaticPattern[2]][0] == "25 feet"):
-            print("25 feet = beat of 1 and heartgap of 0.5")
             beat = 1.00
             heart_gap = 0.5
 
@@ -266,7 +345,7 @@ def nextStaticClick():
             print(beat)
             time.sleep(beat)
 
-        # Heartbeat pattern for 10 through 20 feet
+        # # Heartbeat pattern for 10 through 20 feet
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -407,7 +486,7 @@ def nextDynamicClick():
                     beat = 1.00
                     heart_gap = 0.5
 
-                # sonar pulse for 25 feet
+                # # sonar pulse for 25 feet
                 for i in range(heartbeat_pulse):
                     strip.setPixelColor(pix,pulse_on)
                     strip.show()
@@ -417,7 +496,7 @@ def nextDynamicClick():
                     strip.show()
                     time.sleep(beat)
 
-                # Heartbeat pattern for 10 through 20 feet
+                # # Heartbeat pattern for 10 through 20 feet
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
                     print ("On")
@@ -474,7 +553,6 @@ def fileButtonClick():
         # rename the original file
         os.rename("userData.json", fileChoice + ".txt")
         shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-
 
     else:
         print("error")
@@ -579,7 +657,7 @@ def repeatDynamicClick():
         strip.show()
         time.sleep(beat)
 
-    # Heartbeat pattern for 10 through 20 feet
+    # # Heartbeat pattern for 10 through 20 feet
     for x in range(heartbeat_pulse): 
         strip.setPixelColor(pix,pulse_on)
         print ("On")
@@ -661,11 +739,44 @@ def clearDirectionSelection():
 def clearDistanceSelection():
     distanceChoice.set(20)
 
+#Create elevation Radiobuttons for training patterns page      
+for text, elevation in elevations:
+    elevationButton = ttk.Radiobutton(trainingPage, text=text, variable=elevationChoice, value=elevation)
+    buttonSpacing = buttonSpacing + 30
+    elevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)
+    #create clearElevation button
+clearElevationButton = ttk.Button(trainingPage, text = "Clear", command=clearElevationSelection)
+clearElevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + 120, anchor=tk.CENTER)
 
-#Labels
+#Create distance Radiobuttons for training patterns page      
+buttonSpacing = 0
+for text, distance in distances:
+    distanceButton = ttk.Radiobutton(trainingPage, text=text, variable=distanceChoice, value=distance)
+    buttonSpacing = buttonSpacing + 30
+    distanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER) 
+#create clearDistance button
+clearDistanceButton = ttk.Button(trainingPage, text = "Clear", command=clearDistanceSelection)
+clearDistanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + 150, anchor=tk.CENTER)
+
+#Create direction Radiobuttons for training patterns page      
+buttonSpacing = 0
+for text, direction in directions:
+    directionButton = ttk.Radiobutton(trainingPage, text=text, variable=directionChoice, value=direction)
+    buttonSpacing = buttonSpacing + 30
+    directionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)   
+#create clearDirection button
+clearDirectionButton = ttk.Button(trainingPage, text = "Clear", command=clearDirectionSelection)
+clearDirectionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + 270, anchor=tk.CENTER)
+
+#Labels for staticPage
 elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
 DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
 DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
+
+#Labels for trainingPage
+elevationLabel= ttk.Label(trainingPage, text= "Elevation:", font=("Verdana", 15))
+DistanceLabel= ttk.Label(trainingPage, text= "Distance:", font=("Verdana", 15))
+DirectionLabel= ttk.Label(trainingPage, text= "Direction:", font=("Verdana", 15))
 
 #Set labels and placement
 elevationLabel.place(x=RWidth/4, y=RHeight/4, anchor="center")
@@ -681,6 +792,10 @@ staticNextButton.configure(state=tk.DISABLED)
 dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command=nextDynamicClick, default='active')
 dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicNextButton.configure(state=tk.DISABLED)
+
+#create trainingPage "Enter" button
+trainingNextButton = ttk.Button(trainingPage, text='Enter', command=enterTestingPatterns, default='active')
+trainingNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic Save button
 dynamicSaveButton = ttk.Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
