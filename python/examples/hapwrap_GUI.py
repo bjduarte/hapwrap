@@ -71,7 +71,7 @@ dynamicPage = ttk.Frame(eyesOnScreen)
 eyesOnScreen.add(dynamicPage, text='Dynamic Patterns')
 
 # Adds tab 3 of the notebook
-trainingPage = ttk.Frame(eyesOnScreen)
+dynamicPage = ttk.Frame(eyesOnScreen)
 eyesOnScreen.add(trainingPage, text='Training Patterns')
  
 
@@ -122,9 +122,9 @@ directionChoice.set(20)
 elevationChoice.set(20)
 
 #button options
-elevations = [("Person",1), ("Vehicle",2), ("Chair  ",3)]        
-distances = [("10 feet",1), ("15 feet",2), ("20 feet",3), ("25 feet",4)]        
-directions = [("0",1), ("45",2), ("90",3), ("135",4), ("180",5), ("225",6), ("270",7), ("315",8)]
+elevations = [("Person",0), ("Vehicle",1), ("Chair  ",2)]        
+distances = [("10 feet",0), ("15 feet",1), ("20 feet",2), ("25 feet",3)]        
+directions = [("0",0), ("45",1), ("90",2), ("135",3), ("180",4), ("225",5), ("270",6), ("315",7)]
 
 # lists of all the possible components that make up a pattern
 elevation = [0, 1, 2]
