@@ -132,7 +132,7 @@ distance = [0, 1, 2, 3]
 direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #Display button selection 
-#dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
+dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
 static_incorrect_response = []
 trainingPattern = []
 dynamic_incorrect_response = []
