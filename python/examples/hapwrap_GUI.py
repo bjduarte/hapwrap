@@ -132,7 +132,7 @@ distance = [0, 1, 2, 3]
 direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #Display button selection 
-#dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
+dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
 static_incorrect_response = []
 trainingPattern = []
 dynamic_incorrect_response = []
@@ -171,7 +171,7 @@ patterns = {
     'elevation' : [1, 2, 3],
     'distance' : [10, 15, 20, 25], 
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
-    'pin_out' : [[0,1,2,3,4,5,6,7],[8,9,10,11,12,13,14,15],[16,17,18,19,20,21,22,23]] }
+    'pin_out' : [[0,1,2,3,4,5,6,7],[15, 14, 13, 12, 11, 10, 9, 8],[16,17,18,19,20,21,22,23]] }
 
 def enterTestingPatterns(): 
     global patterns
@@ -454,7 +454,7 @@ def nextDynamicClick():
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
 
-    if (dynamicPatternNum < 2):
+    if (dynamicPatternNum < 24):
         while dynamicNumGenerated == False:
             rNum = random.randint(0, 22)
             while (rNum not in dRandNumList):
