@@ -190,7 +190,7 @@ def enterTestingPatterns():
                 except IndexError:
                     try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, 0]
                     except IndexError:
-                        try: [0, distances[distanceChoice.get() - 1][1]-1, 0]
+                        try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, 0]
                         except IndexError:
                             try: trainingPattern = [0, 0, directions[directionChoice.get() - 1][1]-1]
                             except IndexError: trainingPattern = [0,0,0]
@@ -279,7 +279,7 @@ def nextStaticClick():
                     except IndexError:
                         try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], 0, 0]
                         except IndexError:
-                            try: [0, distances[distanceChoice.get() - 1][0], 0]
+                            try: static_incorrect_response = [0, distances[distanceChoice.get() - 1][0], 0]
                             except IndexError:
                                 try: static_incorrect_response = [0, 0, directions[directionChoice.get() - 1][0]]
                                 except IndexError: static_incorrect_response = [0,0,0]
@@ -546,7 +546,7 @@ def nextDynamicClick():
  
 def fileButtonClick():
     fileChoice = fileName.get()
-    save_path = 'C:/example/'
+    save_path = 'C:/example/completedStudies/'
 
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
