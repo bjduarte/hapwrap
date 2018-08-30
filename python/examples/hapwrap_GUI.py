@@ -550,6 +550,9 @@ def fileButtonClick():
 
     f= open(fileChoice + ".txt","w+")
 
+    completeName = os.path.join(save_path, fileChoice + ".txt")         
+
+
     # if path.exists("userData.json"):
     #     src = path.realpath("userData.json");
     #     # rename the original file
@@ -561,7 +564,7 @@ def fileButtonClick():
     #     print("ErrorError")
 #save file to folder called completedStudies
     print("saved to " + fileChoice + ".txt")
-    shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+    # shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
     tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
 
 def dynamicSaveClick():
