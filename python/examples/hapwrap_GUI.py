@@ -546,16 +546,18 @@ def nextDynamicClick():
  
 def fileButtonClick():
     fileChoice = fileName.get()
-    save_path = 'C:/example/completedStudies/'
+    save_path = 'C:/examples/completedStudies/'
 
     if path.exists("userData.json"):
         src = path.realpath("userData.json");
         # rename the original file
         os.rename("userData.json", fileChoice + ".txt")
+        os.rename("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
         shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
 
     else:
         print("error")
+
     print("saved to " + fileChoice)
 
 def dynamicSaveClick():
