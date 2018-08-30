@@ -553,13 +553,14 @@ def fileButtonClick():
         # rename the original file
         os.rename("userData.json", fileChoice + ".txt")
         os.rename("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-        shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-        tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
+
 
     else:
         print("ErrorError")
 
     print("saved to " + fileChoice + ".txt")
+    shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+    tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
 
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
