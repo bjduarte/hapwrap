@@ -546,7 +546,7 @@ def nextDynamicClick():
  
 def fileButtonClick():
     fileChoice = fileName.get()
-    save_path = 'C:/Eyes_On/python/examples/completedStudies/'
+    save_path = './completedStudies/'
 
     f= open(fileChoice + ".txt","w+")
 
