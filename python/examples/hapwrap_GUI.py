@@ -545,13 +545,20 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
  
 def fileButtonClick():
+    # fileChoice = fileName.get()
+    # save_path = './completedStudies/'
+
+    # f= open(fileChoice + ".txt","w+")
+
+    # completeName = os.path.join(save_path, fileChoice + ".txt")         
+
+
+
+    save_path = 'Eyes_on/python/examples/completedStudies/'
     fileChoice = fileName.get()
-    save_path = './completedStudies/'
-
-    f= open(fileChoice + ".txt","w+")
-
-    completeName = os.path.join(save_path, fileChoice + ".txt")         
-
+    completeName = os.path.join(save_path, fileChoice +".txt")         
+    file1 = open(completeName, "w")
+    file1.close()
 
     # if path.exists("userData.json"):
     #     src = path.realpath("userData.json");
