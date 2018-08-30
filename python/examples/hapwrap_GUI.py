@@ -557,7 +557,7 @@ def fileButtonClick():
         tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
 
     else:
-        print("error")
+        print("ErrorError")
 
     print("saved to " + fileChoice + ".txt")
 
