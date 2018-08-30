@@ -546,18 +546,20 @@ def nextDynamicClick():
  
 def fileButtonClick():
     fileChoice = fileName.get()
-    save_path = 'C:/examples/completedStudies/'
+    save_path = 'C:/Eyes_On/python/examples/completedStudies/'
 
-    if path.exists("userData.json"):
-        src = path.realpath("userData.json");
-        # rename the original file
-        os.rename("userData.json", fileChoice + ".txt")
-        os.rename("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+    f= open(fileChoice + ".txt","w+")
+
+    # if path.exists("userData.json"):
+    #     src = path.realpath("userData.json");
+    #     # rename the original file
+    #     os.rename("userData.json", fileChoice + ".txt")
+    #     os.rename("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
 
 
-    else:
-        print("ErrorError")
-
+    # else:
+    #     print("ErrorError")
+#save file to folder called completedStudies
     print("saved to " + fileChoice + ".txt")
     shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
     tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
