@@ -594,18 +594,18 @@ def nextDynamicClick():
                 # print(pix)
                 beat = 0
 
-                if (distance == 10):
+                if (distance == 0):
                     beat = 0.300
-                elif (distance == 15):
+                elif (distance == 1):
                     beat = 0.650
-                elif (distance == 20):
+                elif (distance == 2):
                     beat = 1.000
-                elif (distance == 25):
+                elif (distance == 3):
                     beat = 1.00
                     heart_gap = 0.5
 
                 # # Heartbeat pattern for 25 feet
-                if (distance == 25):
+                if (distance == 3):
                     for i in range(heartbeat_pulse):
                         strip.setPixelColor(pix,pulse_on)
                         print ("On")
@@ -620,7 +620,7 @@ def nextDynamicClick():
 
         # # Heartbeat pattern for 10 through 20 feet
         # # Heartbeat pattern for 10 through 20 feet
-                elif (distance == 20):
+                elif (distance == 2):
                     for x in range(heartbeat_pulse): 
                         strip.setPixelColor(pix,pulse_on)
                         print ("On")
@@ -646,7 +646,7 @@ def nextDynamicClick():
                         print(beat)
                         time.sleep(beat)
                 # # Heartbeat pattern for 10 through 20 feet
-                elif (distance == 10):
+                elif (distance == 0):
                     for x in range(heartbeat_pulse): 
                         strip.setPixelColor(pix,pulse_on)
                         print ("On")
@@ -672,7 +672,7 @@ def nextDynamicClick():
                         print(beat)
                         time.sleep(beat)
                 # # Heartbeat pattern for 10 through 20 feet
-                elif (distance == 15):
+                elif (distance == 1):
                     for x in range(heartbeat_pulse): 
                         strip.setPixelColor(pix,pulse_on)
                         print ("On")
