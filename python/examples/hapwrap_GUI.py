@@ -706,7 +706,7 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
-    if (dynamicPatternNum >= 2):
+    if (dynamicPatternNum >= 24):
         fileName = ttk.Entry(dynamicPage, width=30)
         fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
         fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
