@@ -214,7 +214,7 @@ def enterTestingPatterns():
         heart_gap = 0.5
 
     # # Heartbeat pattern for 25 feet
-    if (distances[currentStaticPattern[2]][0] == "25 feet")
+    if (distances[currentStaticPattern[2]][0] == "25 feet"):
         for i in range(heartbeat_pulse):
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -389,7 +389,7 @@ def nextStaticClick():
             heart_gap = 0.5
 
         # # Heartbeat pattern for 25 feet
-        if (distances[currentStaticPattern[2]][0] == "25 feet")
+        if (distances[currentStaticPattern[2]][0] == "25 feet"):
             for i in range(heartbeat_pulse):
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
@@ -598,7 +598,7 @@ def nextDynamicClick():
                     heart_gap = 0.5
 
                 # # Heartbeat pattern for 25 feet
-                if (distances[currentStaticPattern[2]][0] == "25 feet")
+                if (distances[currentStaticPattern[2]][0] == "25 feet"):
                     for i in range(heartbeat_pulse):
                         strip.setPixelColor(pix,pulse_on)
                         print ("On")
@@ -833,7 +833,7 @@ def repeatDynamicClick():
 
     print ("pattern repeated")  
     # # Heartbeat pattern for 25 feet
-    if (distances[currentStaticPattern[2]][0] == "25 feet")
+    if (distances[currentStaticPattern[2]][0] == "25 feet"):
         for i in range(heartbeat_pulse):
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -932,7 +932,7 @@ def repeatDynamicClick():
 def repeatStaticClick():
     print ("pattern repeated")   
         # # Heartbeat pattern for 25 feet
-    if (distances[currentStaticPattern[2]][0] == "25 feet")
+    if (distances[currentStaticPattern[2]][0] == "25 feet"):
         for i in range(heartbeat_pulse):
             strip.setPixelColor(pix,pulse_on)
             print ("On")
