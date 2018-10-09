@@ -585,7 +585,7 @@ def nextDynamicClick():
                 dynamicNumGenerated = True
 
 
-        for currentBeat in pat.get(currentDynamicPattern:):
+        for currentBeat in pat.get(currentDynamicPattern):
             elevation = currentBeat[0]
             distance = currentBeat[1]
             direction = currentBeat[2]
