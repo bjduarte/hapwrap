@@ -203,18 +203,18 @@ def enterTestingPatterns():
     beat = 0
 
     #Heart beat code
-    if (trainingPattern[1] == "10 feet"):
+    if (trainingPattern[1] == "0"):
         beat = 0.300
-    elif (trainingPattern[1] == "15 feet"):
+    elif (trainingPattern[1] == "1"):
         beat = 0.650
-    elif (trainingPattern[1] == "20 feet"):
+    elif (trainingPattern[1] == "2"):
         beat = 1.000
-    elif (trainingPattern[1] == "25 feet"):
+    elif (trainingPattern[1] == "3"):
         beat = 1.00
         heart_gap = 0.5
 
     # # Heartbeat pattern for 25 feet
-    if (trainingPattern[1] == "25 feet"):
+    if (trainingPattern[1] == "3"):
         print ("beat 1.0 & sonar")
         print (trainingPattern[1])
         for i in range(heartbeat_pulse):
@@ -231,7 +231,7 @@ def enterTestingPatterns():
 
     # # Heartbeat pattern for 10 through 20 feet
     # # Heartbeat pattern for 10 through 20 feet
-    elif (trainingPattern[1] == "20 feet"):
+    elif (trainingPattern[1] == "2"):
         print (trainingPattern[1])
         print ("beat 1.0")
         for x in range(heartbeat_pulse): 
@@ -259,7 +259,7 @@ def enterTestingPatterns():
             print(beat)
             time.sleep(beat)
             # # Heartbeat pattern for 10 through 20 feet
-    elif (trainingPattern[1] == "10 feet"):
+    elif (trainingPattern[1] == "0"):
         print ("beat 0.3")
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
@@ -286,7 +286,7 @@ def enterTestingPatterns():
             print(beat)
             time.sleep(beat)
             # # Heartbeat pattern for 10 through 20 feet
-    elif (trainingPattern[1] == "15 feet"):
+    elif (trainingPattern[1] == "1"):
         print ("beat 0.65")
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
