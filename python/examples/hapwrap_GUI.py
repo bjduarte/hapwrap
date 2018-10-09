@@ -214,7 +214,7 @@ def enterTestingPatterns():
         heart_gap = 0.5
 
     # # Heartbeat pattern for 25 feet
-    if (distances[currentStaticPattern[2]][0] == "25 feet"):
+    if (distances[trainingPattern[2]][0] == "25 feet"):
         for i in range(heartbeat_pulse):
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -229,7 +229,7 @@ def enterTestingPatterns():
 
     # # Heartbeat pattern for 10 through 20 feet
     # # Heartbeat pattern for 10 through 20 feet
-    elif (distances[currentStaticPattern[2]][0] == "20 feet"):
+    elif (distances[trainingPatternStaticPattern[2]][0] == "20 feet"):
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -255,7 +255,7 @@ def enterTestingPatterns():
             print(beat)
             time.sleep(beat)
             # # Heartbeat pattern for 10 through 20 feet
-    elif (distances[currentStaticPattern[2]][0] == "10 feet"):
+    elif (distances[trainingPattern[2]][0] == "10 feet"):
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -281,7 +281,7 @@ def enterTestingPatterns():
             print(beat)
             time.sleep(beat)
             # # Heartbeat pattern for 10 through 20 feet
-    elif (distances[currentStaticPattern[2]][0] == "15 feet"):
+    elif (distances[trainingPattern[2]][0] == "15 feet"):
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
