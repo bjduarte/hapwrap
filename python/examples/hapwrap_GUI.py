@@ -40,7 +40,6 @@ pulse_off = Color(0, 0, 0)
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
 heartbeat_gap = 0.07 # gap between beats
-rNum = 0;
 
 try:
     Root=Tk()
@@ -325,6 +324,7 @@ def nextStaticClick():
     global pix
     global pix
     global beat
+    global rNum
     global staticPatternNum
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
