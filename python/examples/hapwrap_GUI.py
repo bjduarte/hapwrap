@@ -40,6 +40,7 @@ pulse_off = Color(0, 0, 0)
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
 heartbeat_gap = 0.07 # gap between beats
+rNum = 0;
 
 try:
     Root=Tk()
