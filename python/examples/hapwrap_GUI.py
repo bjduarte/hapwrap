@@ -229,7 +229,7 @@ def enterTestingPatterns():
 
     # # Heartbeat pattern for 10 through 20 feet
     # # Heartbeat pattern for 10 through 20 feet
-    elif (distances[trainingPatternStaticPattern[2]][0] == "20 feet"):
+    elif (distances[trainingPattern[2]][0] == "20 feet"):
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
