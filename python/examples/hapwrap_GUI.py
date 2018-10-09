@@ -584,8 +584,9 @@ def nextDynamicClick():
                 patternDict['visited dynamic patterns'] = visitedDynamicPattern
                 dynamicNumGenerated = True
 
-
         for currentBeat in pat.get(currentDynamicPattern):
+            print pat.get(currentDynamicPattern)
+            print currentBeat
             elevation = currentBeat[0]
             distance = currentBeat[1]
             direction = currentBeat[2]
