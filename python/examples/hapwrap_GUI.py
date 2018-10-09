@@ -572,9 +572,11 @@ def nextDynamicClick():
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
 
-    if (dynamicPatternNum < 24):
+    if (dynamicPatternNum < 23):
         while dynamicNumGenerated == False:
             rNum = random.randint(0, 22)
+            print (rNum)
+            print (dKeyList) 
             while (rNum not in dRandNumList):
                 dRandNumList.append(rNum)
                 currentDynamicPattern = dKeyList[rNum]
@@ -838,7 +840,7 @@ def restoreDynamicClick():
 
 def repeatDynamicClick():
 
-    print ("pattern repeated")  
+    print ("pattern repeated") 
     # # Heartbeat pattern for 25 feet
     if (distance == 25):
         for i in range(heartbeat_pulse):
