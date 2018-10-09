@@ -936,21 +936,16 @@ def repeatDynamicClick():
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
 def repeatStaticClick():
-    if (staticPatternNum < 49 ):
-    while staticNumGenerated == False:
-        rNum = random.randint(0, 95)
-        while (rNum not in randNumList):
-            randNumList.append(rNum)
-            currentStaticPattern = patternList[rNum]
-            visitedStaticPattern.append(currentStaticPattern)
-            patternDict['visited static patterns'] = visitedStaticPattern
-            staticNumGenerated = True
+
+    currentStaticPattern = patternList[rNum]
+    visitedStaticPattern.append(currentStaticPattern)
+    patternDict['visited static patterns'] = visitedStaticPattern
+    staticNumGenerated = True
 
     pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
     print(currentStaticPattern)
     print("pix = " + str(pix))
     beat = 0
-
 
     #Heart beat code
     if (distances[currentStaticPattern[2]][0] == "10 feet"):
