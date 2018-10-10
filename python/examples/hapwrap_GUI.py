@@ -546,6 +546,7 @@ def nextDynamicClick():
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     global dynamicPatternNum
+    global currentDynamicPattern
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
 
@@ -591,7 +592,7 @@ def nextDynamicClick():
             distance = currentBeat[1]
             direction = currentBeat[2]
             print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-
+            print (currentDynamicPattern)
             pix = patterns.get('pin_out')[elevation][direction]
             print(pix)
             beat = 0
@@ -844,100 +845,125 @@ def restoreDynamicClick():
 
 def repeatDynamicClick():
 
-    print ("pattern repeated") 
-    # # Heartbeat pattern for 25 feet
-    if (distance == 25):
-        for i in range(heartbeat_pulse):
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            time.sleep(heartbeat_gap)
+    for currentBeat in pat.get(currentDynamicPattern):
+        print pat.get(currentDynamicPattern)
+        print currentBeat
+        elevation = currentBeat[0]
+        distance = currentBeat[1]
+        direction = currentBeat[2]
+        print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+        print (currentDynamicPattern)
+        pix = patterns.get('pin_out')[elevation][direction]
+        print(pix)
+        beat = 0
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
+        if (distance == 0):
+            print ("distance is 0")
+            beat = 0.300
+        elif (distance == 1):
+            print ("distance is 1")
+            beat = 0.650
+        elif (distance == 2):
+            print ("distance is 2")
+            beat = 1.000
+        elif (distance == 3):
+            print ("distance is 3")
+            beat = 1.00
+            heart_gap = 0.5
 
-    # # Heartbeat pattern for 10 through 20 feet
-    # # Heartbeat pattern for 10 through 20 feet
-    elif (distance == 20):
-        for x in range(heartbeat_pulse): 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+        # # Heartbeat pattern for 25 feet
+        if (distance == 3):
+            for i in range(heartbeat_pulse):
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(beat)
 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+# # Heartbeat pattern for 10 through 20 feet
+# # Heartbeat pattern for 10 through 20 feet
+        elif (distance == 2):
+            for x in range(heartbeat_pulse): 
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
-            # # Heartbeat pattern for 10 through 20 feet
-    elif (distance == 10):
-        for x in range(heartbeat_pulse): 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(beat)
+        # # Heartbeat pattern for 10 through 20 feet
+        elif (distance == 0):
+            for x in range(heartbeat_pulse): 
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
-            # # Heartbeat pattern for 10 through 20 feet
-    elif (distance == 15):
-        for x in range(heartbeat_pulse): 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(beat)
+        # # Heartbeat pattern for 10 through 20 feet
+        elif (distance == 1):
+            for x in range(heartbeat_pulse): 
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
+
+                strip.setPixelColor(pix,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
+
+                strip.setPixelColor(pix,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(beat)
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
