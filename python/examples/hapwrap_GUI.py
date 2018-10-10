@@ -591,8 +591,8 @@ def nextDynamicClick():
             distance = currentBeat[1]
             direction = currentBeat[2]
             print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-        
-            pix = patterns.get('pin_out')[elevation-1][direction/45]
+
+            pix = patterns.get('pin_out')[elevation][direction]
             print(pix)
             beat = 0
 
