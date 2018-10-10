@@ -593,16 +593,20 @@ def nextDynamicClick():
             print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
         
             pix = patterns.get('pin_out')[elevation-1][direction/45]
-            # print(pix)
+            print(pix)
             beat = 0
 
             if (distance == 0):
+                print ("distance is 0")
                 beat = 0.300
             elif (distance == 1):
+                print ("distance is 1")
                 beat = 0.650
             elif (distance == 2):
+                print ("distance is 2")
                 beat = 1.000
             elif (distance == 3):
+                print ("distance is 3")
                 beat = 1.00
                 heart_gap = 0.5
 
