@@ -50,14 +50,14 @@ class Dynamic_pattern_list_builder:
 [2, 0, 0],
 [2, 0, 0]],
 
-    'chairOnRight' : [
+    'chairOnLeft' : [
 [2, 1, 6],
 [2, 1, 7],
 [2, 1, 0],
 [2, 0, 0],
 [2, 0, 0]],
 
-      'chairOnLeft' : [
+      'chairOnRight' : [
 [2, 1, 2],
 [2, 1, 1],
 [2, 1, 0],
@@ -101,7 +101,7 @@ class Dynamic_pattern_list_builder:
 [1, 0, 0],
 [1, 0, 0]],
 
-      'personLeftToRightRear' : [
+      'personRightToLeftRear' : [
 [0, 2, 2],
 [0, 1, 2],
 [0, 0, 3],
@@ -110,7 +110,7 @@ class Dynamic_pattern_list_builder:
 [0, 1, 6],
 [0, 2, 6]],
 
-      'personRightToLeftRear' : [
+      'personLeftToRightRear' : [
 [0, 2, 6],
 [0, 1, 6],
 [0, 0, 5],
@@ -119,7 +119,7 @@ class Dynamic_pattern_list_builder:
 [0, 1, 2],
 [0, 2, 2]],
 
-      'personLeftToRightFront' : [
+      'personRightToLeftFront' : [
 [0, 2, 2],
 [0, 1, 2],
 [0, 0, 1],
@@ -128,7 +128,7 @@ class Dynamic_pattern_list_builder:
 [0, 1, 6],
 [0, 2, 6]],
 
-      'personRightToLeftFront' : [
+      'personLeftToRightFront' : [
 [0, 2, 6],
 [0, 1, 6],
 [0, 0, 7],
@@ -161,7 +161,7 @@ class Dynamic_pattern_list_builder:
 [0, 1, 2],
 [0, 2, 2]],
 
-      'personGreetsLeft' : [
+      'personGreetsRight' : [
 [0, 2, 2],
 [0, 1, 2],
 [0, 0, 2],
@@ -172,7 +172,7 @@ class Dynamic_pattern_list_builder:
 [0, 1, 7],
 [0, 2, 7]],
 
-      'personGreetsRight' : [
+      'personGreetsLeft' : [
 [0, 2, 6],
 [0, 1, 6],
 [0, 0, 6],
