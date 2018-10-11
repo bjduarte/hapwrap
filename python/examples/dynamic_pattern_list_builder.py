@@ -184,7 +184,7 @@ class Dynamic_pattern_list_builder:
 [0, 2, 1]],
 
       'personGreets45' : [
-[0, 2, 1]
+[0, 2, 1],
 [0, 1, 1],
 [0, 0, 1],
 [0, 0, 0],
