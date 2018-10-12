@@ -263,8 +263,8 @@ def enterTestingPatterns():
     directionChoice.set(20)
     distanceChoice.set(20)
 
+#function for the next button on the static page
 def nextStaticClick(): 
-    
     global patterns
     global pix
     global pix
@@ -429,6 +429,7 @@ def nextStaticClick():
     directionChoice.set(20)
     distanceChoice.set(20)
 
+#function for the next button on the dynamic page
 def nextDynamicClick(): 
     global fileName
     global dynamic_incorrect_response
@@ -451,7 +452,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
     
-    if (dynamicPatternNum != 1 & dynamicPatternNum < 24):
+    if (dynamicPatternNum != 1 & dynamicPatternNum < 23):
         #save user response when next is clicked
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
@@ -565,7 +566,8 @@ def nextDynamicClick():
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
- 
+
+#function for saving the study results after the user inputs a file name
 def fileButtonClick():
     # fileChoice = fileName.get()
     # save_path = './completedStudies/'
@@ -573,8 +575,6 @@ def fileButtonClick():
     # f= open(fileChoice + ".txt","w+")
 
     # completeName = os.path.join(save_path, fileChoice + ".txt")         
-
-
 
     save_path = 'Eyes_on/python/examples/completedStudies/'
     fileChoice = fileName.get()
@@ -596,6 +596,7 @@ def fileButtonClick():
     # shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
     tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
 
+#function for the save button on the dynamic page
 def dynamicSaveClick():
     if (dynamicPatternNum < 24 ):
         dynamicNextButton.configure(state=tk.NORMAL)
@@ -603,6 +604,7 @@ def dynamicSaveClick():
     statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
+#function for the save button on the static page
 def staticSaveClick():
     global static_incorrect_response
 
@@ -614,6 +616,7 @@ def staticSaveClick():
     statusMessage = ttk.Label(staticPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
+#function for the restore button on the static page
 def restoreStaticClick():
     global staticPatternNum
     staticNextButton.configure(state=tk.NORMAL)
@@ -636,6 +639,7 @@ def restoreStaticClick():
             print("nothing to restore")
             tkMessageBox.showinfo("Restore", "Nothing to restore")
 
+#function for the restore button on the dynamic page
 def restoreDynamicClick():
     global dynamicPatternNum
     dynamicNextButton.configure(state=tk.NORMAL)
@@ -682,6 +686,7 @@ def restoreDynamicClick():
                 print("nothing to restore")
                 tkMessageBox.showinfo("Restore", "Nothing to restore")
 
+#function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
 
     for currentBeat in pat.get(currentDynamicPattern):
