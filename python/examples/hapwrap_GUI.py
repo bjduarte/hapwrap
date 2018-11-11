@@ -280,6 +280,7 @@ def nextStaticClick():
     global rNum
     global staticPatternNum
     global sRepeatCounter
+    global checkRestoreStatic
 
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
@@ -459,6 +460,7 @@ def nextDynamicClick():
     global dynamicPatternNum
     global currentDynamicPattern
     global dRepeatCounter
+    global checkRestoreDynamic
 
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
