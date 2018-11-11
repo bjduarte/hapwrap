@@ -119,6 +119,8 @@ staticPatternNum = 0
 dynamicPatternNum = 0
 dRepeatCounter = 0
 sRepeatCounter = 0
+checkRestoreStatic = False
+checkRestoreDynamic = False
 distanceChoice.set(20)
 directionChoice.set(20)
 elevationChoice.set(20)
@@ -285,7 +287,7 @@ def nextStaticClick():
     staticCounter.append(staticPatternNum)
     patternDict['user static response'] = user_static_response
 
-    if (staticPatternNum != 1):
+    if (staticPatternNum != 1 & checkRestoreStatic == False):
         staticRepeatCounter.append(sRepeatCounter)
         patternDict['static counter'] = staticCounter
         patternDict['Static Repeat Counter'] = staticRepeatCounter
@@ -445,7 +447,7 @@ def nextStaticClick():
     directionChoice.set(20)
     distanceChoice.set(20)
 
-
+    checkRestoreStatic = False
 
 #function for the next button on the dynamic page
 def nextDynamicClick(): 
@@ -472,7 +474,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
-    if (dynamicPatternNum != 0 & dynamicPatternNum < 23):
+    if (dynamicPatternNum != 1 & dynamicPatternNum < 23 & checkRestoreDynamic == False):
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
@@ -592,7 +594,7 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
         
-
+        checkRestoreDynamic = False
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
     # fileChoice = fileName.get()
@@ -644,6 +646,7 @@ def staticSaveClick():
 
 #function for the restore button on the static page
 def restoreStaticClick():
+    checkRestoreStatic = True
     global staticPatternNum
     staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
@@ -670,6 +673,7 @@ def restoreStaticClick():
 
 #function for the restore button on the dynamic page
 def restoreDynamicClick():
+    checkRestoreDynamic = True
     global dynamicPatternNum
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
