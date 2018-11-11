@@ -782,7 +782,7 @@ def repeatDynamicClick():
     dynamicRepeatCounter.append(dRepeatCounter)
 
 def repeatStaticClick():
-    global staticRepeatCounter
+    global sRepeatCounter
     sRepeatCounter = sRepeatCounter +1
     currentStaticPattern = patternList[rNum]
     visitedStaticPattern.append(currentStaticPattern)
