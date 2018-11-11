@@ -661,7 +661,7 @@ def restoreStaticClick():
         for i in fin['static counter']:
             staticCounter.append(i)
         for i in fin['Static Repeat Counter']:
-            staticRepeatCounter.append(i-1)
+            staticRepeatCounter.append(i)
         staticPatternNum = fin['static counter'][-1] - 1
 
     except:
