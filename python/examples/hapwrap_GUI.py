@@ -658,7 +658,10 @@ def restoreStaticClick():
             user_static_response.append(i)
         for i in fin['static counter']:
             staticCounter.append(i)
+        for i in fin['Static Repeat Counter']:
+            staticRepeatCounter.append(i)
         staticPatternNum = fin['static counter'][-1] - 1
+
     except:
             print("nothing to restore")
             tkMessageBox.showinfo("Restore", "Nothing to restore")
@@ -687,15 +690,25 @@ def restoreDynamicClick():
             user_dynamic_response.append(i)
         for i in fin['dynamic counter']:
             dynamicCounter.append(i)
+        for i in fin['Static Repeat Counter']:
+            staticRepeatCounter.append(i)
+        for i in fin['Dyanmic Repeat Counter']:
+            dynamicRepeatCounter.append(i)
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
     except:
         try:
+            f = open('userData.json', 'r')
+            fin = json.load(f)
+            f.close()
+
             for i in fin['visited static patterns']:
                 visitedStaticPattern.append(i)
             for i in fin['user static response']:
                 user_static_response.append(i)
             for i in fin['static counter']:
                 staticCounter.append(i)
+            for i in fin['Static Repeat Counter']:
+                staticRepeatCounter.append(i)
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
@@ -705,6 +718,8 @@ def restoreDynamicClick():
                     user_dynamic_response.append(i)
                 for i in fin['dynamic counter']:
                     dynamicCounter.append(i)
+                for i in fin['Dyanmic Repeat Counter']:
+                    dynamicRepeatCounter.append(i)
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
