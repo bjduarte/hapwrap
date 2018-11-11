@@ -284,11 +284,11 @@ def nextStaticClick():
     staticPatternNum = staticPatternNum + 1
     staticCounter.append(staticPatternNum)
     patternDict['user static response'] = user_static_response
-    patternDict['static counter'] = staticCounter
 
     if (staticPatternNum != 0):
 
         staticRepeatCounter.append(sRepeatCounter)
+        patternDict['static counter'] = staticCounter
         patternDict['Static Repeat Counter'] = staticRepeatCounter
         sRepeatCounter = 0
         # keep track of participants answers
@@ -469,14 +469,11 @@ def nextDynamicClick():
 
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
-    
-    if (dynamicPatternNum != 0):
+
+    if (dynamicPatternNum != 0 & dynamicPatternNum < 23):
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
-
-    if (dynamicPatternNum != 0 & dynamicPatternNum < 23):
-
         #save user response when next is clicked
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
