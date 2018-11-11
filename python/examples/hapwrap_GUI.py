@@ -723,7 +723,7 @@ def repeatDynamicClick():
         # elif (distance == 3):
         #     print ("distance is 3")
         #     beat = 1.00
-             heart_gap = 0.5
+            heart_gap = 0.5
 
         # Heartbeat pattern for 25 feet
         # This code is commented out to remove the 25 foot distance for now
