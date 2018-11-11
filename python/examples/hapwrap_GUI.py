@@ -281,7 +281,10 @@ def nextStaticClick():
 
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-
+    staticPatternNum = staticPatternNum + 1
+    staticCounter.append(staticPatternNum)
+    patternDict['user static response'] = user_static_response
+    patternDict['static counter'] = staticCounter
 
     if (staticPatternNum != 0):
 
@@ -306,10 +309,6 @@ def nextStaticClick():
                                 except IndexError: static_incorrect_response = [0,0,0]
         user_static_response.append(static_incorrect_response)
 
-    staticPatternNum = staticPatternNum + 1
-    staticCounter.append(staticPatternNum)
-    patternDict['user static response'] = user_static_response
-    patternDict['static counter'] = staticCounter
     #create elevation buttons
     staticNextButton.configure(state=tk.DISABLED)
     staticNumGenerated = False
@@ -793,10 +792,8 @@ def repeatDynamicClick():
 
 def repeatStaticClick():
     global sRepeatCounter
-    sRepeatCounter = sRepeatCounter +1
+    sRepeatCounter = sRepeatCounter + 1
     currentStaticPattern = patternList[rNum]
-    visitedStaticPattern.append(currentStaticPattern)
-    patternDict['visited static patterns'] = visitedStaticPattern
     staticNumGenerated = True
 
     pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
