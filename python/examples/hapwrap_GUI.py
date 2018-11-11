@@ -456,10 +456,6 @@ def nextDynamicClick():
     global dynamicPatternNum
     global currentDynamicPattern
     global dRepeatCounter
-    
-    dynamicRepeatCounter.append(dRepeatCounter)
-    patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
-    dRepeatCounter = 0
 
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
@@ -476,6 +472,10 @@ def nextDynamicClick():
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
     
     if (dynamicPatternNum != 1 & dynamicPatternNum < 23):
+        dynamicRepeatCounter.append(dRepeatCounter)
+        patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
+        dRepeatCounter = 0
+        
         #save user response when next is clicked
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
