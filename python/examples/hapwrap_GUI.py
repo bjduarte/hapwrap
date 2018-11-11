@@ -280,6 +280,7 @@ def nextStaticClick():
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
     staticRepeatCounter.append(sRepeatCounter)
+    patternDict['Static Repeat Counter'] = staticRepeatCounter
 
     if (staticPatternNum != 0):
         # keep track of participants answers
@@ -438,7 +439,6 @@ def nextStaticClick():
     directionChoice.set(20)
     distanceChoice.set(20)
 
-    patternDict['Static Repeat Counter'] = staticRepeatCounter
 
 
 #function for the next button on the dynamic page
@@ -450,7 +450,8 @@ def nextDynamicClick():
     global beat
     global dynamicPatternNum
     global currentDynamicPattern
-
+    
+    patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     dynamicRepeatCounter.append(dRepeatCounter)
@@ -583,7 +584,6 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
         
-        patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
 
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
@@ -706,6 +706,7 @@ def restoreDynamicClick():
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
+    dRepeatCounter = dRepeatCounter+1
     for currentBeat in pat.get(currentDynamicPattern):
         print pat.get(currentDynamicPattern)
         print currentBeat
@@ -777,10 +778,10 @@ def repeatDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-    dRepeatCounter = dRepeatCounter+1
     dynamicRepeatCounter.append(dRepeatCounter)
 
 def repeatStaticClick():
+    sRepeatCounter = sRepeatCounter +1
     currentStaticPattern = patternList[rNum]
     visitedStaticPattern.append(currentStaticPattern)
     patternDict['visited static patterns'] = visitedStaticPattern
@@ -849,7 +850,6 @@ def repeatStaticClick():
 
     repeatMessage = ttk.Label(staticPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)   
-    sRepeatCounter = sRepeatCounter +1
 
 #function to deselect the elevation button
 def clearElevationSelection():
