@@ -281,6 +281,7 @@ def nextStaticClick():
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
     staticRepeatCounter.append(sRepeatCounter)
     patternDict['Static Repeat Counter'] = staticRepeatCounter
+    staticRepeatCounter = 0
 
     if (staticPatternNum != 0):
         # keep track of participants answers
@@ -451,10 +452,12 @@ def nextDynamicClick():
     global dynamicPatternNum
     global currentDynamicPattern
     
+    dynamicRepeatCounter.append(dRepeatCounter)
     patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
+    dRepeatCounter = 0
+
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
-    dynamicRepeatCounter.append(dRepeatCounter)
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
 
