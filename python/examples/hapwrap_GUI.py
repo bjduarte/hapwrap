@@ -696,7 +696,7 @@ def restoreDynamicClick():
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
-  dRepeatCounter = 0
+    dRepeatCounter = 0
 
     for currentBeat in pat.get(currentDynamicPattern):
         print pat.get(currentDynamicPattern)
@@ -773,7 +773,7 @@ def repeatDynamicClick():
     dynamicRepeatCounter.append(dRepeatCounter)
 
 def repeatStaticClick():
-sRepeatCounter = 0
+    sRepeatCounter = 0
 
     currentStaticPattern = patternList[rNum]
     visitedStaticPattern.append(currentStaticPattern)
