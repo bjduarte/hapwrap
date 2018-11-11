@@ -19,31 +19,25 @@ class Dynamic_pattern_list_builder:
         [0, 3, 4]],
 
       'personApproachesRear' : [
-[0, 3, 4],
 [0, 2, 4],
 [0, 1, 3],
 [0, 0, 2],
 [0, 1, 1],
 [0, 2, 0],
-[0, 3, 0]],
 
       'vehicleLeftToRight' : [
-[1, 3, 6],
 [1, 2, 7],
 [1, 1, 7],
 [1, 0, 0],
 [1, 1, 1],
 [1, 2, 1],
-[1, 3, 2]],
 
       'vehicleRightToLeft' : [
-[1, 3, 2],
 [1, 2, 1],
 [1, 1, 1],
 [1, 0, 0],
 [1, 1, 7],
 [1, 2, 7],
-[1, 3, 6]],
 
       'approachingChairFront' : [
 [2, 1, 0],
@@ -65,25 +59,20 @@ class Dynamic_pattern_list_builder:
 [2, 0, 0]],
 
       'vehicleLeftRear' : [
-[1, 3, 5],
 [1, 2, 5],
 [1, 1, 6],
 [1, 0, 6],
 [1, 1, 6],
 [1, 2, 7],
-[1, 3, 7]],
 
       'vehicleRightFront' : [
-[1, 3, 1],
 [1, 2, 1],
 [1, 1, 2],
 [1, 0, 2],
 [1, 1, 2],
 [1, 2, 3],
-[1, 3, 3]],
 
       'vehicleRightTurn' : [
-[1, 3, 5],
 [1, 2, 5],
 [1, 1, 6],
 [1, 0, 6],
@@ -91,10 +80,8 @@ class Dynamic_pattern_list_builder:
 [1, 0, 0],
 [1, 1, 1],
 [1, 2, 1],
-[1, 3, 2]],
 
       'vehicleStopped' : [
-[1, 3, 6],
 [1, 2, 6],
 [1, 1, 7],
 [1, 0, 0],

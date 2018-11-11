@@ -122,13 +122,13 @@ directionChoice.set(20)
 elevationChoice.set(20)
 
 #button options
-elevations = [("Person",1), ("Vehicle",2), ("Chair  ",3)]        
-distances = [("10 feet",1), ("15 feet",2), ("20 feet",3), ("25 feet",4)]        
+elevations = [("Head Height",1), ("Chest Height",2), ("Waist Height  ",3)]        
+distances = [("10 feet",1), ("15 feet",2), ("20 feet",3)]        
 directions = [("0",1), ("45",2), ("90",3), ("135",4), ("180",5), ("225",6), ("270",7), ("315",8)]
 
 # lists of all the possible components that make up a pattern
 elevation = [0, 1, 2]
-distance = [0, 1, 2, 3]
+distance = [0, 1, 2]
 direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #Display button selection 
@@ -138,6 +138,8 @@ trainingPattern = []
 dynamic_incorrect_response = []
 randNumList = []
 staticCounter = []
+staticRepeatCounter = []
+dynamicRepeatCounter = []
 dynamicCounter = []
 visitedStaticPattern = []
 user_static_response = []
@@ -169,7 +171,7 @@ for i in elevation:
 # Patterns dictionary containing object positions
 patterns = {
     'elevation' : [1, 2, 3],
-    'distance' : [10, 15, 20, 25], 
+    'distance' : [10, 15, 20], 
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
     'pin_out' : [[0,1,2,3,4,5,6,7],[15, 14, 13, 12, 11, 10, 9, 8],[16,17,18,19,20,21,22,23]] }
 
@@ -209,27 +211,29 @@ def enterTestingPatterns():
         beat = 0.650
     elif (trainingPattern[1] == 2):
         beat = 1.000
-    elif (trainingPattern[1] == 3):
-        beat = 1.00
+# commented out to remove 25 feet distance
+    # elif (trainingPattern[1] == 3):
+    #     beat = 1.00
         heart_gap = 0.5
 
-    # # Heartbeat pattern for 25 feet
-    if (trainingPattern[1] == 3):
-        print ("beat 1.0 & sonar")
-        print (trainingPattern[1])
-        for i in range(heartbeat_pulse):
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            time.sleep(heartbeat_gap)
+    # Heartbeat pattern for 25 feet
+    # commented out to remove 25 feet distance
+    # if (trainingPattern[1] == 3):
+    #     print ("beat 1.0 & sonar")
+    #     print (trainingPattern[1])
+    #     for i in range(heartbeat_pulse):
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         time.sleep(heartbeat_gap)
+    #
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(beat)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
-
-    # # Heartbeat pattern for 10 through 20 feet
+    # Heartbeat pattern for 10 through 20 feet
     elif ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
         print (trainingPattern[1])
         print ("beat 1.0")
@@ -314,9 +318,9 @@ def nextStaticClick():
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
     # we will remove the while loop and replace with "next button" event handler from GUI
-    if (staticPatternNum < 49 ):
+    if (staticPatternNum < 37 ):
         while staticNumGenerated == False:
-            rNum = random.randint(0, 95)
+            rNum = random.randint(0, 72)
             while (rNum not in randNumList):
                 randNumList.append(rNum)
                 currentStaticPattern = patternList[rNum]
@@ -336,25 +340,27 @@ def nextStaticClick():
             beat = 0.650
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
             beat = 1.000
-        elif (distances[currentStaticPattern[2]][0] == "25 feet"):
-            beat = 1.00
+# commented out to remove 25 feet distance
+        # elif (distances[currentStaticPattern[2]][0] == "25 feet"):
+        #     beat = 1.00
             heart_gap = 0.5
 
         # # Heartbeat pattern for 25 feet
-        if (distances[currentStaticPattern[2]][0] == "25 feet"):
-            for i in range(heartbeat_pulse):
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                time.sleep(heartbeat_gap)
+        # commented out to remove 25 feet distance
+        # if (distances[currentStaticPattern[2]][0] == "25 feet"):
+        #     for i in range(heartbeat_pulse):
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         time.sleep(heartbeat_gap)
+        #
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(beat)
 
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(beat)
-
-        # # Heartbeat pattern for 10 through 20 feet
+        # Heartbeat pattern for 10 through 20 feet
         elif ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
             for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
@@ -380,7 +386,7 @@ def nextStaticClick():
                 strip.show()
                 print(beat)
                 time.sleep(beat)
-                
+
         for text, elevation in elevations:
             elevationButton = ttk.Radiobutton(staticPage, text=text, variable=elevationChoice, value=elevation)
             buttonSpacing = buttonSpacing + 30
@@ -410,7 +416,7 @@ def nextStaticClick():
         clearDirectionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + 270, anchor=tk.CENTER) 
 
     #create pattern text to display current pattern 
-    if (staticPatternNum < 49):
+    if (staticPatternNum < 37):
         #dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(staticPage, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
@@ -418,10 +424,10 @@ def nextStaticClick():
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
-    if (staticPatternNum >= 49):
+    if (staticPatternNum >= 37):
         patternMessage = ttk.Label(staticPage, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(staticPage, text="All 48 patterns have been done")
+        currentStaticPatternMessage = ttk.Label(staticPage, text="All 36 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
@@ -499,26 +505,28 @@ def nextDynamicClick():
             elif (distance == 2):
                 print ("distance is 2")
                 beat = 1.000
-            elif (distance == 3):
-                print ("distance is 3")
-                beat = 1.00
+# commented out to remove 25 feet distance
+            # elif (distance == 3):
+            #     print ("distance is 3")
+                # beat = 1.00
                 heart_gap = 0.5
 
-            # # Heartbeat pattern for 25 feet
-            if (distance == 3):
-                for i in range(heartbeat_pulse):
-                    strip.setPixelColor(pix,pulse_on)
-                    print ("On")
-                    strip.show()
-                    time.sleep(heartbeat_gap)
+            # Heartbeat pattern for 25 feet
+            # commented out to remove 25 feet distance
+            # if (distance == 3):
+            #     for i in range(heartbeat_pulse):
+            #         strip.setPixelColor(pix,pulse_on)
+            #         print ("On")
+            #         strip.show()
+            #         time.sleep(heartbeat_gap)
+            #
+            #         strip.setPixelColor(pix,pulse_off)
+            #         print ("Off")
+            #         strip.show()
+            #         print(beat)
+            #         time.sleep(beat)
 
-                    strip.setPixelColor(pix,pulse_off)
-                    print ("Off")
-                    strip.show()
-                    print(beat)
-                    time.sleep(beat)
-        
-            # # Heartbeat pattern for 10 through 20 feet
+            # Heartbeat pattern for 10 through 20 feet
             elif ((distance == 2) or (distance == 1) or (distance == 0)):
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
@@ -688,6 +696,7 @@ def restoreDynamicClick():
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
+  dRepeatCounter = 0
 
     for currentBeat in pat.get(currentDynamicPattern):
         print pat.get(currentDynamicPattern)
@@ -710,27 +719,29 @@ def repeatDynamicClick():
         elif (distance == 2):
             print ("distance is 2")
             beat = 1.000
-        elif (distance == 3):
-            print ("distance is 3")
-            beat = 1.00
-            heart_gap = 0.5
+            # commented out to remove 25 feet distance
+        # elif (distance == 3):
+        #     print ("distance is 3")
+        #     beat = 1.00
+             heart_gap = 0.5
 
-        # # Heartbeat pattern for 25 feet
-        if (distance == 3):
-            for i in range(heartbeat_pulse):
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                time.sleep(heartbeat_gap)
-
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(beat)
+        # Heartbeat pattern for 25 feet
+        # This code is commented out to remove the 25 foot distance for now
+        # if (distance == 3):
+        #     for i in range(heartbeat_pulse):
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         time.sleep(heartbeat_gap)
+        #
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(beat)
 
         # # Heartbeat pattern for 10 through 20 feet
-        elif ((distance == 2) or (distance == 1) or (distance == 0)):
+        if ((distance == 2) or (distance == 1) or (distance == 0)):
             for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
@@ -758,8 +769,11 @@ def repeatDynamicClick():
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+    dRepeatCounter = dRepeatCounter+1
+    dynamicRepeatCounter.append(dRepeatCounter)
 
 def repeatStaticClick():
+sRepeatCounter = 0
 
     currentStaticPattern = patternList[rNum]
     visitedStaticPattern.append(currentStaticPattern)
@@ -778,27 +792,30 @@ def repeatStaticClick():
         beat = 0.650
     elif (distances[currentStaticPattern[2]][0] == "20 feet"):
         beat = 1.000
-    elif (distances[currentStaticPattern[2]][0] == "25 feet"):
-        beat = 1.00
+        # commented out to remove 25 feet distance
+    # elif (distances[currentStaticPattern[2]][0] == "25 feet"):
+    #     beat = 1.00
         heart_gap = 0.5
 
     print ("pattern repeated")   
-        # # Heartbeat pattern for 25 feet
-    if (distances[currentStaticPattern[2]][0] == "25 feet"):
-        for i in range(heartbeat_pulse):
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            time.sleep(heartbeat_gap)
+    
+        # Heartbeat pattern for 25 feet
+        # This code is commented out to remove the 25 feet distance
+    # if (distances[currentStaticPattern[2]][0] == "25 feet"):
+    #     for i in range(heartbeat_pulse):
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         time.sleep(heartbeat_gap)
+    #
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(beat)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
-
-    # # Heartbeat pattern for 10 through 20 feet
-    elif ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
+    # Heartbeat pattern for 10 through 20 feet
+    if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
         for x in range(heartbeat_pulse): 
             strip.setPixelColor(pix,pulse_on)
             print ("On")
@@ -826,6 +843,8 @@ def repeatStaticClick():
 
     repeatMessage = ttk.Label(staticPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)   
+    sRepeatCounter = sRepeatCounter +1
+    staticRepeatCounter.append(sRepeatCounter)
 
 #function to deselect the elevation button
 def clearElevationSelection():
