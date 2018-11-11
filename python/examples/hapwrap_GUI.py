@@ -659,7 +659,7 @@ def restoreStaticClick():
         for i in fin['static counter']:
             staticCounter.append(i)
         for i in fin['Static Repeat Counter']:
-            staticRepeatCounter.append(i)
+            staticRepeatCounter.append(i-1)
         staticPatternNum = fin['static counter'][-1] - 1
 
     except:
@@ -691,9 +691,9 @@ def restoreDynamicClick():
         for i in fin['dynamic counter']:
             dynamicCounter.append(i)
         for i in fin['Static Repeat Counter']:
-            staticRepeatCounter.append(i)
+            staticRepeatCounter.append(i-1)
         for i in fin['Dyanmic Repeat Counter']:
-            dynamicRepeatCounter.append(i)
+            dynamicRepeatCounter.append(i-1)
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
     except:
         try:
@@ -708,7 +708,7 @@ def restoreDynamicClick():
             for i in fin['static counter']:
                 staticCounter.append(i)
             for i in fin['Static Repeat Counter']:
-                staticRepeatCounter.append(i)
+                staticRepeatCounter.append(i-1)
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
@@ -719,7 +719,7 @@ def restoreDynamicClick():
                 for i in fin['dynamic counter']:
                     dynamicCounter.append(i)
                 for i in fin['Dyanmic Repeat Counter']:
-                    dynamicRepeatCounter.append(i)
+                    dynamicRepeatCounter.append(i-1)
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
