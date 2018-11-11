@@ -691,7 +691,7 @@ def restoreDynamicClick():
     except:
         try:
             for i in fin['visited static patterns']:
-                visitedStaticPattern. = i
+                visitedStaticPattern = i
             for i in fin['user static response']:
                 user_static_response = i
             for i in fin['static counter']:
