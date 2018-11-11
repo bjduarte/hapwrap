@@ -471,11 +471,13 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
     
-    if (dynamicPatternNum != 1 & dynamicPatternNum < 23):
+    if (dynamicPatternNum != 0)
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
-        
+
+    if (dynamicPatternNum != 0 & dynamicPatternNum < 23):
+
         #save user response when next is clicked
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
