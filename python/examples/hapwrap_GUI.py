@@ -285,12 +285,14 @@ def nextStaticClick():
     staticCounter.append(staticPatternNum)
     patternDict['user static response'] = user_static_response
 
-    if (staticPatternNum != 0):
-
+    if (staticPatternNum != 1)
         staticRepeatCounter.append(sRepeatCounter)
         patternDict['static counter'] = staticCounter
         patternDict['Static Repeat Counter'] = staticRepeatCounter
         sRepeatCounter = 0
+
+    if (staticPatternNum != 0):
+
         # keep track of participants answers
         # radio button presses will be read in and saved 
         try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
