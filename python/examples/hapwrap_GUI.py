@@ -653,11 +653,11 @@ def restoreStaticClick():
         f.close()
         #type(fin)
         for i in fin['visited static patterns']:
-            visitedStaticPattern.append(i)
+            visitedStaticPattern = i
         for i in fin['user static response']:
-            user_static_response.append(i)
+            user_static_response = i
         for i in fin['static counter']:
-            staticCounter.append(i)
+            staticCounter = i
         staticPatternNum = fin['static counter'][-1] - 1
     except:
             print("nothing to restore")
@@ -676,35 +676,35 @@ def restoreDynamicClick():
         f.close()
 
         for i in fin['visited static patterns']:
-            visitedStaticPattern.append(i)
+            visitedStaticPattern = i
         for i in fin['user static response']:
-            user_static_response.append(i)
+            user_static_response = i
         for i in fin['static counter']:
-            staticCounter.append(i)
+            staticCounter = i
         for i in fin['visited dynamic patterns']:
-            visitedDynamicPattern.append(i)
+            visitedDynamicPattern = i
         for i in fin['user dynamic response']:
-            user_dynamic_response.append(i)
+            user_dynamic_response = i
         for i in fin['dynamic counter']:
-            dynamicCounter.append(i)
+            dynamicCounter = i
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
     except:
         try:
             for i in fin['visited static patterns']:
-                visitedStaticPattern.append(i)
+                visitedStaticPattern. = i
             for i in fin['user static response']:
-                user_static_response.append(i)
+                user_static_response = i
             for i in fin['static counter']:
-                staticCounter.append(i)
+                staticCounter = i
             dynamicPatternNum = fin['dynamic counter'][-1] - 1
         except:
             try:
                 for i in fin['visited dynamic patterns']:
-                    visitedDynamicPattern.append(i)
+                    visitedDynamicPattern = i
                 for i in fin['user dynamic response']:
-                    user_dynamic_response.append(i)
+                    user_dynamic_response = i
                 for i in fin['dynamic counter']:
-                    dynamicCounter.append(i)
+                    dynamicCounter = i
                 dynamicPatternNum = fin['dynamic counter'][-1] - 1
             except:
                 print("nothing to restore")
