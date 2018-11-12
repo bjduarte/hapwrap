@@ -182,7 +182,7 @@ patterns = {
 def enterTestingPatterns(): 
     global patterns
     global pix
-    global pix
+#    global pix
     global beat
     global staticPatternNum
 
@@ -215,30 +215,10 @@ def enterTestingPatterns():
         beat = 0.650
     elif (trainingPattern[1] == 2):
         beat = 1.000
-# commented out to remove 25 feet distance
-    # elif (trainingPattern[1] == 3):
-    #     beat = 1.00
         heart_gap = 0.5
 
-    # Heartbeat pattern for 25 feet
-    # commented out to remove 25 feet distance
-    # if (trainingPattern[1] == 3):
-    #     print ("beat 1.0 & sonar")
-    #     print (trainingPattern[1])
-    #     for i in range(heartbeat_pulse):
-    #         strip.setPixelColor(pix,pulse_on)
-    #         print ("On")
-    #         strip.show()
-    #         time.sleep(heartbeat_gap)
-    #
-    #         strip.setPixelColor(pix,pulse_off)
-    #         print ("Off")
-    #         strip.show()
-    #         print(beat)
-    #         time.sleep(beat)
-
     # Heartbeat pattern for 10 through 20 feet
-    elif ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
+    if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
         print (trainingPattern[1])
         print ("beat 1.0")
         for x in range(heartbeat_pulse): 
@@ -265,7 +245,7 @@ def enterTestingPatterns():
             strip.show()
             print(beat)
             time.sleep(beat)
-        
+
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
     elevationChoice.set(20)
     directionChoice.set(20)
@@ -274,7 +254,7 @@ def enterTestingPatterns():
 #function for the next button on the static page
 def nextStaticClick(): 
     global patterns
-    global pix
+    # global pix
     global pix
     global beat
     global rNum
@@ -355,7 +335,6 @@ def nextStaticClick():
             beat = 1.000
             heart_gap = 0.5
 
-
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
           strip.setPixelColor(pix,pulse_on)
@@ -363,7 +342,7 @@ def nextStaticClick():
           strip.show()
           print(beat)
           time.sleep(1.0)
-          
+
           strip.setPixelColor(pix,pulse_off)
           print ("Off")
           strip.show()
