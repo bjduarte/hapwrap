@@ -288,7 +288,7 @@ def nextStaticClick():
     staticCounter.append(staticPatternNum)
     patternDict['user static response'] = user_static_response
 
-    if (staticPatternNum != 1 & checkRestoreStatic == False):
+    if ((staticPatternNum > 1) & (checkRestoreStatic == False)):
         staticRepeatCounter.append(sRepeatCounter)
         patternDict['static counter'] = staticCounter
         patternDict['Static Repeat Counter'] = staticRepeatCounter
