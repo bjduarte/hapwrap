@@ -371,7 +371,7 @@ def nextStaticClick():
           time.sleep(heartbeat_gap)
 
 
-            for x in range(heartbeat_pulse): 
+          for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
                 strip.show()
