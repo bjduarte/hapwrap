@@ -349,7 +349,6 @@ def nextStaticClick():
             print(beat)
             time.sleep(heartbeat_gap)
 
-
             for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
@@ -451,7 +450,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
-    if (dynamicPatternNum != 1 & dynamicPatternNum < 23 & checkRestoreDynamic == False):
+    if (dynamicPatternNum != 1 & dynamicPatternNum < 23):
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
