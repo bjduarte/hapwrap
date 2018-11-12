@@ -337,20 +337,20 @@ def nextStaticClick():
 
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
-          strip.setPixelColor(pix,pulse_on)
-          print ("On")
-          strip.show()
-          print(beat)
-          time.sleep(1.0)
+            strip.setPixelColor(pix,pulse_on)
+            print ("On")
+            strip.show()
+            print(beat)
+            time.sleep(1.0)
 
-          strip.setPixelColor(pix,pulse_off)
-          print ("Off")
-          strip.show()
-          print(beat)
-          time.sleep(heartbeat_gap)
+            strip.setPixelColor(pix,pulse_off)
+            print ("Off")
+            strip.show()
+            print(beat)
+            time.sleep(heartbeat_gap)
 
 
-          for x in range(heartbeat_pulse): 
+            for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
                 strip.show()
