@@ -501,29 +501,10 @@ def nextDynamicClick():
             elif (distance == 2):
                 print ("distance is 2")
                 beat = 1.000
-# commented out to remove 25 feet distance
-            # elif (distance == 3):
-            #     print ("distance is 3")
-                # beat = 1.00
                 heart_gap = 0.5
 
-            # Heartbeat pattern for 25 feet
-            # commented out to remove 25 feet distance
-            # if (distance == 3):
-            #     for i in range(heartbeat_pulse):
-            #         strip.setPixelColor(pix,pulse_on)
-            #         print ("On")
-            #         strip.show()
-            #         time.sleep(heartbeat_gap)
-            #
-            #         strip.setPixelColor(pix,pulse_off)
-            #         print ("Off")
-            #         strip.show()
-            #         print(beat)
-            #         time.sleep(beat)
-
             # Heartbeat pattern for 10 through 20 feet
-            elif ((distance == 2) or (distance == 1) or (distance == 0)):
+            if ((distance == 2) or (distance == 1) or (distance == 0)):
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
                     print ("On")
