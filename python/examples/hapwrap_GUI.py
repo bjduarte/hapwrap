@@ -318,7 +318,7 @@ def nextStaticClick():
 
     # write patternDict to json file called userData.json
     f = open("userData.json","w")
-    f.write(json.dumps(patternDict))
+    f.write(json.dumps(patternDict, sort_keys=True, indent=1))
     f.close()
 
     # generates a random number and calls a pattern
@@ -477,7 +477,7 @@ def nextDynamicClick():
         patternDict['dynamic counter'] = dynamicCounter
         # write patternDict to json file called userData.json
         f = open("userData.json","w")
-        f.write(json.dumps(patternDict))
+        f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
 
     #clear the entry field
@@ -505,8 +505,8 @@ def nextDynamicClick():
             print (currentDynamicPattern)
             pix = patterns.get('pin_out')[elevation][direction]
             pixPointer = patterns.get('pin_out')[1][direction]
-            print("pix = " + pix)
-            print("pixPointer = " + pixPointer)
+            print("pix = " + str(pix))
+            print("pixPointer = " + str(pixPointer))
             beat = 0
 
             if (distance == 0):
@@ -585,32 +585,73 @@ def nextDynamicClick():
         checkRestoreDynamic = False
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
-    # fileChoice = fileName.get()
-    # save_path = './completedStudies/'
-
-    # f= open(fileChoice + ".txt","w+")
-
-    # completeName = os.path.join(save_path, fileChoice + ".txt")         
-
-    save_path = 'Eyes_on/python/examples/completedStudies/'
     fileChoice = fileName.get()
-    completeName = os.path.join(save_path, fileChoice +".txt")         
-    file1 = open(completeName, "w")
-    file1.close()
+    save_path = 'C:/example/'
 
     # if path.exists("userData.json"):
     #     src = path.realpath("userData.json");
     #     # rename the original file
     #     os.rename("userData.json", fileChoice + ".txt")
-    #     os.rename("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-
+    #     shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
 
     # else:
-    #     print("ErrorError")
-#save file to folder called completedStudies
-    print("saved to " + fileChoice + ".txt")
-    # shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-    tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
+    #     print("error")
+    # print("saved to " + fileChoice)
+
+    # reads in the json file to be parsed
+    file = open('userData.json', 'r')
+    fin = json.load(file)
+
+    # writes dynamic data to a text file formatted together
+    dynamic = zip(fin.get('visited dynamic patterns'), fin.get("user dynamic response"))
+    #writes the static data to a text file formatted together
+    static = zip(fin.get('visited static patterns'), fin.get('user static response'))
+    f = open('output.txt', 'w+')
+    
+    f.write("Static Pattern \t | \t User Response\n")
+    for i in static:
+        f.write(str(i) + "\n")
+
+    f.write("Dynamic Pattern \t | \t User Response\n")
+    for j in dynamic:
+        f.write(str(j) + "\n")
+    f.close()
+
+    staticResults = fin.get('user static response')
+    #Debugging
+    print(staticResults)
+    numStaticCorrect = 0
+    for i in range(len(staticResults)):
+        if staticResults[i][0] == 0:
+            numStaticCorrect = (numStaticCorrect + 1)
+        if staticResults[i][1] == 0:
+            numStaticCorrect = (numStaticCorrect + 1)
+        if staticResults[i][2] == 0:
+            numStaticCorrect = (numStaticCorrect + 1)
+    
+    print ("Static Score = " + str((numStaticCorrect/108)*100))
+
+    dynamicResults = fin.get('user dynamic response')
+    numDynamicCorrect = 0
+    
+    i = 0
+
+    while i < len(dynamicResults):
+        if len(dynamicResults[i]) == 0:
+            # print ("works")
+            numDynamicCorrect = (numDynamicCorrect + 1)
+        print ("d: " + str(dynamicResults[i]))
+        print (len(dynamicResults[i]))
+        i += 1
+
+    # for i in dynamicResults:
+    #     if i == "":
+    #         numDynamicCorrect = (numDynamicCorrect + 1)
+    
+    print ("Dynamic Score = " + str((numDynamicCorrect/23)*100))
+
+    #pop-up window displays percentage correct for static and dynamic training
+    tkMessageBox.showinfo("Score", "Static Training: " + str((numStaticCorrect/36)*100) + "%/ correct. Dynamic Training: " + str((numDynamicCorrect/23)*100) + "%/ correct")
 
 #function for the save button on the dynamic page
 def dynamicSaveClick():
