@@ -25,7 +25,7 @@ from complete_hapwrap_handler import *
 from dynamic_pattern_list_builder import *
 
 # LED strip configuration:
-LED_COUNT = 24 # Number of LED pixels.
+LED_COUNT = 24 # Number of LED Labels.
 LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN = 10 # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
@@ -204,7 +204,7 @@ def enterTestingPatterns():
     print(trainingPattern)
 
     pix = patterns.get('pin_out')[trainingPattern[0]][trainingPattern[2]]
-    pixPointer = patterns.get('pin_out')[trainingPattern[0]][1]
+    pixPointer = patterns.get('pin_out')[1][trainingPattern[2]]
     print("pix = " + str(pix))
     print("pixPointer = " + str(pixPointer))
     beat = 0
@@ -335,7 +335,7 @@ def nextStaticClick():
                 staticNumGenerated = True
 
         pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
-        pixPointer = patterns.get('pin_out')[currentStaticPattern[1]][2]
+        pixPointer = patterns.get('pin_out')[1][currentStaticPattern[3]]
         print(currentStaticPattern)
         print("pix = " + str(pix))
         print("pixPointer = " + str(pixPointer))
@@ -504,7 +504,9 @@ def nextDynamicClick():
             print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
             print (currentDynamicPattern)
             pix = patterns.get('pin_out')[elevation][direction]
-            print(pix)
+            pixPointer = patterns.get('pin_out')[1][direction]
+            print("pix = " + pix)
+            print("pixPointer = " + pixPointer)
             beat = 0
 
             if (distance == 0):
@@ -520,6 +522,19 @@ def nextDynamicClick():
 
             # Heartbeat pattern for 10 through 20 feet
             if ((distance == 2) or (distance == 1) or (distance == 0)):
+              strip.setPixelColor(pixPointer,pulse_on)
+              print ("On")
+              strip.show()
+              print(beat)
+              time.sleep(1.0)
+
+              strip.setPixelColor(pixPointer,pulse_off)
+              print ("Off")
+              strip.show()
+              print(beat)
+              time.sleep(heartbeat_gap)
+              print("Beginning Heartbeat")
+
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
                     print ("On")
