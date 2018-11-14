@@ -522,18 +522,18 @@ def nextDynamicClick():
 
             # Heartbeat pattern for 10 through 20 feet
             if ((distance == 2) or (distance == 1) or (distance == 0)):
-              strip.setPixelColor(pixPointer,pulse_on)
-              print ("On")
-              strip.show()
-              print(beat)
-              time.sleep(1.0)
+                strip.setPixelColor(pixPointer,pulse_on)
+                print ("On")
+                strip.show()
+                print(beat)
+                time.sleep(1.0)
 
-              strip.setPixelColor(pixPointer,pulse_off)
-              print ("Off")
-              strip.show()
-              print(beat)
-              time.sleep(heartbeat_gap)
-              print("Beginning Heartbeat")
+                strip.setPixelColor(pixPointer,pulse_off)
+                print ("Off")
+                strip.show()
+                print(beat)
+                time.sleep(heartbeat_gap)
+                print("Beginning Heartbeat")
 
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
