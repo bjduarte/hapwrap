@@ -40,7 +40,7 @@ pulse_off = Color(0, 0, 0)
 
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
-heartbeat_gap = 0.07 # gap between beats
+heartbeat_gap = 0.05 # gap between beats
 
 try:
     Root=Tk()
@@ -212,12 +212,12 @@ def enterTestingPatterns():
 
     #Heart beat code
     if (trainingPattern[1] == 0):
-        beat = 0.300
+        beat = 0.33
     elif (trainingPattern[1] == 1):
-        beat = 0.650
+        beat = 0.66
     elif (trainingPattern[1] == 2):
-        beat = 1.000
-        heart_gap = 0.5
+        beat = 0.99
+        heart_gap = 0.75
 
     # Heartbeat pattern for 10 through 20 feet
     if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
@@ -241,7 +241,7 @@ def enterTestingPatterns():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(heartbeat_gap)
+            time.sleep(heart_gap)
 
             strip.setPixelColor(pix,pulse_off)
             print ("Off")
@@ -253,7 +253,7 @@ def enterTestingPatterns():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(heartbeat_gap)
+            time.sleep(heart_gap)
 
             strip.setPixelColor(pix,pulse_off)
             print ("Off")
