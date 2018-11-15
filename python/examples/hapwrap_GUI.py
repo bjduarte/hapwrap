@@ -40,7 +40,8 @@ pulse_off = Color(0, 0, 0)
 
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
-heartbeat_gap = 0.07 # gap between beats
+heartbeat_gap = 0.06 # gap between beats
+heart_gap = 0.55 # duration beat is on
 
 try:
     Root=Tk()
@@ -212,12 +213,12 @@ def enterTestingPatterns():
 
     #Heart beat code
     if (trainingPattern[1] == 0):
-        beat = 0.300
+        beat = 0.33
     elif (trainingPattern[1] == 1):
-        beat = 0.650
+        beat = 0.66
     elif (trainingPattern[1] == 2):
-        beat = 1.000
-        heart_gap = 0.5
+        beat = 0.99
+        
 
     # Heartbeat pattern for 10 through 20 feet
     if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
@@ -226,7 +227,7 @@ def enterTestingPatterns():
         print ("On")
         strip.show()
         print(beat)
-        time.sleep(1.0)
+        time.sleep(0.99)
         
         strip.setPixelColor(pixPointer,pulse_off)
         print ("Off")
@@ -241,7 +242,7 @@ def enterTestingPatterns():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(heartbeat_gap)
+            time.sleep(heart_gap)
 
             strip.setPixelColor(pix,pulse_off)
             print ("Off")
@@ -253,7 +254,7 @@ def enterTestingPatterns():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(heartbeat_gap)
+            time.sleep(heart_gap)
 
             strip.setPixelColor(pix,pulse_off)
             print ("Off")
@@ -312,12 +313,11 @@ def nextStaticClick():
 
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
-            beat = 0.300
+            beat = 0.33
         elif (distances[currentStaticPattern[2]][0] == "15 feet"):
-            beat = 0.650
+            beat = 0.66
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
-            beat = 1.000
-            heart_gap = 0.5
+            beat = 0.99
 
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
@@ -325,7 +325,7 @@ def nextStaticClick():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(1.0)
+            time.sleep(0.99)
 
             strip.setPixelColor(pixPointer,pulse_off)
             print ("Off")
@@ -339,7 +339,7 @@ def nextStaticClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(heartbeat_gap)
+                time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
@@ -351,7 +351,7 @@ def nextStaticClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(heartbeat_gap)
+                time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
@@ -542,7 +542,6 @@ def nextDynamicClick():
             elif (distance == 2):
                 print ("distance is 2")
                 beat = 1.000
-                heart_gap = 0.5
 
             # Heartbeat pattern for 10 through 20 feet
             if ((distance == 2) or (distance == 1) or (distance == 0)):
@@ -550,7 +549,7 @@ def nextDynamicClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(1.0)
+                time.sleep(0.99)
 
                 strip.setPixelColor(pixPointer,pulse_off)
                 print ("Off")
@@ -788,7 +787,6 @@ def repeatDynamicClick():
         elif (distance == 2):
             print ("distance is 2")
             beat = 1.000
-            heart_gap = 0.5
 
         # # Heartbeat pattern for 10 through 20 feet
         if ((distance == 2) or (distance == 1) or (distance == 0)):
@@ -839,7 +837,6 @@ def repeatStaticClick():
         beat = 0.650
     elif (distances[currentStaticPattern[2]][0] == "20 feet"):
         beat = 1.000
-        heart_gap = 0.5
 
     print ("pattern repeated")   
 
