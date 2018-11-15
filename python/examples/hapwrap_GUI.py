@@ -40,7 +40,7 @@ pulse_off = Color(0, 0, 0)
 
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
-heartbeat_gap = 0.05 # gap between beats
+heartbeat_gap = 0.07 # gap between beats
 
 try:
     Root=Tk()
@@ -217,7 +217,7 @@ def enterTestingPatterns():
         beat = 0.66
     elif (trainingPattern[1] == 2):
         beat = 0.99
-        heart_gap = 0.75
+        heart_gap = 0.1.0
 
     # Heartbeat pattern for 10 through 20 feet
     if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
