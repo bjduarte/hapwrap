@@ -40,8 +40,8 @@ pulse_off = Color(0, 0, 0)
 
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
-heartbeat_gap = 0.077 # gap between beats
-heart_gap = 0.77 # duration beat is on
+heartbeat_gap = 0.06 # gap between beats
+heart_gap = 0.55 # duration beat is on
 
 try:
     Root=Tk()
@@ -227,7 +227,7 @@ def enterTestingPatterns():
         print ("On")
         strip.show()
         print(beat)
-        time.sleep(1.0)
+        time.sleep(0.99)
         
         strip.setPixelColor(pixPointer,pulse_off)
         print ("Off")
@@ -325,7 +325,7 @@ def nextStaticClick():
             print ("On")
             strip.show()
             print(beat)
-            time.sleep(1.0)
+            time.sleep(0.99)
 
             strip.setPixelColor(pixPointer,pulse_off)
             print ("Off")
@@ -549,7 +549,7 @@ def nextDynamicClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(1.0)
+                time.sleep(0.99)
 
                 strip.setPixelColor(pixPointer,pulse_off)
                 print ("Off")
