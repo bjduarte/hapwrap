@@ -287,7 +287,7 @@ def nextStaticClick():
         patternDict['Static Repeat Counter'] = staticRepeatCounter
         sRepeatCounter = 0
 
-    if (staticPatternNum != 0):
+    if (staticPatternNum > 0):
 
         # keep track of participants answers
         # radio button presses will be read in and saved 
