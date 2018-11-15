@@ -213,11 +213,11 @@ def enterTestingPatterns():
 
     #Heart beat code
     if (trainingPattern[1] == 0):
-        beat = 0.33
+        beat = 0.25
     elif (trainingPattern[1] == 1):
-        beat = 0.66
+        beat = 0.5
     elif (trainingPattern[1] == 2):
-        beat = 0.99
+        beat = 1.0
         
 
     # Heartbeat pattern for 10 through 20 feet
@@ -313,11 +313,11 @@ def nextStaticClick():
 
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
-            beat = 0.33
+            beat = 0.25
         elif (distances[currentStaticPattern[2]][0] == "15 feet"):
-            beat = 0.66
+            beat = 0.5
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
-            beat = 0.99
+            beat = 1.0
 
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
@@ -535,10 +535,10 @@ def nextDynamicClick():
 
             if (distance == 0):
                 print ("distance is 0")
-                beat = 0.300
+                beat = 0.25
             elif (distance == 1):
                 print ("distance is 1")
-                beat = 0.650
+                beat = 0.5
             elif (distance == 2):
                 print ("distance is 2")
                 beat = 1.000
@@ -780,10 +780,10 @@ def repeatDynamicClick():
 
         if (distance == 0):
             print ("distance is 0")
-            beat = 0.300
+            beat = 0.25
         elif (distance == 1):
             print ("distance is 1")
-            beat = 0.650
+            beat = 0.5
         elif (distance == 2):
             print ("distance is 2")
             beat = 1.000
@@ -832,9 +832,9 @@ def repeatStaticClick():
 
     #Heart beat code
     if (distances[currentStaticPattern[2]][0] == "10 feet"):
-        beat = 0.300
+        beat = 0.25
     elif (distances[currentStaticPattern[2]][0] == "15 feet"):
-        beat = 0.650
+        beat = 0.5
     elif (distances[currentStaticPattern[2]][0] == "20 feet"):
         beat = 1.000
 
