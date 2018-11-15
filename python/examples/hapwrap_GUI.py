@@ -273,7 +273,7 @@ def nextStaticClick():
     global rNum
     global staticPatternNum
     global sRepeatCounter
-    global checkRestoreStatic
+
 
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
@@ -306,6 +306,9 @@ def nextStaticClick():
                                 try: static_incorrect_response = [0, 0, directions[directionChoice.get() - 1][0]]
                                 except IndexError: static_incorrect_response = [0,0,0]
         user_static_response.append(static_incorrect_response)
+        print("This is the incorrect response: " + str(user_static_response))
+        print("This is the user static response " + str(user_static_response))
+
 
     #create elevation buttons
     staticNextButton.configure(state=tk.DISABLED)
@@ -727,9 +730,10 @@ def restoreDynamicClick():
             dynamicCounter.append(i)
         for i in fin['Static Repeat Counter']:
             staticRepeatCounter.append(i)
-        for i in fin['Dyanmic Repeat Counter']:
+        for i in fin['Dynamic Repeat Counter']:
             dynamicRepeatCounter.append(i)
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
+
     except:
         try:
             f = open('userData.json', 'r')
