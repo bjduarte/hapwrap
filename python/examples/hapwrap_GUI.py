@@ -2,6 +2,7 @@
 
 #from kinter import *
 #from tkinter import ttk
+from os.path import join as pjoin
 
 try:
     import Tkinter as tk
@@ -274,68 +275,33 @@ def nextStaticClick():
     global staticPatternNum
     global sRepeatCounter
 
-
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
     staticPatternNum = staticPatternNum + 1
+    patternDict['static counter'] = staticCounter
     staticCounter.append(staticPatternNum)
-    patternDict['user static response'] = user_static_response
-
-    if ((staticPatternNum > 1)):
-        staticRepeatCounter.append(sRepeatCounter)
-        patternDict['static counter'] = staticCounter
-        patternDict['Static Repeat Counter'] = staticRepeatCounter
-        sRepeatCounter = 0
-
-    if (staticPatternNum > 1):
-
-        # keep track of participants answers
-        # radio button presses will be read in and saved 
-        try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
-        except IndexError: 
-            try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0],0]
-            except IndexError: 
-                try: static_incorrect_response = [0, distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
-                except IndexError: 
-                    try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], 0, directions[directionChoice.get() - 1][0]]
-                    except IndexError:
-                        try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], 0, 0]
-                        except IndexError:
-                            try: static_incorrect_response = [0, distances[distanceChoice.get() - 1][0], 0]
-                            except IndexError:
-                                try: static_incorrect_response = [0, 0, directions[directionChoice.get() - 1][0]]
-                                except IndexError: static_incorrect_response = [0,0,0]
-        user_static_response.append(static_incorrect_response)
-        print("This is the incorrect response: " + str(user_static_response))
-        print("This is the user static response " + str(user_static_response))
-
+    staticNumGenerated = False
 
     #create elevation buttons
     staticNextButton.configure(state=tk.DISABLED)
-    staticNumGenerated = False
     buttonSpacing = 0
 
     #Each time next button is clicked status message is changed back to unsaved
     statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
-    # write patternDict to json file called userData.json
-    f = open("userData.json","w")
-    f.write(json.dumps(patternDict, sort_keys=True, indent=1))
-    f.close()
-
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
     # we will remove the while loop and replace with "next button" event handler from GUI
-    if (staticPatternNum < 37 ):
+    if ((staticPatternNum < 37) & (staticPatternNum > 0)):
         while staticNumGenerated == False:
             rNum = random.randint(0, 72)
             while (rNum not in randNumList):
                 randNumList.append(rNum)
                 currentStaticPattern = patternList[rNum]
-                visitedStaticPattern.append(currentStaticPattern)
-                patternDict['visited static patterns'] = visitedStaticPattern
                 staticNumGenerated = True
+        
+        sRepeatCounter = 0
 
         pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
         pixPointer = patterns.get('pin_out')[1][currentStaticPattern[3]]
@@ -420,9 +386,8 @@ def nextStaticClick():
         #create clearDirection button
         clearDirectionButton = ttk.Button(staticPage, text = "Clear", command=clearDirectionSelection)
         clearDirectionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + 270, anchor=tk.CENTER) 
-
-    #create pattern text to display current pattern 
-    if (staticPatternNum < 37):
+        
+        #create pattern text to display current pattern 
         #dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(staticPage, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
@@ -430,7 +395,63 @@ def nextStaticClick():
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
+    if ((staticPatternNum < 37) & (staticPatternNum > 1)):
+        # keep track of participants answers
+        # radio button presses will be read in and saved 
+        try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
+        except IndexError: 
+            try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0],0]
+            except IndexError: 
+                try: static_incorrect_response = [0, distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
+                except IndexError: 
+                    try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], 0, directions[directionChoice.get() - 1][0]]
+                    except IndexError:
+                        try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], 0, 0]
+                        except IndexError:
+                            try: static_incorrect_response = [0, distances[distanceChoice.get() - 1][0], 0]
+                            except IndexError:
+                                try: static_incorrect_response = [0, 0, directions[directionChoice.get() - 1][0]]
+                                except IndexError: static_incorrect_response = [0,0,0]
+        user_static_response.append(static_incorrect_response)
+        print("This is the incorrect response: " + str(user_static_response))
+        print("This is the user static response " + str(user_static_response))
+
+        visitedStaticPattern.append(currentStaticPattern)
+        patternDict['visited static patterns'] = visitedStaticPattern
+        staticRepeatCounter.append(sRepeatCounter)
+        patternDict['Static Repeat Counter'] = staticRepeatCounter
+        patternDict['user static response'] = user_static_response
+
+
+        # write patternDict to json file called userData.json
+        f = open("userData.json","w")
+        f.write(json.dumps(patternDict, sort_keys=True, indent=1))
+        f.close()
+
     if (staticPatternNum >= 37):
+        file = open('userData.json', 'r')
+        fin = json.load(file)
+        file.close()
+
+        staticResults = fin.get('user static response')
+        #Debugging
+        print(staticResults)
+        numStaticCorrect = 0
+        for i in range(len(staticResults)):
+            if staticResults[i][0] == 0:
+                numStaticCorrect = (numStaticCorrect + 1)
+            if staticResults[i][1] == 0:
+                numStaticCorrect = (numStaticCorrect + 1)
+            if staticResults[i][2] == 0:
+                numStaticCorrect = (numStaticCorrect + 1)
+        
+        staticScore = numStaticCorrect/float(108)*100
+
+        print ("Static Score = " + str(staticScore) + "%")
+        #pop-up window displays percentage correct for static training
+        tkMessageBox.showinfo("Score", "Static Score: "  + str(staticScore) + "%")
+
+
         patternMessage = ttk.Label(staticPage, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
         currentStaticPatternMessage = ttk.Label(staticPage, text="All 36 patterns have been done")
@@ -469,7 +490,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
-    if (dynamicPatternNum > 1 and dynamicPatternNum < 23):
+    if (dynamicPatternNum > 1 and dynamicPatternNum < 24):
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
@@ -486,7 +507,7 @@ def nextDynamicClick():
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
 
-    if (dynamicPatternNum < 23):
+    if (dynamicPatternNum < 24):
         while dynamicNumGenerated == False:
             rNum = random.randint(0, 22)
             print (rNum)
@@ -589,50 +610,42 @@ def nextDynamicClick():
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
     fileChoice = fileName.get()
-    save_path = 'C:/example/'
+    # save_path = '/Eyes_On/python/examples/completedStudies/'
+    # study_file = (save_path + fileChoice + ".txt")
 
-    # if path.exists("userData.json"):
-    #     src = path.realpath("userData.json");
-    #     # rename the original file
-    #     os.rename("userData.json", fileChoice + ".txt")
-    #     shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+    # # if path.exists("userData.json"):
+    # #     src = path.realpath("userData.json");
+    # #     # rename the original file
+    # #     os.rename("userData.json", fileChoice + ".txt")
+    # #     shutil.move("Eyes_on/python/examples/output.txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
 
-    # else:
-    #     print("error")
+    # # else:
+    # #     print("error")
     # print("saved to " + fileChoice)
 
     # reads in the json file to be parsed
     file = open('userData.json', 'r')
     fin = json.load(file)
-
+    file.close()
     # writes dynamic data to a text file formatted together
-    dynamic = zip(fin.get('visited dynamic patterns'), fin.get("user dynamic response"))
+    static = zip(fin.get('static counter'), fin.get('visited static patterns'), fin.get('user static response'), fin.get('Static Repeat Counter'))
+    dynamic = zip(fin.get('dynamic counter'), fin.get('visited dynamic patterns'), fin.get("user dynamic response"), fin.get('Dynamic Repeat Counter'))
     #writes the static data to a text file formatted together
-    static = zip(fin.get('visited static patterns'), fin.get('user static response'))
-    f = open('output.txt', 'w+')
-    
-    f.write("Static Pattern \t | \t User Response\n")
+
+    #f = open('output.txt', 'w+')
+    cwd = os.getcwd()
+    path_to_file = pjoin(cwd, "completedStudies", fileChoice)
+    f = open(path_to_file, "w+")
+
+
+    f.write("Count|Static Pattern|User Response|Times Repeated\n")
     for i in static:
         f.write(str(i) + "\n")
 
-    f.write("Dynamic Pattern \t | \t User Response\n")
+    f.write("Count|Dynamic Pattern|User Response|Times Repeated\n")
     for j in dynamic:
         f.write(str(j) + "\n")
     f.close()
-
-    staticResults = fin.get('user static response')
-    #Debugging
-    print(staticResults)
-    numStaticCorrect = 0
-    for i in range(len(staticResults)):
-        if staticResults[i][0] == 0:
-            numStaticCorrect = (numStaticCorrect + 1)
-        if staticResults[i][1] == 0:
-            numStaticCorrect = (numStaticCorrect + 1)
-        if staticResults[i][2] == 0:
-            numStaticCorrect = (numStaticCorrect + 1)
-    
-    print ("Static Score = " + str((numStaticCorrect/108)*100))
 
     dynamicResults = fin.get('user dynamic response')
     numDynamicCorrect = 0
@@ -641,20 +654,21 @@ def fileButtonClick():
 
     while i < len(dynamicResults):
         if len(dynamicResults[i]) == 0:
-            # print ("works")
             numDynamicCorrect = (numDynamicCorrect + 1)
-        print ("d: " + str(dynamicResults[i]))
-        print (len(dynamicResults[i]))
         i += 1
 
-    # for i in dynamicResults:
-    #     if i == "":
-    #         numDynamicCorrect = (numDynamicCorrect + 1)
-    
-    print ("Dynamic Score = " + str((numDynamicCorrect/23)*100))
+    dynamicScore = numDynamicCorrect/float(23)*100
 
-    #pop-up window displays percentage correct for static and dynamic training
-    tkMessageBox.showinfo("Score", "Static Training: " + str((numStaticCorrect/36)*100) + "%/ correct. Dynamic Training: " + str((numDynamicCorrect/23)*100) + "%/ correct")
+    print ("Dynamic Score: "  + str(dynamicScore) + "%")
+
+    #pop-up window displays percentage correct for dynamic training
+    tkMessageBox.showinfo("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
+
+
+#save file to folder called completedStudies
+    print("saved to " + fileChoice + ".txt")
+    # shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
+    tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
 
 #function for the save button on the dynamic page
 def dynamicSaveClick():
@@ -716,12 +730,12 @@ def restoreDynamicClick():
         fin = json.load(f)
         f.close()
 
-        for i in fin['visited static patterns']:
-            visitedStaticPattern.append(i)
-        for i in fin['user static response']:
-            user_static_response.append(i)
-        for i in fin['static counter']:
-            staticCounter.append(i)
+        # for i in fin['visited static patterns']:
+        #     visitedStaticPattern.append(i)
+        # for i in fin['user static response']:
+        #     user_static_response.append(i)
+        # for i in fin['static counter']:
+        #     staticCounter.append(i)
         for i in fin['visited dynamic patterns']:
             visitedDynamicPattern.append(i)
         for i in fin['user dynamic response']:
@@ -735,32 +749,6 @@ def restoreDynamicClick():
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
 
     except:
-        try:
-            f = open('userData.json', 'r')
-            fin = json.load(f)
-            f.close()
-
-            for i in fin['visited static patterns']:
-                visitedStaticPattern.append(i)
-            for i in fin['user static response']:
-                user_static_response.append(i)
-            for i in fin['static counter']:
-                staticCounter.append(i)
-            for i in fin['Static Repeat Counter']:
-                staticRepeatCounter.append(i)
-            dynamicPatternNum = fin['dynamic counter'][-1] - 1
-        except:
-            try:
-                for i in fin['visited dynamic patterns']:
-                    visitedDynamicPattern.append(i)
-                for i in fin['user dynamic response']:
-                    user_dynamic_response.append(i)
-                for i in fin['dynamic counter']:
-                    dynamicCounter.append(i)
-                for i in fin['Dyanmic Repeat Counter']:
-                    dynamicRepeatCounter.append(i)
-                dynamicPatternNum = fin['dynamic counter'][-1] - 1
-            except:
                 print("nothing to restore")
                 tkMessageBox.showinfo("Restore", "Nothing to restore")
 
