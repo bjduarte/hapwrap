@@ -293,9 +293,9 @@ def nextStaticClick():
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
     # we will remove the while loop and replace with "next button" event handler from GUI
-    if ((staticPatternNum < 37) & (staticPatternNum > 0)):
+    if ((staticPatternNum <= 37) & (staticPatternNum > 0)):
         while staticNumGenerated == False:
-            rNum = random.randint(0, 72)
+            rNum = random.randint(0, 71)
             while (rNum not in randNumList):
                 randNumList.append(rNum)
                 currentStaticPattern = patternList[rNum]
@@ -395,7 +395,7 @@ def nextStaticClick():
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
-    if ((staticPatternNum < 37) & (staticPatternNum > 1)):
+    if ((staticPatternNum <= 37) & (staticPatternNum > 1)):
         # keep track of participants answers
         # radio button presses will be read in and saved 
         try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
@@ -428,7 +428,7 @@ def nextStaticClick():
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
 
-    if (staticPatternNum >= 37):
+    if (staticPatternNum > 37):
         file = open('userData.json', 'r')
         fin = json.load(file)
         file.close()
@@ -593,6 +593,17 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
     if (dynamicPatternNum >= 24):
+        #save user response when next is clicked
+        dynamicRepeatCounter.append(dRepeatCounter)
+        patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
+        dynamic_incorrect_response = userDynamicChoice.get()
+        user_dynamic_response.append(dynamic_incorrect_response)
+        patternDict['user dynamic response'] = user_dynamic_response
+        patternDict['dynamic counter'] = dynamicCounter
+        # write patternDict to json file called userData.json
+        f = open("userData.json","w")
+        f.write(json.dumps(patternDict, sort_keys=True, indent=1))
+        f.close()
         fileName = ttk.Entry(dynamicPage, width=30)
         fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
         fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
