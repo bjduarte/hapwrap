@@ -217,7 +217,7 @@ def enterTestingPatterns():
         beat = 0.66
     elif (trainingPattern[1] == 2):
         beat = 0.99
-        heart_gap = 0.1.0
+        heart_gap = 0.77
 
     # Heartbeat pattern for 10 through 20 feet
     if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
@@ -312,12 +312,12 @@ def nextStaticClick():
 
         #Heart beat code
         if (distances[currentStaticPattern[2]][0] == "10 feet"):
-            beat = 0.300
+            beat = 0.33
         elif (distances[currentStaticPattern[2]][0] == "15 feet"):
-            beat = 0.650
+            beat = 0.66
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
-            beat = 1.000
-            heart_gap = 0.5
+            beat = 0.99
+            heart_gap = 0.75
 
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
@@ -339,7 +339,7 @@ def nextStaticClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(heartbeat_gap)
+                time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
@@ -351,7 +351,7 @@ def nextStaticClick():
                 print ("On")
                 strip.show()
                 print(beat)
-                time.sleep(heartbeat_gap)
+                time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
