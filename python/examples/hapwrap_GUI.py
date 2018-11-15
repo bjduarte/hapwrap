@@ -40,7 +40,8 @@ pulse_off = Color(0, 0, 0)
 
 hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
-heartbeat_gap = 0.07 # gap between beats
+heartbeat_gap = 0.077 # gap between beats
+heart_gap = 0.77 # duration beat is on
 
 try:
     Root=Tk()
@@ -217,7 +218,7 @@ def enterTestingPatterns():
         beat = 0.66
     elif (trainingPattern[1] == 2):
         beat = 0.99
-        heart_gap = 0.77
+        
 
     # Heartbeat pattern for 10 through 20 feet
     if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
@@ -317,7 +318,6 @@ def nextStaticClick():
             beat = 0.66
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
             beat = 0.99
-            heart_gap = 0.75
 
         # Heartbeat pattern for 10 through 20 feet
         if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
@@ -542,7 +542,6 @@ def nextDynamicClick():
             elif (distance == 2):
                 print ("distance is 2")
                 beat = 1.000
-                heart_gap = 0.5
 
             # Heartbeat pattern for 10 through 20 feet
             if ((distance == 2) or (distance == 1) or (distance == 0)):
@@ -777,7 +776,6 @@ def repeatDynamicClick():
         elif (distance == 2):
             print ("distance is 2")
             beat = 1.000
-            heart_gap = 0.5
 
         # # Heartbeat pattern for 10 through 20 feet
         if ((distance == 2) or (distance == 1) or (distance == 0)):
@@ -828,7 +826,6 @@ def repeatStaticClick():
         beat = 0.650
     elif (distances[currentStaticPattern[2]][0] == "20 feet"):
         beat = 1.000
-        heart_gap = 0.5
 
     print ("pattern repeated")   
 
