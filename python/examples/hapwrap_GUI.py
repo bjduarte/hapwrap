@@ -228,7 +228,6 @@ def enterTestingPatterns():
         print(beat)
         time.sleep(0.99)
         
->>>>>>> a345db2ad124f20c8f3cd30bf4d751fd71703d92
         strip.setPixelColor(pixPointer,pulse_off)
         print ("Off")
         strip.show()
@@ -269,9 +268,10 @@ def enterTestingPatterns():
 #function for the next button on the static page
 def nextStaticClick(): 
     global patterns
-    global pix
-    global beat
+    # global pix
+    # global beat
     global rNum
+    global sRepeatCounter
     global staticPatternNum
 
     repeatMessage = ttk.Label(staticPage, text="                                                    ")
@@ -417,6 +417,7 @@ def nextStaticClick():
         patternDict['visited static patterns'] = visitedStaticPattern
         staticRepeatCounter.append(sRepeatCounter)
         patternDict['Static Repeat Counter'] = staticRepeatCounter
+        sRepeatCounter = 0
         patternDict['user static response'] = user_static_response
 
         # write patternDict to json file called userData.json
@@ -771,7 +772,9 @@ def repeatDynamicClick():
         print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
         print (currentDynamicPattern)
         pix = patterns.get('pin_out')[elevation][direction]
-        print(pix)
+        pixPointer = patterns.get('pin_out')[1][direction]
+        print("pix = " + str(pix))
+        print("pixPointer = " + str(pixPointer))
         beat = 0
 
         if (distance == 0):
@@ -779,13 +782,26 @@ def repeatDynamicClick():
             beat = 0.25
         elif (distance == 1):
             print ("distance is 1")
-            beat = 0.5
+            beat = 0.50
         elif (distance == 2):
             print ("distance is 2")
-            beat = 1.000
+            beat = 1.00
 
         # # Heartbeat pattern for 10 through 20 feet
         if ((distance == 2) or (distance == 1) or (distance == 0)):
+            strip.setPixelColor(pixPointer,pulse_on)
+            print ("On")
+            strip.show()
+            print(beat)
+            time.sleep(0.99)
+
+            strip.setPixelColor(pixPointer,pulse_off)
+            print ("Off")
+            strip.show()
+            print(beat)
+            time.sleep(heartbeat_gap)
+            print("Beginning Heartbeat")
+        
             for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
@@ -816,6 +832,8 @@ def repeatDynamicClick():
     dynamicRepeatCounter.append(dRepeatCounter)
 
 def repeatStaticClick():
+    global sRepeatCounter
+
     sRepeatCounter = sRepeatCounter + 1
     currentStaticPattern = patternList[rNum]
     staticNumGenerated = True
