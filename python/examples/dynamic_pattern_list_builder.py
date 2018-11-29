@@ -10,13 +10,11 @@ class Dynamic_pattern_list_builder:
   def pattern_builder(self):
     dDict = {
       'personApproachesFront' : [
-        [0, 3, 0],
         [0, 2, 0],
         [0, 1, 1],
         [0, 0, 2],
         [0, 1, 3],
         [0, 2, 4],
-        [0, 3, 4]],
 
       'personApproachesRear' : [
 [0, 2, 4],
@@ -86,7 +84,6 @@ class Dynamic_pattern_list_builder:
 [1, 1, 7],
 [1, 0, 0],
 [1, 0, 0],
-[1, 0, 0]],
 
       'personRightToLeftRear' : [
 [0, 2, 2],
