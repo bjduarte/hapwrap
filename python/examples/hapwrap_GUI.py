@@ -292,7 +292,7 @@ def nextStaticClick():
     # generates a random number and calls a pattern
     # tries to check for duplicate random numbers
     # we will remove the while loop and replace with "next button" event handler from GUI
-    if ((staticPatternNum <= 37) & (staticPatternNum > 0)):
+    if ((staticPatternNum <= 31) & (staticPatternNum > 0)):
         while staticNumGenerated == False:
             rNum = random.randint(0, 71)
             while (rNum not in randNumList):
@@ -392,7 +392,7 @@ def nextStaticClick():
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
-    if ((staticPatternNum <= 37) & (staticPatternNum > 1)):
+    if ((staticPatternNum <= 0) & (staticPatternNum > 1)):
         # keep track of participants answers
         # radio button presses will be read in and saved 
         try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
@@ -425,7 +425,7 @@ def nextStaticClick():
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
 
-    if (staticPatternNum > 37):
+    if (staticPatternNum > 31):
         file = open('userData.json', 'r')
         fin = json.load(file)
         file.close()
@@ -442,7 +442,7 @@ def nextStaticClick():
             if staticResults[i][2] == 0:
                 numStaticCorrect = (numStaticCorrect + 1)
         
-        staticScore = numStaticCorrect/float(108)*100
+        staticScore = numStaticCorrect/float(90)*100
 
         print ("Static Score = " + str(staticScore) + "%")
         #pop-up window displays percentage correct for static training
@@ -451,7 +451,7 @@ def nextStaticClick():
 
         patternMessage = ttk.Label(staticPage, text="Done")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(staticPage, text="All 36 patterns have been done")
+        currentStaticPatternMessage = ttk.Label(staticPage, text="All 30 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
@@ -487,7 +487,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
-    if (dynamicPatternNum > 1 and dynamicPatternNum < 24):
+    if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
@@ -504,9 +504,10 @@ def nextDynamicClick():
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
 
-    if (dynamicPatternNum < 24):
+    if (dynamicPatternNum < 18):
         while dynamicNumGenerated == False:
-            rNum = random.randint(0, 22)
+            rNum = random.randint(0, 16)
+            pointerDone = False
             print (rNum)
             print (dKeyList) 
             while (rNum not in dRandNumList):
@@ -525,9 +526,7 @@ def nextDynamicClick():
             print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
             print (currentDynamicPattern)
             pix = patterns.get('pin_out')[elevation][direction]
-            pixPointer = patterns.get('pin_out')[1][direction]
             print("pix = " + str(pix))
-            print("pixPointer = " + str(pixPointer))
             beat = 0
 
             if (distance == 0):
@@ -540,8 +539,10 @@ def nextDynamicClick():
                 # print ("distance is 2")
                 beat = 1.00
 
-            # Heartbeat pattern for 10 through 20 feet
-            if ((distance == 2) or (distance == 1) or (distance == 0)):
+            #PixPointer Pattern
+            if (pointerDone == False):
+                pixPointer = patterns.get('pin_out')[1][direction]
+                print("pixPointer = " + str(pixPointer))
                 strip.setPixelColor(pixPointer,pulse_on)
                 print ("On")
                 strip.show()
@@ -554,7 +555,10 @@ def nextDynamicClick():
                 print(beat)
                 time.sleep(heartbeat_gap)
                 print("Beginning Heartbeat")
+                pointerDone = True
 
+            # Heartbeat pattern for 10 through 20 feet
+            if ((distance == 2) or (distance == 1) or (distance == 0)):
                 for x in range(heartbeat_pulse): 
                     strip.setPixelColor(pix,pulse_on)
                     print ("On")
@@ -588,7 +592,7 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
-    if (dynamicPatternNum >= 24):
+    if (dynamicPatternNum >= 18):
         #save user response when next is clicked
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
@@ -664,7 +668,7 @@ def fileButtonClick():
             numDynamicCorrect = (numDynamicCorrect + 1)
         i += 1
 
-    dynamicScore = numDynamicCorrect/float(23)*100
+    dynamicScore = numDynamicCorrect/float(17)*100
 
     print ("Dynamic Score: "  + str(dynamicScore) + "%")
 
@@ -679,7 +683,7 @@ def fileButtonClick():
 
 #function for the save button on the dynamic page
 def dynamicSaveClick():
-    if (dynamicPatternNum < 24 ):
+    if (dynamicPatternNum < 18 ):
         dynamicNextButton.configure(state=tk.NORMAL)
 
     statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
@@ -689,7 +693,7 @@ def dynamicSaveClick():
 def staticSaveClick():
     global static_incorrect_response
 
-    if (staticPatternNum < 49 ):
+    if (staticPatternNum < 31 ):
         staticNextButton.configure(state=tk.NORMAL)
     else:
         staticSaveButton.configure(state=tk.DISABLED)
@@ -763,6 +767,7 @@ def restoreDynamicClick():
 def repeatDynamicClick():
     global dRepeatCounter
     dRepeatCounter = dRepeatCounter+1
+    pointerDone = False
     for currentBeat in pat.get(currentDynamicPattern):
         print pat.get(currentDynamicPattern)
         print currentBeat
@@ -772,9 +777,7 @@ def repeatDynamicClick():
         print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
         print (currentDynamicPattern)
         pix = patterns.get('pin_out')[elevation][direction]
-        pixPointer = patterns.get('pin_out')[1][direction]
         print("pix = " + str(pix))
-        print("pixPointer = " + str(pixPointer))
         beat = 0
 
         if (distance == 0):
@@ -786,9 +789,10 @@ def repeatDynamicClick():
         elif (distance == 2):
             print ("distance is 2")
             beat = 1.00
-
-        # # Heartbeat pattern for 10 through 20 feet
-        if ((distance == 2) or (distance == 1) or (distance == 0)):
+        #PixPointer Pattern
+        if (pointerDone == False):
+            pixPointer = patterns.get('pin_out')[1][direction]
+            print("pixPointer = " + str(pixPointer))
             strip.setPixelColor(pixPointer,pulse_on)
             print ("On")
             strip.show()
@@ -801,7 +805,10 @@ def repeatDynamicClick():
             print(beat)
             time.sleep(heartbeat_gap)
             print("Beginning Heartbeat")
-        
+            pointerDone = True
+
+        # # Heartbeat pattern for 10 through 20 feet
+        if ((distance == 2) or (distance == 1) or (distance == 0)):
             for x in range(heartbeat_pulse): 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
