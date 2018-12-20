@@ -392,7 +392,7 @@ def nextStaticClick():
         currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
-    if ((staticPatternNum <= 0) & (staticPatternNum > 1)):
+    if ((staticPatternNum <= 30) & (staticPatternNum > 1)):
         # keep track of participants answers
         # radio button presses will be read in and saved 
         try: static_incorrect_response = [elevations[elevationChoice.get() - 1][0], distances[distanceChoice.get() - 1][0], directions[directionChoice.get() - 1][0]]
@@ -425,33 +425,33 @@ def nextStaticClick():
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
 
-    if (staticPatternNum > 31):
-        file = open('userData.json', 'r')
-        fin = json.load(file)
-        file.close()
+        if (staticPatternNum == 30):
+            file = open('userData.json', 'r')
+            fin = json.load(file)
+            file.close()
 
-        staticResults = fin.get('user static response')
-        #Debugging
-        print(staticResults)
-        numStaticCorrect = 0
-        for i in range(len(staticResults)):
-            if staticResults[i][0] == 0:
-                numStaticCorrect = (numStaticCorrect + 1)
-            if staticResults[i][1] == 0:
-                numStaticCorrect = (numStaticCorrect + 1)
-            if staticResults[i][2] == 0:
-                numStaticCorrect = (numStaticCorrect + 1)
-        
-        staticScore = numStaticCorrect/float(90)*100
+            staticResults = fin.get('user static response')
+            #Debugging
+            print(staticResults)
+            numStaticCorrect = 0
+            for i in range(len(staticResults)):
+                if staticResults[i][0] == 0:
+                    numStaticCorrect = (numStaticCorrect + 1)
+                if staticResults[i][1] == 0:
+                    numStaticCorrect = (numStaticCorrect + 1)
+                if staticResults[i][2] == 0:
+                    numStaticCorrect = (numStaticCorrect + 1)
+            
+            staticScore = numStaticCorrect/float(87)*100
 
-        print ("Static Score = " + str(staticScore) + "%")
-        #pop-up window displays percentage correct for static training
-        tkMessageBox.showinfo("Score", "Static Score: "  + str(staticScore) + "%")
+            print ("Static Score = " + str(staticScore) + "%")
+            #pop-up window displays percentage correct for static training
+            tkMessageBox.showinfo("Score", "Static Score: "  + str(staticScore) + "%")
 
 
-        patternMessage = ttk.Label(staticPage, text="Done")
-        patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(staticPage, text="All 30 patterns have been done")
+            patternMessage = ttk.Label(staticPage, text="Done")
+            patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
+            currentStaticPatternMessage = ttk.Label(staticPage, text="All 30 patterns have been done")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
