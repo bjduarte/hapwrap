@@ -1,0 +1,11 @@
+
+PI to Hapwrap connections:
+Yellow Alligator is ground to Yellow wire
+Green alligator is Data to black wire
+White alligator is VCC to green wire
+
+On the PI:
+green wire is VCC
+Yellow wire ground
+black wire data = 18 on the PI
+
