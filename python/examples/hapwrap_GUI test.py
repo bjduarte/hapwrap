@@ -1,28 +1,20 @@
 #!/usr/bin/python3
 
 #from kinter import *
-#from tkinter import ttk
+from tkinter import ttk
 from os.path import join as pjoin
+import tkinter as tk
 
-try:
-    import Tkinter as tk
-except:
-    import tkinter as tk
-try:
-    import ttk
-except:
-    from tkinter import ttk
-
-from neopixel import *
+# from neopixel import *
 import sys
 import json
 import random
-import tkMessageBox
+import tkinter.messagebox as tkMessageBox
 import shutil
 import os
 import time
 from os import path
-from complete_hapwrap_handler import *
+# from complete_hapwrap_handler import *
 from dynamic_pattern_list_builder import *
 
 # LED strip configuration:
@@ -35,18 +27,15 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-pulse_on = Color(255, 255, 255)
-pulse_off = Color(0, 0, 0)
+# pulse_on = Color(255, 255, 255)
+# pulse_off = Color(0, 0, 0)
 
-hapwrap = Complete_hapwrap_handler()
+# hapwrap = Complete_hapwrap_handler()
 heartbeat_pulse = 3
 heartbeat_gap = 0.06 # gap between beats
 heart_gap = 0.55 # duration beat is on
 
-try:
-    Root=Tk()
-except:
-    Root = tk.Tk()
+Root = tk.Tk()
 
 RTitle=Root.title("HapWrap")
 RWidth=Root.winfo_screenwidth()
@@ -78,42 +67,15 @@ eyesOnScreen.add(familiarizationPage, text='Familiarization')
  
 
 #create variable for button selection
-try:
-    staticPatternNum = IntVar()
-except:
-    staticPatternNum = tk.IntVar()    
-try:
-    dynamicPatternNum = IntVar()
-except:
-    dynamicPatternNum = tk.IntVar()
-try:
-    buttonSpacing = IntVar()
-except:
-    buttonSpacing = tk.IntVar()
-try:
-    distanceChoice = IntVar()
-except:
-    distanceChoice = tk.IntVar()
-try:
-    directionChoice = IntVar()
-except:
-    directionChoice = tk.IntVar()
-try:
-    elevationChoice = IntVar()
-except:
-    elevationChoice = tk.IntVar()
-try:
-    userDynamicChoice = StringVar()
-except:
-    userDynamicChoice = tk.StringVar()   
-try:
-    staticNumGenerated = BooleanVar()
-except:
-    staticNumGenerated = tk.BooleanVar()
-try:
-    dynamicNumGenerated = BooleanVar()
-except:
-    dynamicNumGenerated = tk.BooleanVar()    
+staticPatternNum = tk.IntVar()
+dynamicPatternNum = tk.IntVar()
+buttonSpacing = tk.IntVar()
+distanceChoice = tk.IntVar()
+directionChoice = tk.IntVar()
+elevationChoice = tk.IntVar()
+userDynamicChoice = tk.StringVar()
+staticNumGenerated = tk.BooleanVar()
+dynamicNumGenerated = tk.BooleanVar()
 
 #initialize variables
 buttonSpacing = 0
@@ -121,8 +83,6 @@ staticPatternNum = 0
 dynamicPatternNum = 0
 dRepeatCounter = 0
 sRepeatCounter = 0
-checkRestoreStatic = False
-checkRestoreDynamic = False
 distanceChoice.set(20)
 directionChoice.set(20)
 elevationChoice.set(20)
@@ -219,46 +179,46 @@ def enterTestingPatterns():
     elif (trainingPattern[1] == 2):
         beat = 1.00
 
-    # Heartbeat pattern for 10 through 20 feet
-    if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
-        print (trainingPattern[1])
-        strip.setPixelColor(pixPointer,pulse_on)
-        print ("On")
-        strip.show()
-        print(beat)
-        time.sleep(0.99)
+    # # Heartbeat pattern for 10 through 20 feet
+    # if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
+    #     print (trainingPattern[1])
+    #     strip.setPixelColor(pixPointer,pulse_on)
+    #     print ("On")
+    #     strip.show()
+    #     print(beat)
+    #     time.sleep(0.99)
         
-        strip.setPixelColor(pixPointer,pulse_off)
-        print ("Off")
-        strip.show()
-        print(beat)
-        time.sleep(heartbeat_gap)
-        print("Beginning Heartbeat")
+    #     strip.setPixelColor(pixPointer,pulse_off)
+    #     print ("Off")
+    #     strip.show()
+    #     print(beat)
+    #     time.sleep(heartbeat_gap)
+    #     print("Beginning Heartbeat")
 
-        for x in range(heartbeat_pulse): 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heart_gap)
+    #     for x in range(heartbeat_pulse): 
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heart_gap)
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(beat)
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
     elevationChoice.set(20)
@@ -268,7 +228,7 @@ def enterTestingPatterns():
 #function for the next button on the static page
 def nextStaticClick(): 
     global patterns
-    # global pix how to determine which motor vibrates 2 tuple elevation and direction
+    # global pix
     # global beat
     global rNum
     global sRepeatCounter
@@ -300,7 +260,6 @@ def nextStaticClick():
                 currentStaticPattern = patternList[rNum]
                 staticNumGenerated = True
 
-
         pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
         pixPointer = patterns.get('pin_out')[1][currentStaticPattern[3]]
         print(currentStaticPattern)
@@ -316,45 +275,45 @@ def nextStaticClick():
         elif (distances[currentStaticPattern[2]][0] == "20 feet"):
             beat = 1.00
 
-        # Heartbeat pattern for 10 through 20 feet
-        if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
-            strip.setPixelColor(pixPointer,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(0.99)
+        # # Heartbeat pattern for 10 through 20 feet
+        # if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
+        #     strip.setPixelColor(pixPointer,pulse_on)
+        #     print ("On")
+        #     strip.show()
+        #     print(beat)
+        #     time.sleep(0.99)
 
-            strip.setPixelColor(pixPointer,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
-            print("Beginning Heartbeat")
+        #     strip.setPixelColor(pixPointer,pulse_off)
+        #     print ("Off")
+        #     strip.show()
+        #     print(beat)
+        #     time.sleep(heartbeat_gap)
+        #     print("Beginning Heartbeat")
 
-            for x in range(heartbeat_pulse): 
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                print(beat)
-                time.sleep(heart_gap)
+        #     for x in range(heartbeat_pulse): 
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heart_gap)
 
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(heartbeat_gap)
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heartbeat_gap)
 
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                print(beat)
-                time.sleep(heart_gap)
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heart_gap)
 
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(beat)
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(beat)
 
         for text, elevation in elevations:
             elevationButton = ttk.Radiobutton(staticPage, text=text, variable=elevationChoice, value=elevation)
@@ -421,11 +380,10 @@ def nextStaticClick():
         patternDict['user static response'] = user_static_response
 
         # write patternDict to json file called userData.json
-        # TODO make a funtion for this and for reading in for restore
-        # TODO heartbeat, writing to json and formating json to text file, restore
         f = open("userData.json","w")
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
+        print ("staticPatternNum" + str(staticPatternNum))
 
         if (staticPatternNum == 30):
             file = open('userData.json', 'r')
@@ -449,19 +407,23 @@ def nextStaticClick():
             print ("Static Score = " + str(staticScore) + "%")
             #pop-up window displays percentage correct for static training
             tkMessageBox.showinfo("Score", "Static Score: "  + str(staticScore) + "%")
-
+            
+            patternDict['Static Score'] = str(staticScore) + "%"
+            
+            # write patternDict to json file called userData.json
+            f = open("userData.json","w")
+            f.write(json.dumps(patternDict, sort_keys=True, indent=1))
+            f.close()
 
             patternMessage = ttk.Label(staticPage, text="Done")
             patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
             currentStaticPatternMessage = ttk.Label(staticPage, text="All 30 patterns have been done")
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
+            currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
     elevationChoice.set(20)
     directionChoice.set(20)
     distanceChoice.set(20)
-
-    checkRestoreStatic = False
 
 #function for the next button on the dynamic page
 def nextDynamicClick(): 
@@ -473,7 +435,13 @@ def nextDynamicClick():
     global dynamicPatternNum
     global currentDynamicPattern
     global dRepeatCounter
-    global checkRestoreDynamic
+    global visitedStaticPattern
+    global staticCounter
+    global staticRepeatCounter
+    global user_static_response
+
+
+    print("This is the user static response " + str(user_static_response))
 
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
@@ -490,6 +458,11 @@ def nextDynamicClick():
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
+        patternDict['visited static patterns'] = visitedStaticPattern
+        patternDict['static counter'] = staticCounter
+        patternDict['Static Repeat Counter'] = staticRepeatCounter
+        patternDict['user static response'] = user_static_response
+
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
@@ -542,49 +515,49 @@ def nextDynamicClick():
                 beat = 1.00
 
             #PixPointer Pattern
-            if (pointerDone == False):
-                pixPointer = patterns.get('pin_out')[1][direction]
-                print("pixPointer = " + str(pixPointer))
-                strip.setPixelColor(pixPointer,pulse_on)
-                print ("On")
-                strip.show()
-                print(beat)
-                time.sleep(0.99)
+            # if (pointerDone == False):
+            #     pixPointer = patterns.get('pin_out')[1][direction]
+            #     print("pixPointer = " + str(pixPointer))
+            #     strip.setPixelColor(pixPointer,pulse_on)
+            #     print ("On")
+            #     strip.show()
+            #     print(beat)
+            #     time.sleep(0.99)
 
-                strip.setPixelColor(pixPointer,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(heartbeat_gap)
-                print("Beginning Heartbeat")
-                pointerDone = True
+            #     strip.setPixelColor(pixPointer,pulse_off)
+            #     print ("Off")
+            #     strip.show()
+            #     print(beat)
+            #     time.sleep(heartbeat_gap)
+            #     print("Beginning Heartbeat")
+            #     pointerDone = True
 
-            # Heartbeat pattern for 10 through 20 feet
-            if ((distance == 2) or (distance == 1) or (distance == 0)):
-                for x in range(heartbeat_pulse): 
-                    strip.setPixelColor(pix,pulse_on)
-                    print ("On")
-                    strip.show()
-                    print(beat)
-                    time.sleep(heart_gap)
+            # # Heartbeat pattern for 10 through 20 feet
+            # if ((distance == 2) or (distance == 1) or (distance == 0)):
+            #     for x in range(heartbeat_pulse): 
+            #         strip.setPixelColor(pix,pulse_on)
+            #         print ("On")
+            #         strip.show()
+            #         print(beat)
+            #         time.sleep(heart_gap)
 
-                    strip.setPixelColor(pix,pulse_off)
-                    print ("Off")
-                    strip.show()
-                    print(beat)
-                    time.sleep(heartbeat_gap)
+            #         strip.setPixelColor(pix,pulse_off)
+            #         print ("Off")
+            #         strip.show()
+            #         print(beat)
+            #         time.sleep(heartbeat_gap)
 
-                    strip.setPixelColor(pix,pulse_on)
-                    print ("On")
-                    strip.show()
-                    print(beat)
-                    time.sleep(heart_gap)
+            #         strip.setPixelColor(pix,pulse_on)
+            #         print ("On")
+            #         strip.show()
+            #         print(beat)
+            #         time.sleep(heart_gap)
 
-                    strip.setPixelColor(pix,pulse_off)
-                    print ("Off")
-                    strip.show()
-                    print(beat)
-                    time.sleep(beat)
+            #         strip.setPixelColor(pix,pulse_off)
+            #         print ("Off")
+            #         strip.show()
+            #         print(beat)
+            #         time.sleep(beat)
             
         #create dynamic status text
         statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
@@ -595,13 +568,39 @@ def nextDynamicClick():
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
     if (dynamicPatternNum >= 18):
+
+        patternDict['visited static patterns'] = visitedStaticPattern
+        patternDict['visited dynamic patterns'] = visitedDynamicPattern
+        patternDict['static counter'] = staticCounter
+        patternDict['Static Repeat Counter'] = staticRepeatCounter
+        patternDict['user static response'] = user_static_response
         #save user response when next is clicked
         dynamicRepeatCounter.append(dRepeatCounter)
+
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
         patternDict['user dynamic response'] = user_dynamic_response
         patternDict['dynamic counter'] = dynamicCounter
+
+        file = open('userData.json', 'r')
+        fin = json.load(file)
+        file.close()
+
+        dynamicResults = fin.get('user dynamic response')
+        numDynamicCorrect = 0
+        i = 0
+        while i < len(dynamicResults):
+            if len(dynamicResults[i]) == 0:
+                numDynamicCorrect = (numDynamicCorrect + 1)
+            i += 1
+        dynamicScore = numDynamicCorrect/float(17)*100
+
+        print ("Dynamic Score: "  + str(dynamicScore) + "%")
+        #pop-up window displays percentage correct for dynamic training
+        tkMessageBox.showinfo("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
+        patternDict['Dynamic Score'] = str(dynamicScore) + "%"
+
         # write patternDict to json file called userData.json
         f = open("userData.json","w")
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
@@ -619,22 +618,10 @@ def nextDynamicClick():
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
         
-        checkRestoreDynamic = False
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
+
     fileChoice = fileName.get()
-    # save_path = '/Eyes_On/python/examples/completedStudies/'
-    # study_file = (save_path + fileChoice + ".txt")
-
-    # # if path.exists("userData.json"):
-    # #     src = path.realpath("userData.json");
-    # #     # rename the original file
-    # #     os.rename("userData.json", fileChoice + ".txt")
-    # #     shutil.move("Eyes_on/python/examples/output.txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-
-    # # else:
-    # #     print("error")
-    # print("saved to " + fileChoice)
 
     # reads in the json file to be parsed
     file = open('userData.json', 'r')
@@ -655,28 +642,18 @@ def fileButtonClick():
     for i in static:
         f.write(str(i) + "\n")
 
-    f.write("Count|Dynamic Pattern|User Response|Times Repeated\n")
+    f.write("Static Score:\n")
+    # f.write(str(fin.get('Static Score')))
+
+
+    f.write("\nCount|Dynamic Pattern|User Response|Times Repeated\n")
     for j in dynamic:
         f.write(str(j) + "\n")
+
+    f.write("Dynamic Score:\n")
+    f.write(str(fin.get('Dynamic Score')))
+
     f.close()
-
-    dynamicResults = fin.get('user dynamic response')
-    numDynamicCorrect = 0
-    
-    i = 0
-
-    while i < len(dynamicResults):
-        if len(dynamicResults[i]) == 0:
-            numDynamicCorrect = (numDynamicCorrect + 1)
-        i += 1
-
-    dynamicScore = numDynamicCorrect/float(17)*100
-
-    print ("Dynamic Score: "  + str(dynamicScore) + "%")
-
-    #pop-up window displays percentage correct for dynamic training
-    tkMessageBox.showinfo("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
-
 
 #save file to folder called completedStudies
     print("saved to " + fileChoice + ".txt")
@@ -705,7 +682,6 @@ def staticSaveClick():
 
 #function for the restore button on the static page
 def restoreStaticClick():
-    checkRestoreStatic = True
     global staticPatternNum
     staticNextButton.configure(state=tk.NORMAL)
     staticSaveButton.configure(state=tk.NORMAL)
@@ -718,13 +694,18 @@ def restoreStaticClick():
         #type(fin)
         for i in fin['visited static patterns']:
             visitedStaticPattern.append(i)
+            print ("worked1")
         for i in fin['user static response']:
             user_static_response.append(i)
+            print ("worked2")
         for i in fin['static counter']:
             staticCounter.append(i)
+            print ("worked3")
         for i in fin['Static Repeat Counter']:
             staticRepeatCounter.append(i)
+            print ("worked4")
         staticPatternNum = fin['static counter'][-1] - 1
+        print ("worked5")
 
     except:
             print("nothing to restore")
@@ -732,7 +713,6 @@ def restoreStaticClick():
 
 #function for the restore button on the dynamic page
 def restoreDynamicClick():
-    checkRestoreDynamic = True
     global dynamicPatternNum
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
@@ -743,27 +723,36 @@ def restoreDynamicClick():
         fin = json.load(f)
         f.close()
 
-        # for i in fin['visited static patterns']:
-        #     visitedStaticPattern.append(i)
-        # for i in fin['user static response']:
-        #     user_static_response.append(i)
-        # for i in fin['static counter']:
-        #     staticCounter.append(i)
+        for i in fin['visited static patterns']:
+            visitedStaticPattern.append(i)
+            print ("dworked7")
+        for i in fin['user static response']:
+            user_static_response.append(i)
+            print ("dworked8")
+        for i in fin['static counter']:
+            staticCounter.append(i)
+            print ("dworked9")
         for i in fin['visited dynamic patterns']:
             visitedDynamicPattern.append(i)
+            print ("dworked1")
         for i in fin['user dynamic response']:
             user_dynamic_response.append(i)
+            print ("dworked2")
         for i in fin['dynamic counter']:
             dynamicCounter.append(i)
+            print ("dworked3")
         for i in fin['Static Repeat Counter']:
             staticRepeatCounter.append(i)
+            print ("dworked4")
         for i in fin['Dynamic Repeat Counter']:
             dynamicRepeatCounter.append(i)
+            print ("dworked5")
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
+        print ("dworked6")
 
     except:
-                print("nothing to restore")
-                tkMessageBox.showinfo("Restore", "Nothing to restore")
+        print("nothing to restore")
+        tkMessageBox.showinfo("Restore", "Nothing to restore")
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
@@ -792,49 +781,49 @@ def repeatDynamicClick():
             print ("distance is 2")
             beat = 1.00
         #PixPointer Pattern
-        if (pointerDone == False):
-            pixPointer = patterns.get('pin_out')[1][direction]
-            print("pixPointer = " + str(pixPointer))
-            strip.setPixelColor(pixPointer,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(0.99)
+        # if (pointerDone == False):
+        #     pixPointer = patterns.get('pin_out')[1][direction]
+        #     print("pixPointer = " + str(pixPointer))
+        #     strip.setPixelColor(pixPointer,pulse_on)
+        #     print ("On")
+        #     strip.show()
+        #     print(beat)
+        #     time.sleep(0.99)
 
-            strip.setPixelColor(pixPointer,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
-            print("Beginning Heartbeat")
-            pointerDone = True
+        #     strip.setPixelColor(pixPointer,pulse_off)
+        #     print ("Off")
+        #     strip.show()
+        #     print(beat)
+        #     time.sleep(heartbeat_gap)
+        #     print("Beginning Heartbeat")
+        #     pointerDone = True
 
-        # # Heartbeat pattern for 10 through 20 feet
-        if ((distance == 2) or (distance == 1) or (distance == 0)):
-            for x in range(heartbeat_pulse): 
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                print(beat)
-                time.sleep(heartbeat_gap)
+        # # # Heartbeat pattern for 10 through 20 feet
+        # if ((distance == 2) or (distance == 1) or (distance == 0)):
+        #     for x in range(heartbeat_pulse): 
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heartbeat_gap)
 
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(heartbeat_gap)
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heartbeat_gap)
 
-                strip.setPixelColor(pix,pulse_on)
-                print ("On")
-                strip.show()
-                print(beat)
-                time.sleep(heartbeat_gap)
+        #         strip.setPixelColor(pix,pulse_on)
+        #         print ("On")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(heartbeat_gap)
 
-                strip.setPixelColor(pix,pulse_off)
-                print ("Off")
-                strip.show()
-                print(beat)
-                time.sleep(beat)
+        #         strip.setPixelColor(pix,pulse_off)
+        #         print ("Off")
+        #         strip.show()
+        #         print(beat)
+        #         time.sleep(beat)
 
     repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
@@ -864,44 +853,44 @@ def repeatStaticClick():
 
     print ("pattern repeated")   
 
-    # Heartbeat pattern for 10 through 20 feet
-    if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
-      strip.setPixelColor(pixPointer,pulse_on)
-      print ("On")
-      strip.show()
-      print(beat)
-      time.sleep(1.00)
+    # # Heartbeat pattern for 10 through 20 feet
+    # if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
+    #   strip.setPixelColor(pixPointer,pulse_on)
+    #   print ("On")
+    #   strip.show()
+    #   print(beat)
+    #   time.sleep(1.00)
 
-      strip.setPixelColor(pixPointer,pulse_off)
-      print ("Off")
-      strip.show()
-      print(beat)
-      time.sleep(heartbeat_gap)
+    #   strip.setPixelColor(pixPointer,pulse_off)
+    #   print ("Off")
+    #   strip.show()
+    #   print(beat)
+    #   time.sleep(heartbeat_gap)
 
-      for x in range(heartbeat_pulse): 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heart_gap)
+    #   for x in range(heartbeat_pulse): 
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(heartbeat_gap)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heartbeat_gap)
 
-            strip.setPixelColor(pix,pulse_on)
-            print ("On")
-            strip.show()
-            print(beat)
-            time.sleep(heart_gap)
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
 
-            strip.setPixelColor(pix,pulse_off)
-            print ("Off")
-            strip.show()
-            print(beat)
-            time.sleep(beat)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(beat)
 
     repeatMessage = ttk.Label(staticPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)   
@@ -1013,8 +1002,8 @@ dynamicRepeatButton.configure(state=tk.DISABLED)
 #statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 # Create NeoPixel object with appropriate configuration.
-strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+# strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 # Initialize the library (must be called once before other functions).
-strip.begin()
+# strip.begin()
  
 Root.mainloop()
