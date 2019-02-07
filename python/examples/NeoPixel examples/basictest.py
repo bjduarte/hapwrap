@@ -22,7 +22,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
 
-def colorWipe(strip, color, wait_ms=50):
+def colorWipe(strip, color, wait_ms=5000):
 
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     #      print ("direction: " + direction)
     #      
             # print ('Color wipe animations.')
-        colorWipe(strip, Color(255, 255, 255),2000)  # Red wipe
+        colorWipe(strip, Color(255, 255, 255),10000)  # Red wipe
             # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
             # colorWipe(strip, Color(0, 0, 255))  # Green wipe
             # print ('Theater chase animations.')
