@@ -57,28 +57,27 @@ def postJsonHandler():
         beat = 0
 
         if (distance == 0):
-            # print ("distance is 10")
+            print ("distance is 10")
             beat = 0.25
         elif (distance == 1):
-            # print ("distance is 15")
+            print ("distance is 15")
             beat = 0.50
         elif (distance == 2):
-            # print ("distance is 20")
+            print ("distance is 20")
             beat = 1.00
 
         #PixPointer Pattern
             pixPointer = patterns.get('pin_out')[1][direction]
             print("pixPointer = " + str(pixPointer))
             strip.setPixelColor(pixPointer,pulse_on)
-            print ("On")
+            print ("Pointer Beat On")
             strip.show()
-            print(beat)
             time.sleep(0.99)
 
             strip.setPixelColor(pixPointer,pulse_off)
-            print ("Off")
+            print ("Pointer Beat Off")
             strip.show()
-            print(beat)
+            print("beat", beat)
             time.sleep(heartbeat_gap)
             print("Beginning Heartbeat")
 
@@ -88,25 +87,23 @@ def postJsonHandler():
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
                 strip.show()
-                print(beat)
+                print("beat", beat)
                 time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
                 strip.show()
-                print(beat)
                 time.sleep(heartbeat_gap)
 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
                 strip.show()
-                print(beat)
+                print("beat", beat)
                 time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
                 print ("Off")
                 strip.show()
-                print(beat)
                 time.sleep(beat)
     return 'JSON posted'
 
