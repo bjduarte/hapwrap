@@ -27,39 +27,12 @@ heartbeat_pulse = 3
 heartbeat_gap = 0.06 # gap between beats
 heart_gap = 0.55 # duration beat is on
 
-# lists of all the possible components that make up a pattern
-elevation = [0, 1, 2]
-distance = [0, 1, 2]
-direction = [0, 1, 2, 3, 4, 5, 6, 7]
-
-#dictionary containning all static patterns
-patternDict = {}
-#iterate through each component to create a list of patterns
-#elevation, distance, direction
-pat = dynamicPattern.pattern_builder()
-
-# create list of keys, necessary for calling dynamic patterns
-for i in pat:
-    dKeyList.append(i)
-
-num = 0
-patternList = []
-for i in elevation:
-  for j in distance:
-    for k in direction:
-      pattern = [num, i, j, k]
-      patternList.append(pattern)
-      #patternDict['pattern list'] = patternList
-      num += 1
-
-# Patterns dictionary containing object positions
+# Patterns dictionary containing dynamic positions
 patterns = {
     'elevation' : [1, 2, 3],
     'distance' : [10, 15, 20], 
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
-    'pin_out' : [[0,1,2,3,4,5,6,7],[15, 14, 13, 12, 11, 10, 9, 8],[16,17,18,19,20,21,22,23]] }
-
-
+    'pin_out' : [[23, 22, 21, 20, 19, 18, 17, 16],[15, 14, 13, 12, 11, 10, 9, 8],[7, 6, 5, 4, 3, 2, 1, 0]] }
 
 # json flask request
 app = Flask(__name__)
@@ -72,26 +45,25 @@ def postJsonHandler():
     content = request.get_json()
     print (j)
 #    print('Output ' + j['first_name'])
-    for currentBeat in j:
-        # print pat.get(currentDynamicPattern)
-        print currentBeat
-        elevation = currentBeat[0]
-        distance = currentBeat[1]
-        direction = currentBeat[2]
+    for currentPattern in j:
+        print (currentPattern)
+        elevation = currentPattern[0]
+        distance = currentPattern[1]
+        direction = currentPattern[2]
         print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-        print (currentDynamicPattern)
+
         pix = patterns.get('pin_out')[elevation][direction]
         print("pix = " + str(pix))
         beat = 0
 
         if (distance == 0):
-            # print ("distance is 0")
+            # print ("distance is 10")
             beat = 0.25
         elif (distance == 1):
-            # print ("distance is 1")
+            # print ("distance is 15")
             beat = 0.50
         elif (distance == 2):
-            # print ("distance is 2")
+            # print ("distance is 20")
             beat = 1.00
 
         #PixPointer Pattern
