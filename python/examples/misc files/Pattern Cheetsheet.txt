@@ -1,0 +1,59 @@
+# person approaches from directly in front of you, moves to your left and continues past directly behind you
+personApproachesFront = [
+
+# person approaches from directly behind you, moves to your right, passes in front of you
+personApproachesRear = [
+
+# vehicle passes in front of you left to right
+vehicleLeftToRight = [
+
+# vehicle passes in front of you right to left
+vehicleRightToLeft = [
+
+# you approach a chair directly in front of you
+approachingChairFront = [
+
+# A chair is directly to your right, you turn to face it then approach it
+chairOnRight = [
+
+# a chair is directly to your left, you turn to face it, then approach it
+chairOnLeft = [
+
+# vehicle approaches from behind you and to the left, continues past you
+vehicleLeftRear = [
+
+# vehicle approaches from in front of you and to the right, continues past you
+vehicleRightFront = [
+
+# vehicle approaches from behind you and to your left, stops next to you, then turns in front of you to the right
+vehicleRightTurn = [
+
+# vehicle approaches from the left and stops in front of you
+vehicleStopped = [
+
+# person approaches from your left, moves behind you, continues past to your right
+personLeftToRightRear = [
+
+# person approaches from your right, moves behind you, continues passed to your left
+personRightToLeftRear = [
+
+# person approaches from your left, moves in front of you, continues passed to your right
+personLeftToRightFront = [
+
+# person approaches from your right, moves in front of you, continues passed to your left
+personRightToLeftFront = [
+
+#person approaches from the rear, greets you, heads off to the left
+personGreetingRear = [
+
+# person approaches from front, greets you, heads off to the left
+personGreetsFront = [
+
+# person approaches from left, greets you, heads off at 315 degrees
+personGreetsLeft = [
+
+# person approaches from the right, greets you, heads off at 45 degrees
+personGreetsRight = [
+
+# person approaches from 45 degrees, greets you, heads off directly behind you
+personGreets45 = [
