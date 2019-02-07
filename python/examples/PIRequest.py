@@ -45,8 +45,8 @@ def postJsonHandler():
     content = request.get_json()
     print (j)
 #    print('Output ' + j['first_name'])
-    for rcvData in j:
-        print (rcvData)
+    for currentPattern in j:
+        print (currentPattern)
         elevation = currentPattern[0]
         distance = currentPattern[1]
         direction = currentPattern[2]
