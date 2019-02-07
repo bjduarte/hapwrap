@@ -110,6 +110,8 @@ def postJsonHandler():
                 time.sleep(beat)
     return 'JSON posted'
 
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip.begin()
 app.run(host='0.0.0.0', port=   8080)
 
 
