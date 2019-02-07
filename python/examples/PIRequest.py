@@ -47,12 +47,10 @@ def postJsonHandler():
 #    print('Output ' + j['first_name'])
     for rcvData in j:
         print (rcvData)
-        for currentPattern in rcvData:
-          print (currentPattern)
-          elevation = currentPattern[0]
-          distance = currentPattern[1]
-          direction = currentPattern[2]
-          print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+        elevation = currentPattern[0]
+        distance = currentPattern[1]
+        direction = currentPattern[2]
+        print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
 
         pix = patterns.get('pin_out')[elevation][direction]
         print("pix = " + str(pix))
