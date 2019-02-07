@@ -3,7 +3,7 @@
 import requests
 import json
 
-API_ENDPOINT = "http://0.0.0.0:8080/postjson"
+API_ENDPOINT = "http://172.20.10.13:8080/postjson"
 
 
 
