@@ -45,14 +45,15 @@ def postJsonHandler():
     content = request.get_json()
     print (j)
 #    print('Output ' + j['first_name'])
-    for currentPattern in j:
-        print (currentPattern)
-        elevation = currentPattern[0]
-        distance = currentPattern[1]
-        direction = currentPattern[2]
-        print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
+    for rcvData in j:
+        print (rcvData)
+        for currentPattern in rcvData:
+          elevation = currentPattern[0]
+          distance = currentPattern[1]
+          direction = currentPattern[2]
+          print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
 
-        pix = patterns.get('pin_out')[int(elevation)][int(direction)]
+        pix = patterns.get('pin_out')[elevation][direction]
         print("pix = " + str(pix))
         beat = 0
 
