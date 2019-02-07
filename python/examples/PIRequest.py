@@ -52,7 +52,7 @@ def postJsonHandler():
         direction = currentPattern[2]
         print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
 
-        pix = patterns.get('pin_out')[elevation][direction]
+        pix = patterns.get('pin_out')[int(elevation)][int(direction)]
         print("pix = " + str(pix))
         beat = 0
 
