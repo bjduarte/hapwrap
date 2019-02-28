@@ -32,7 +32,7 @@ patterns = {
     'elevation' : [1, 2, 3],
     'distance' : [10, 15, 20], 
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
-    'pin_out' : [[23, 22, 21, 20, 19, 18, 17, 16],[15, 14, 13, 12, 11, 10, 9, 8],[7, 6, 5, 4, 3, 2, 1, 0]] }
+    'pin_out' : [[0, 1, 2, 3, 4, 5, 6, 7],[15, 14, 13, 12, 11,  10, 9, 8],[16, 17, 18, 19, 20, 21, 22, 23]] }
 
 # json flask request
 app = Flask(__name__)
@@ -41,11 +41,11 @@ app = Flask(__name__)
 def postJsonHandler():
     print (request.is_json)
     print(request.get_data())
-    j = json.loads(request.get_data())
+    rcvData = json.loads(request.get_data())
     content = request.get_json()
-    print (j)
-#    print('Output ' + j['first_name'])
-    for currentPattern in j:
+    # print (rcvData)
+
+    for currentPattern in rcvData:
         print (currentPattern)
         elevation = currentPattern[0]
         distance = currentPattern[1]
@@ -71,13 +71,13 @@ def postJsonHandler():
             print("pixPointer = " + str(pixPointer))
             strip.setPixelColor(pixPointer,pulse_on)
             print ("Pointer Beat On")
+            print("beat", beat)
             strip.show()
             time.sleep(0.99)
 
             strip.setPixelColor(pixPointer,pulse_off)
             print ("Pointer Beat Off")
             strip.show()
-            print("beat", beat)
             time.sleep(heartbeat_gap)
             print("Beginning Heartbeat")
 
@@ -97,8 +97,9 @@ def postJsonHandler():
 
                 strip.setPixelColor(pix,pulse_on)
                 print ("On")
-                strip.show()
                 print("beat", beat)
+                strip.show()
+
                 time.sleep(heart_gap)
 
                 strip.setPixelColor(pix,pulse_off)
@@ -110,6 +111,3 @@ def postJsonHandler():
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip.begin()
 app.run(host='0.0.0.0', port=   8080)
-
-
-  
