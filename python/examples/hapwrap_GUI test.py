@@ -141,37 +141,23 @@ patterns = {
     'direction' : [[0, 45, 90, 135, 180, 225, 270, 315],[315, 270, 225, 180, 135, 90, 45, 0],[0, 45, 90, 135, 180, 225, 270, 315]],
     'pin_out' : [[0,1,2,3,4,5,6,7],[15, 14, 13, 12, 11, 10, 9, 8],[16,17,18,19,20,21,22,23]] }
 
-def enterTestingPatterns(): 
-    global patterns
+
+
+def staticHeartbeat():
     global pix
     global beat
-    global staticPatternNum
-
-    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
-    except IndexError: 
-        try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1,0]
-        except IndexError: 
-            try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
-            except IndexError: 
-                try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, directions[directionChoice.get() - 1][1]-1]
-                except IndexError:
-                    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, 0]
-                    except IndexError:
-                        try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, 0]
-                        except IndexError:
-                            try: trainingPattern = [0, 0, directions[directionChoice.get() - 1][1]-1]
-                            except IndexError: trainingPattern = [0,0,0]
-
-    buttonSpacing = 0
-    print(trainingPattern)
 
     pix = patterns.get('pin_out')[trainingPattern[0]][trainingPattern[2]]
     pixPointer = patterns.get('pin_out')[1][trainingPattern[2]]
     print("pix = " + str(pix))
     print("pixPointer = " + str(pixPointer))
+
     beat = 0
 
+
+
     #Heart beat code
+# select heart gap for distance
     if (trainingPattern[1] == 0):
         beat = 0.25
     elif (trainingPattern[1] == 1):
@@ -179,7 +165,7 @@ def enterTestingPatterns():
     elif (trainingPattern[1] == 2):
         beat = 1.00
 
-    # # Heartbeat pattern for 10 through 20 feet
+# Pointer beat
     # if ((trainingPattern[1] == 2) or (trainingPattern[1] == 0) or (trainingPattern[1] == 1)):
     #     print (trainingPattern[1])
     #     strip.setPixelColor(pixPointer,pulse_on)
@@ -187,14 +173,14 @@ def enterTestingPatterns():
     #     strip.show()
     #     print(beat)
     #     time.sleep(0.99)
-        
+
     #     strip.setPixelColor(pixPointer,pulse_off)
     #     print ("Off")
     #     strip.show()
     #     print(beat)
     #     time.sleep(heartbeat_gap)
-    #     print("Beginning Heartbeat")
 
+    #     print("Beginning Heartbeat")
     #     for x in range(heartbeat_pulse): 
     #         strip.setPixelColor(pix,pulse_on)
     #         print ("On")
@@ -220,16 +206,40 @@ def enterTestingPatterns():
     #         print(beat)
     #         time.sleep(beat)
 
+
+def familiarizationTab(): 
+    global patterns
+    global staticPatternNum
+
+    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
+    except IndexError: 
+        try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, distances[distanceChoice.get() - 1][1]-1,0]
+        except IndexError: 
+            try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, directions[directionChoice.get() - 1][1]-1]
+            except IndexError: 
+                try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, directions[directionChoice.get() - 1][1]-1]
+                except IndexError:
+                    try: trainingPattern = [elevations[elevationChoice.get() - 1][1]-1, 0, 0]
+                    except IndexError:
+                        try: trainingPattern = [0, distances[distanceChoice.get() - 1][1]-1, 0]
+                        except IndexError:
+                            try: trainingPattern = [0, 0, directions[directionChoice.get() - 1][1]-1]
+                            except IndexError: trainingPattern = [0,0,0]
+
+    buttonSpacing = 0
+    print(trainingPattern)
+
+# heartbeat code was here!
+
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
     elevationChoice.set(20)
     directionChoice.set(20)
     distanceChoice.set(20)
 
+
 #function for the next button on the static page
 def nextStaticClick(): 
     global patterns
-    # global pix
-    # global beat
     global rNum
     global sRepeatCounter
     global staticPatternNum
@@ -249,9 +259,60 @@ def nextStaticClick():
     statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
-    # generates a random number and calls a pattern
+# heartbeat handler for static tab
+def staticHeartbeatHandler():
+    global pix, beat
+    pix = patterns.get('pin_out')[currentStaticPattern[1]][currentStaticPattern[3]]
+    pixPointer = patterns.get('pin_out')[1][currentStaticPattern[3]]
+    print(currentStaticPattern)
+    print("pix = " + str(pix))
+    print("pixPointer = " + str(pixPointer))
+    beat = 0
+    # Heart beat code
+    if (distances[currentStaticPattern[2]][0] == "10 feet"):
+        beat = 0.25
+    elif (distances[currentStaticPattern[2]][0] == "15 feet"):
+        beat = 0.50
+    elif (distances[currentStaticPattern[2]][0] == "20 feet"):
+        beat = 1.00
+    # # Heartbeat pattern for 10 through 20 feet
+    # if ((distances[currentStaticPattern[2]][0] == "20 feet") or (distances[currentStaticPattern[2]][0] == "10 feet") or (distances[currentStaticPattern[2]][0] == "15 feet")):
+    #     strip.setPixelColor(pixPointer,pulse_on)
+    #     print ("On")
+    #     strip.show()
+    #     print(beat)
+    #     time.sleep(0.99)
+    #     strip.setPixelColor(pixPointer,pulse_off)
+    #     print ("Off")
+    #     strip.show()
+    #     print(beat)
+    #     time.sleep(heartbeat_gap)
+    #     print("Beginning Heartbeat")
+    #     for x in range(heartbeat_pulse):
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heartbeat_gap)
+    #         strip.setPixelColor(pix,pulse_on)
+    #         print ("On")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(heart_gap)
+    #         strip.setPixelColor(pix,pulse_off)
+    #         print ("Off")
+    #         strip.show()
+    #         print(beat)
+    #         time.sleep(beat)
+
+
+# generates a random number and calls a pattern
     # tries to check for duplicate random numbers
-    # we will remove the while loop and replace with "next button" event handler from GUI
     if ((staticPatternNum <= 31) & (staticPatternNum > 0)):
         while staticNumGenerated == False:
             rNum = random.randint(0, 71)
@@ -430,8 +491,6 @@ def nextDynamicClick():
     global fileName
     global dynamic_incorrect_response
     global dKeyList
-    global pix
-    global beat
     global dynamicPatternNum
     global currentDynamicPattern
     global dRepeatCounter
@@ -439,7 +498,6 @@ def nextDynamicClick():
     global staticCounter
     global staticRepeatCounter
     global user_static_response
-
 
     print("This is the user static response " + str(user_static_response))
 
@@ -455,7 +513,10 @@ def nextDynamicClick():
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
 
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
-    dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
+    dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)
+
+    global pix
+    global beat
 
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
         patternDict['visited static patterns'] = visitedStaticPattern
@@ -493,8 +554,8 @@ def nextDynamicClick():
                 dynamicNumGenerated = True
 
         for currentBeat in pat.get(currentDynamicPattern):
-            print pat.get(currentDynamicPattern)
-            print currentBeat
+            print (pat.get(currentDynamicPattern))
+            print (currentBeat)
             elevation = currentBeat[0]
             distance = currentBeat[1]
             direction = currentBeat[2]
@@ -616,8 +677,8 @@ def nextDynamicClick():
         patternMessage = ttk.Label(dynamicPage, text="Done          ")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
         currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
-        
+        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)
+
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
 
@@ -760,8 +821,8 @@ def repeatDynamicClick():
     dRepeatCounter = dRepeatCounter+1
     pointerDone = False
     for currentBeat in pat.get(currentDynamicPattern):
-        print pat.get(currentDynamicPattern)
-        print currentBeat
+        print (pat.get(currentDynamicPattern))
+        print (currentBeat)
         elevation = currentBeat[0]
         distance = currentBeat[1]
         direction = currentBeat[2]
@@ -962,7 +1023,7 @@ dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicNextButton.configure(state=tk.DISABLED)
 
 #create familiarization page "Enter" button
-trainingNextButton = ttk.Button(familiarizationPage, text='Enter', command=enterTestingPatterns, default='active')
+trainingNextButton = ttk.Button(familiarizationPage, text='Enter', command=familiarizationTab, default='active')
 trainingNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic Save button
