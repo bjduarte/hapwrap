@@ -519,6 +519,7 @@ def ClickNext():
 
 
 #function for the next button on the dynamic page
+'''
 def nextDynamicClick(): 
 
     global currentDynamicPattern
@@ -534,24 +535,22 @@ def nextDynamicClick():
     global dynamic_incorrect_response
     global dKeyList
 
+    NextDynamicClick(dKeyList, staticCounter, staticRepeatCounter, user_static_response, visitedStaticPattern)
+'''
 
+def NextDynamicClick():
+    global dynamicPatternNum, dRepeatCounter, currentDynamicPattern, pix, beat, fileName
     print("This is the user static response " + str(user_static_response))
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
-
     repeatMessage = ttk.Label(dynamicPage, text="                                                    ")
-    repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-
+    repeatMessage.place(x=RWidth - 6 * RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
     InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
-    InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
-
+    InformationMessage.place(x=(RWidth - 50) / 2, y=RHeight / 3 - 50, anchor=tk.CENTER)
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
-    dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)
-
-
-
+    dynamicUserResponse.place(x=(RWidth - 50) / 2, y=RHeight / 3, anchor=tk.CENTER)
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
         patternDict['visited static patterns'] = visitedStaticPattern
         patternDict['static counter'] = staticCounter
@@ -561,7 +560,7 @@ def nextDynamicClick():
         dynamicRepeatCounter.append(dRepeatCounter)
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
-        #save user response when next is clicked
+        # save user response when next is clicked
         ClickNext()
         '''
         dynamic_incorrect_response = userDynamicChoice.get()
@@ -573,16 +572,14 @@ def nextDynamicClick():
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
         '''
-
-    #clear the entry field
-    dynamicUserResponse.delete(0,tk.END)
-
+    # clear the entry field
+    dynamicUserResponse.delete(0, tk.END)
     if (dynamicPatternNum < 18):
         while dynamicNumGenerated == False:
             rNum = random.randint(0, 16)
             pointerDone = False
-            print (rNum)
-            print (dKeyList) 
+            print(rNum)
+            print(dKeyList)
             while (rNum not in dRandNumList):
                 dRandNumList.append(rNum)
                 currentDynamicPattern = dKeyList[rNum]
@@ -591,13 +588,14 @@ def nextDynamicClick():
                 dynamicNumGenerated = True
 
         for currentBeat in pat.get(currentDynamicPattern):
-            print (pat.get(currentDynamicPattern))
-            print (currentBeat)
+            print(pat.get(currentDynamicPattern))
+            print(currentBeat)
             elevation = currentBeat[0]
             distance = currentBeat[1]
             direction = currentBeat[2]
-            print ('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(direction))
-            print (currentDynamicPattern)
+            print('elevation: ' + str(elevation) + ' ' + 'distance: ' + str(distance) + ' ' + 'direction: ' + str(
+                direction))
+            print(currentDynamicPattern)
             pix = patterns.get('pin_out')[elevation][direction]
             print("pix = " + str(pix))
             beat = 0
@@ -612,7 +610,7 @@ def nextDynamicClick():
                 # print ("distance is 2")
                 beat = 1.00
 
-            #PixPointer Pattern
+            # PixPointer Pattern
             # if (pointerDone == False):
             #     pixPointer = patterns.get('pin_out')[1][direction]
             #     print("pixPointer = " + str(pixPointer))
@@ -632,7 +630,7 @@ def nextDynamicClick():
 
             # # Heartbeat pattern for 10 through 20 feet
             # if ((distance == 2) or (distance == 1) or (distance == 0)):
-            #     for x in range(heartbeat_pulse): 
+            #     for x in range(heartbeat_pulse):
             #         strip.setPixelColor(pix,pulse_on)
             #         print ("On")
             #         strip.show()
@@ -656,15 +654,14 @@ def nextDynamicClick():
             #         strip.show()
             #         print(beat)
             #         time.sleep(beat)
-            
-        #create dynamic status text
-        statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
-        statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
-        patternMessage = ttk.Label(dynamicPage, text="Pattern " + str(dynamicPatternNum))
-        patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
+        # create dynamic status text
+        statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
+        statusMessage.place(x=RWidth - 2 * RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
+        patternMessage = ttk.Label(dynamicPage, text="Pattern " + str(dynamicPatternNum))
+        patternMessage.place(x=RWidth - RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
+        currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
+        currentStaticPatternMessage.place(x=19 * RWidth / 40, y=RHeight - 200, anchor=tk.CENTER)
     if (dynamicPatternNum >= 18):
 
         patternDict['visited static patterns'] = visitedStaticPattern
@@ -672,11 +669,11 @@ def nextDynamicClick():
         patternDict['static counter'] = staticCounter
         patternDict['Static Repeat Counter'] = staticRepeatCounter
         patternDict['user static response'] = user_static_response
-        #save user response when next is clicked
+        # save user response when next is clicked
         dynamicRepeatCounter.append(dRepeatCounter)
 
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
-        
+
         ClickNext()
         '''
         dynamic_incorrect_response = userDynamicChoice.get()
@@ -688,7 +685,7 @@ def nextDynamicClick():
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
         '''
-        
+
         dynamicResults = fin.get('user dynamic response')
         numDynamicCorrect = 0
         i = 0
@@ -696,29 +693,31 @@ def nextDynamicClick():
             if len(dynamicResults[i]) == 0:
                 numDynamicCorrect = (numDynamicCorrect + 1)
             i += 1
-        dynamicScore = numDynamicCorrect/float(17)*100
+        dynamicScore = numDynamicCorrect / float(17) * 100
 
-        print ("Dynamic Score: "  + str(dynamicScore) + "%")
-        #pop-up window displays percentage correct for dynamic training
-        tkMessageBox.showinfo("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
+        print("Dynamic Score: " + str(dynamicScore) + "%")
+        # pop-up window displays percentage correct for dynamic training
+        tkMessageBox.showinfo("Score", "Dynamic Score: " + str(dynamicScore) + "%")
         patternDict['Dynamic Score'] = str(dynamicScore) + "%"
 
         # write patternDict to json file called userData.json
-        f = open("userData.json","w")
+        f = open("userData.json", "w")
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
         fileName = ttk.Entry(dynamicPage, width=30)
-        fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
+        fileName.place(x=(RWidth - 50) / 2, y=RHeight / 6, anchor=tk.CENTER)
         fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
-        fileInfo.place(x=(RWidth-50)/2, y = RHeight/6 - 45, anchor = tk.CENTER)  
+        fileInfo.place(x=(RWidth - 50) / 2, y=RHeight / 6 - 45, anchor=tk.CENTER)
         fileButton = ttk.Button(dynamicPage, text="Save file", command=fileButtonClick)
-        fileButton.place(x=(RWidth-50)/2 + 200, y = RHeight/6, anchor = tk.CENTER)  
+        fileButton.place(x=(RWidth - 50) / 2 + 200, y=RHeight / 6, anchor=tk.CENTER)
         dynamicSaveButton.configure(state=tk.DISABLED)
         dynamicNextButton.configure(state=tk.DISABLED)
         patternMessage = ttk.Label(dynamicPage, text="Done          ")
-        patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
-        currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)
+        patternMessage.place(x=RWidth - RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
+        currentStaticPatternMessage = ttk.Label(dynamicPage,
+                                                text="All 23 patterns have been done\n                                               \n                                      ")
+        currentStaticPatternMessage.place(x=19 * RWidth / 40, y=RHeight - 200, anchor=tk.CENTER)
+
 
 #function for saving the study results after the user inputs a file name
 def fileButtonClick():
@@ -1059,7 +1058,7 @@ staticNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticNextButton.configure(state=tk.DISABLED)
 
 #create Dynamic Next button
-dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command=nextDynamicClick, default='active')
+dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command=NextDynamicClick, default='active')
 dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicNextButton.configure(state=tk.DISABLED)
 
