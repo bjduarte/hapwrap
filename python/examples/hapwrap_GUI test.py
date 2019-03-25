@@ -488,6 +488,7 @@ def staticHeartbeatHandler():
     
 
 #function for saving response when next is clicked
+'''
 def clickNext():
     global currentDynamicPattern
     global dynamicPatternNum
@@ -501,13 +502,18 @@ def clickNext():
     global fileName
     global dynamic_incorrect_response
     global dKeyList
-    
+
+    ClickNext()
+
+'''
+def ClickNext():
+    global dynamic_incorrect_response
     dynamic_incorrect_response = userDynamicChoice.get()
     user_dynamic_response.append(dynamic_incorrect_response)
     patternDict['user dynamic response'] = user_dynamic_response
     patternDict['dynamic counter'] = dynamicCounter
     # write patternDict to json file called userData.json
-    f = open("userData.json","w")
+    f = open("userData.json", "w")
     f.write(json.dumps(patternDict, sort_keys=True, indent=1))
     f.close()
 
@@ -556,7 +562,7 @@ def nextDynamicClick():
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
         #save user response when next is clicked
-        clickNext()
+        ClickNext()
         '''
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
@@ -671,7 +677,7 @@ def nextDynamicClick():
 
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         
-        clickNext()
+        ClickNext()
         '''
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
