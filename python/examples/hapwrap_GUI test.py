@@ -485,22 +485,51 @@ def staticHeartbeatHandler():
     elevationChoice.set(20)
     directionChoice.set(20)
     distanceChoice.set(20)
+    
 
-#function for the next button on the dynamic page
-def nextDynamicClick(): 
-    global fileName
-    global dynamic_incorrect_response
-    global dKeyList
-    global dynamicPatternNum
+#function for saving response when next is clicked
+def clickNext():
     global currentDynamicPattern
+    global dynamicPatternNum
     global dRepeatCounter
     global visitedStaticPattern
     global staticCounter
     global staticRepeatCounter
     global user_static_response
+    global pix
+    global beat
+    global fileName
+    global dynamic_incorrect_response
+    global dKeyList
+    
+    dynamic_incorrect_response = userDynamicChoice.get()
+    user_dynamic_response.append(dynamic_incorrect_response)
+    patternDict['user dynamic response'] = user_dynamic_response
+    patternDict['dynamic counter'] = dynamicCounter
+    # write patternDict to json file called userData.json
+    f = open("userData.json","w")
+    f.write(json.dumps(patternDict, sort_keys=True, indent=1))
+    f.close()
+
+
+#function for the next button on the dynamic page
+def nextDynamicClick(): 
+
+    global currentDynamicPattern
+    global dynamicPatternNum
+    global dRepeatCounter
+    global visitedStaticPattern
+    global staticCounter
+    global staticRepeatCounter
+    global user_static_response
+    global pix
+    global beat
+    global fileName
+    global dynamic_incorrect_response
+    global dKeyList
+
 
     print("This is the user static response " + str(user_static_response))
-
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
     dynamicPatternNum = dynamicPatternNum + 1
@@ -515,8 +544,7 @@ def nextDynamicClick():
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)
 
-    global pix
-    global beat
+
 
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
         patternDict['visited static patterns'] = visitedStaticPattern
@@ -528,6 +556,8 @@ def nextDynamicClick():
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
         dRepeatCounter = 0
         #save user response when next is clicked
+        clickNext()
+        '''
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
         patternDict['user dynamic response'] = user_dynamic_response
@@ -536,6 +566,7 @@ def nextDynamicClick():
         f = open("userData.json","w")
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
+        '''
 
     #clear the entry field
     dynamicUserResponse.delete(0,tk.END)
@@ -639,15 +670,19 @@ def nextDynamicClick():
         dynamicRepeatCounter.append(dRepeatCounter)
 
         patternDict['Dynamic Repeat Counter'] = dynamicRepeatCounter
+        
+        clickNext()
+        '''
         dynamic_incorrect_response = userDynamicChoice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
         patternDict['user dynamic response'] = user_dynamic_response
         patternDict['dynamic counter'] = dynamicCounter
-
-        file = open('userData.json', 'r')
-        fin = json.load(file)
-        file.close()
-
+        # write patternDict to json file called userData.json
+        f = open("userData.json","w")
+        f.write(json.dumps(patternDict, sort_keys=True, indent=1))
+        f.close()
+        '''
+        
         dynamicResults = fin.get('user dynamic response')
         numDynamicCorrect = 0
         i = 0
