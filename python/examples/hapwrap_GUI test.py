@@ -539,7 +539,7 @@ def nextDynamicClick():
 '''
 
 def NextDynamicClick():
-    global dynamicPatternNum, dRepeatCounter, currentDynamicPattern, pix, beat, fileName
+    global dynamicPatternNum, dRepeatCounter, currentDynamicPattern, pix, beat, fileName, dynamicUserResponse
     print("This is the user static response " + str(user_static_response))
     dynamicNextButton.configure(state=tk.DISABLED)
     dynamicNumGenerated = False
@@ -551,6 +551,12 @@ def NextDynamicClick():
     InformationMessage.place(x=(RWidth - 50) / 2, y=RHeight / 3 - 50, anchor=tk.CENTER)
     dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth - 50) / 2, y=RHeight / 3, anchor=tk.CENTER)
+
+    dynamicHeartbeatHandler(dynamicNumGenerated, dynamicPatternNum, dynamicUserResponse)
+
+
+def dynamicHeartbeatHandler(dynamicNumGenerated, dynamicPatternNum, dynamicUserResponse):
+    global dRepeatCounter, currentDynamicPattern, pix, beat, fileName
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
         patternDict['visited static patterns'] = visitedStaticPattern
         patternDict['static counter'] = staticCounter
@@ -763,11 +769,14 @@ def fileButtonClick():
 
 #function for the save button on the dynamic page
 def dynamicSaveClick():
+    global dynamicUserResponse
     if (dynamicPatternNum < 18 ):
         dynamicNextButton.configure(state=tk.NORMAL)
 
     statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
-    statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
+    lsum = ttk.Label(master, text='Your input is:')
+    lsum.grid(row=30, column=30, sticky=W, pady=5)
+    lsum["text"] = "Your input is: " + dynamicUserResponse
 
 #function for the save button on the static page
 def staticSaveClick():
@@ -780,7 +789,7 @@ def staticSaveClick():
 
     statusMessage = ttk.Label(staticPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
-
+'''
 #function for the restore button on the static page
 def restoreStaticClick():
     global staticPatternNum
@@ -814,11 +823,14 @@ def restoreStaticClick():
 
 #function for the restore button on the dynamic page
 def restoreDynamicClick():
+    restoreClick()
+'''
+
+def restoreClick():
     global dynamicPatternNum
     dynamicNextButton.configure(state=tk.NORMAL)
     dynamicSaveButton.configure(state=tk.NORMAL)
     dynamicRepeatButton.configure(state=tk.NORMAL)
-
     try:
         f = open('userData.json', 'r')
         fin = json.load(f)
@@ -826,34 +838,35 @@ def restoreDynamicClick():
 
         for i in fin['visited static patterns']:
             visitedStaticPattern.append(i)
-            print ("dworked7")
+            print("dworked7")
         for i in fin['user static response']:
             user_static_response.append(i)
-            print ("dworked8")
+            print("dworked8")
         for i in fin['static counter']:
             staticCounter.append(i)
-            print ("dworked9")
+            print("dworked9")
         for i in fin['visited dynamic patterns']:
             visitedDynamicPattern.append(i)
-            print ("dworked1")
+            print("dworked1")
         for i in fin['user dynamic response']:
             user_dynamic_response.append(i)
-            print ("dworked2")
+            print("dworked2")
         for i in fin['dynamic counter']:
             dynamicCounter.append(i)
-            print ("dworked3")
+            print("dworked3")
         for i in fin['Static Repeat Counter']:
             staticRepeatCounter.append(i)
-            print ("dworked4")
+            print("dworked4")
         for i in fin['Dynamic Repeat Counter']:
             dynamicRepeatCounter.append(i)
-            print ("dworked5")
+            print("dworked5")
         dynamicPatternNum = fin['dynamic counter'][-1] - 1
-        print ("dworked6")
+        print("dworked6")
 
     except:
         print("nothing to restore")
         tkMessageBox.showinfo("Restore", "Nothing to restore")
+
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
@@ -1077,11 +1090,11 @@ staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticSaveButton.configure(state=tk.DISABLED)
 
 #create dynamic restore button
-restoreDynamicButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
+restoreDynamicButton = ttk.Button(dynamicPage, text = "Restore", command=restoreClick, width = 15)
 restoreDynamicButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static restore button
-restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
+restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreClick, width = 15)
 restoreStaticButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
