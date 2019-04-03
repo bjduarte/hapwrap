@@ -7,7 +7,6 @@ from typing import List, Dict
 from tkinter import ttk
 from os.path import join as pjoin
 import tkinter as tk
-from tkinter import *
 
 # from neopixel import *
 import sys
@@ -22,14 +21,14 @@ from os import path
 from dynamic_pattern_list_builder import *
 
 # LED strip configuration:
-LED_COUNT: int = 24  # Number of LED Labels.
-LED_PIN: int = 18  # GPIO pin connected to the pixels (18 uses PWM!).
+#LED_COUNT: int = 24  # Number of LED Labels.
+#LED_PIN: int = 18  # GPIO pin connected to the pixels (18 uses PWM!).
 # LED_PIN: int = 10 # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
-LED_FREQ_H: int = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA: int = 10  # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS: int = 255  # Set to 0 for darkest and 255 for brightest
-LED_INVERT: bool = False  # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL: int = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
+#LED_FREQ_H: int = 800000  # LED signal frequency in hertz (usually 800khz)
+#LED_DMA: int = 10  # DMA channel to use for generating signal (try 10)
+#LED_BRIGHTNESS: int = 255  # Set to 0 for darkest and 255 for brightest
+#LED_INVERT: bool = False  # True to invert the signal (when using NPN transistor level shift)
+#LED_CHANNEL: int = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # pulse_on = Color(255, 255, 255)
 # pulse_off = Color(0, 0, 0)
@@ -577,22 +576,8 @@ def next_dynamic_click():
 '''
 
 
-def show_entry_fields():
-    global l
-    'repeat_input = ttk.Label(dynamic_page, text='')'
-    'repeat_input = ttk.Label(dynamic_page, text=dynamic_user_response.get())'
-    'repeat_input.place(x=(RWidth - 50) / 2, y=RHeight / 2 - 20, anchor=tk.CENTER)'
-    'repeat_input.destroy()'
-
-    var = StringVar()
-    l = Label(dynamic_page,fg ="black",bg = "light grey", textvariable=var)
-    #l.pack()
-    var.set(dynamic_user_response.get())
-    l.place(x=(RWidth - 50) / 2, y=RHeight / 2 - 20, anchor=tk.CENTER)
-    'root.mainloop()'
-
 def next_dynamic_click():
-    global dynamic_pattern_num, l,d_repeat_counter, current_dynamic_pattern, pix, beat, file_name, dynamic_user_response, \
+    global dynamic_pattern_num, d_repeat_counter, current_dynamic_pattern, pix, beat, file_name, dynamic_user_response, \
         dynamic_num_generated
     print('This is the user static response ' + str(user_static_response))
     dynamic_next_button.configure(state=tk.DISABLED)
@@ -603,14 +588,10 @@ def next_dynamic_click():
     repeat_message.place(x=RWidth - 6 * RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
     information_message = ttk.Label(dynamic_page, text='Enter User Response:')
     information_message.place(x=(RWidth - 50) / 2, y=RHeight / 3 - 50, anchor=tk.CENTER)
-    input_label = ttk.Label(dynamic_page, text='Your input is:')
-    input_label.place(x=(RWidth - 50) / 2, y=RHeight / 2 - 40, anchor=tk.CENTER)
     dynamic_user_response = ttk.Entry(dynamic_page, width=30, textvariable=user_dynamic_choice)
     dynamic_user_response.place(x=(RWidth - 50) / 2, y=RHeight / 3, anchor=tk.CENTER)
 
     dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response)
-    l.destroy()
-
 
 
 def dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response):
@@ -839,13 +820,9 @@ def dynamic_save_click():
         dynamic_next_button.configure(state=tk.NORMAL)
 
     status_message = ttk.Label(dynamic_page, text='  Status: SAVED  ')
-    '''
     lsum = ttk.Label(master, text='Your input is:')
     lsum.grid(row=30, column=30, sticky=W, pady=5)
     lsum['text'] = 'Your input is: ' + dynamic_user_response
-    '''
-    show_entry_fields()
-
 
 
 # function for the save button on the static page
