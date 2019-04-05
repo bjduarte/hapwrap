@@ -7,6 +7,8 @@ from typing import List, Dict
 from tkinter import ttk
 from os.path import join as pjoin
 import tkinter as tk
+from tkinter import *
+
 
 # from neopixel import *
 import sys
@@ -40,11 +42,23 @@ heart_gap: float = 0.55  # duration beat is on
 beat: int = 0
 
 Root = tk.Tk()
+'''
+frame = Frame(Root)
+frame.pack()
+
+bottomframe = Frame(Root)
+bottomframe.pack(side=BOTTOM)
+
+redbutton = Button(frame, text="Red", fg="red")
+redbutton.pack(side=LEFT)
+'''
 
 RTitle = Root.title('HapWrap')
 RWidth = Root.winfo_screenwidth()
 RHeight = Root.winfo_screenheight()
 Root.geometry('%dx%d' % (RWidth, RHeight))
+
+
 
 # gives weight to the cells in the grid
 rows: int = 0
@@ -146,6 +160,11 @@ patterns: Dict = {
                   [0, 45, 90, 135, 180, 225, 270, 315]],
     'pin_out': [[0, 1, 2, 3, 4, 5, 6, 7], [15, 14, 13, 12, 11, 10, 9, 8], [16, 17, 18, 19, 20, 21, 22, 23]]}
 
+def write_json():
+    # write pattern_dict to json file called userData.json
+    f = open('userData.json', 'w')
+    f.write(json.dumps(pattern_dict, sort_keys=True, indent=1))
+    f.close()
 
 def static_heartbeat():
     global pix, beat
@@ -475,9 +494,7 @@ def static_heart_beat_handler():
         pattern_dict['user static response'] = user_static_response
 
         # write pattern_dict to json file called userData.json
-        f = open('userData.json', 'w')
-        f.write(json.dumps(pattern_dict, sort_keys=True, indent=1))
-        f.close()
+        write_json()
         print('static_pattern_num' + str(static_pattern_num))
 
         if static_pattern_num == 30:
@@ -506,9 +523,7 @@ def static_heart_beat_handler():
             pattern_dict['Static Score'] = str(static_score) + '%'
 
             # write pattern_dict to json file called userData.json
-            f = open('userData.json', 'w')
-            f.write(json.dumps(pattern_dict, sort_keys=True, indent=1))
-            f.close()
+            write_json()
 
             patter_message = ttk.Label(static_page, text='Done')
             patter_message.place(x=RWidth - RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
@@ -520,39 +535,6 @@ def static_heart_beat_handler():
     elevation_choice.set(20)
     direction_choice.set(20)
     distance_choice.set(20)
-
-
-# function for saving response when next is clicked
-'''
-def click_next():
-    global current_dynamic_pattern
-    global dynamic_pattern_num
-    global d_repeat_counter
-    global visited_static_pattern
-    global static_counter
-    global static_repeat_counter
-    global user_static_response
-    global pix
-    global beat
-    global file_name
-    global dynamic_incorrect_response
-    global d_key_list
-
-    click_next()
-
-'''
-
-
-def click_next():
-    global dynamic_incorrect_response
-    dynamic_incorrect_response = user_dynamic_choice.get()
-    user_dynamic_response.append(dynamic_incorrect_response)
-    pattern_dict['user dynamic response'] = user_dynamic_response
-    pattern_dict['dynamic counter'] = dynamic_counter
-    # write pattern_dict to json file called userData.json
-    f = open('userData.json', 'w')
-    f.write(json.dumps(pattern_dict, sort_keys=True, indent=1))
-    f.close()
 
 
 # function for the next button on the dynamic page
@@ -607,7 +589,11 @@ def dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response):
         pattern_dict['Dynamic Repeat Counter'] = dynamic_repeat_counter
         d_repeat_counter = 0
         # save user response when next is clicked
-        click_next()
+        dynamic_incorrect_response = user_dynamic_choice.get()
+        user_dynamic_response.append(dynamic_incorrect_response)
+        pattern_dict['user dynamic response'] = user_dynamic_response
+        pattern_dict['dynamic counter'] = dynamic_counter
+        write_json()
         '''
         dynamic_incorrect_response = user_dynamic_choice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
@@ -722,7 +708,7 @@ def dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response):
 
         pattern_dict['Dynamic Repeat Counter'] = dynamic_repeat_counter
 
-        click_next()
+        write_json()
         '''
         dynamic_incorrect_response = user_dynamic_choice.get()
         user_dynamic_response.append(dynamic_incorrect_response)
@@ -753,9 +739,7 @@ def dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response):
         pattern_dict['Dynamic Score'] = str(dynamic_score) + '%'
 
         # write pattern_dict to json file called userData.json
-        f = open('userData.json', 'w')
-        f.write(json.dumps(pattern_dict, sort_keys=True, indent=1))
-        f.close()
+        write_json()
         file_name = ttk.Entry(dynamic_page, width=30)
         file_name.place(x=(RWidth - 50) / 2, y=RHeight / 6, anchor=tk.CENTER)
         file_info = ttk.Label(dynamic_page, text='Enter a file name:')
@@ -768,6 +752,9 @@ def dynamic_heartbeat_handler(dynamic_pattern_num, dynamic_user_response):
         patter_message.place(x=RWidth - RWidth / 7, y=RHeight - 190, anchor=tk.CENTER)
         current_static_pattern_message = ttk.Label(dynamic_page, text='All 23 patterns have been done\n\n')
         current_static_pattern_message.place(x=19 * RWidth / 40, y=RHeight - 200, anchor=tk.CENTER)
+
+
+
 
 
 # function for saving the study results after the user inputs a file name
@@ -823,6 +810,7 @@ def dynamic_save_click():
     lsum = ttk.Label(master, text='Your input is:')
     lsum.grid(row=30, column=30, sticky=W, pady=5)
     lsum['text'] = 'Your input is: ' + dynamic_user_response
+
 
 
 # function for the save button on the static page
