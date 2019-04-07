@@ -60,7 +60,7 @@ class ButtonType(Enum):
         api_dict[self.value][pattern_num](frame)
 
     # provides a Tuple of distances for button type
-    def get_dist(selfs) -> Tuple:
+    def get_dist(self) -> Tuple:
         dist_dict: Dict[Tuple] = {
             'prox_abs': (proxMappings.intimate,
                          proxMappings.personal,
@@ -75,6 +75,8 @@ class ButtonType(Enum):
             'feet_abs': (5, 10, 15, 20, 25),
             'feet_rel': (5, 10, 15, 20, 25)
         }
+
+        return dist_dict[self.value]
 
 
 
