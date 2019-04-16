@@ -1,4 +1,9 @@
+#!/usr/bin/python3
 from appJar import gui
+import datacollection as dc
+
+#creating  class objects
+dh = dc.DataHandler() #datahandler object
 
 #This is the Entire dialog box with 1200 x 800 dimensions
 app=gui("Grid Demo", "1200x800", useTtk=True)
@@ -8,11 +13,33 @@ app.setSticky("news")
 app.setExpand("both")
 app.setFont(20)
 
-#Function for the button
+#Functions for the button
 def press(btn):
     print(btn)
 
-#Notebook is used for different tabs such as proximity,feet and familiarisation
+def repeat(btn):
+    dh.repeatbtn()
+
+def absolute(btn):
+    dh.generate_distance()
+    dh.get_abs_or_rel("absolute")
+    dh.write_to_json()
+
+def relative(btn):
+    dh.generate_distance()
+    dh.get_abs_or_rel("relative")
+    dh.write_to_json()
+
+def prox(btn):
+    dh.get_prox_or_ft("proximate")
+
+def feet(btn):
+    dh.get_prox_or_ft("feet")
+
+def writeJson(btn):
+    dh.write_to_json()
+    
+#Notebook is used for different tabs such as proximity,feet and familiarization
 app.startNotebook("Notebook")
 
 ###############################################################################################################
@@ -21,14 +48,14 @@ app.startNotebook("Notebook")
 app.startNote("Proximity")
 
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addNamedButton("Absolute","ab1",press,row=0,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Relative","rel1",press,row=1,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Repeat","rep1",press,row=2,column=0,rowspan=0,colspan=0)
+app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
+app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
+app.addNamedButton("Repeat","rep1",repeat,row=2,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res1",press,row=2,column=1,rowspan=0,colspan=0)
 
 #This is just to align it properly
 app.addLabel("                ",row=2,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Save","sav1",press,row=2,column=3,rowspan=0,colspan=0)
+app.addNamedButton("Save","sav1",writeJson,row=2,column=3,rowspan=0,colspan=0)
 app.addNamedButton("Next Pattern","nex1",press,row=2,column=4,rowspan=0,colspan=0)
 
 # End of 1st tab
@@ -38,21 +65,20 @@ app.stopNote()
 
 #start of Feet tab
 app.startNote("Feet")
-
 #all the buttons in Feet tab- ab2,rel2 etc are the names. Absolute, relative are the titles on button
-app.addNamedButton("  Absolute  ","ab2",press,row=0,column=2,rowspan=0,colspan=0)
-app.addNamedButton("  Relative  ","rel2",press,row=1,column=2,rowspan=0,colspan=0)
-app.addButton("Repeat",press,row=2,column=0,rowspan=0,colspan=0)
+app.addNamedButton("  Absolute  ","ab2",absolute,row=0,column=2,rowspan=0,colspan=0)
+app.addNamedButton("  Relative  ","rel2",relative,row=1,column=2,rowspan=0,colspan=0)
+app.addButton("Repeat",repeat,row=2,column=0,rowspan=0,colspan=0)
 app.addButton("Restore",press,row=2,column=1,rowspan=0,colspan=0)
 app.addLabel("               ",row=2,column=2,rowspan=0,colspan=0)
-app.addButton("Save",press,row=2,column=3,rowspan=0,colspan=0)
+app.addButton("Save",writeJson,row=2,column=3,rowspan=0,colspan=0)
 app.addButton("Next Pattern",press,row=2,column=4,rowspan=0,colspan=0)
 app.stopNote()
 
 ###############################################################################################################
 
-#start of Familiarisation tab
-app.startNote("Familiarisation")
+#start of Familiarization tab
+app.startNote("Familiarization")
 
 #All the buttons in Proximity tab- pr2,feet2 etc are the names. Proximity and Feet are the titles on button
 #The radio buttons are grouped according to the proximity group and Feet group

@@ -1,7 +1,6 @@
 from enum import Enum
 from typing import List, Dict, Tuple
-from AbhiksPython.hapBack import *
-from AbhiksPython.hapServer import *
+from python.examples.AbhiksPython.hapBack import *
 
 
 class proxMappings(Enum):
@@ -19,11 +18,14 @@ class proxMappings(Enum):
             'intimate': 0,
             'personal': 1,
             'social': 2,
-            'public_gen': 3,
-            'public': 4
+            'public': 3,
+            'public_gen': 4
         }
 
+        return int_dict[self.value]
 
+    def get_str(self) -> str:
+        return self.value
 
 class ButtonType(Enum):
     '''
@@ -51,15 +53,15 @@ class ButtonType(Enum):
         return int_dict[self.value]
 
     # provides the appropriate api call for the button type
-    def get_api_call(self, frame: int, pattern_num: int) -> None:
+    def get_api_call(self, dist: int, pattern_num: int):
         api_dict: Dict[List] = {
             'prox_abs': [a1, a2],
             'prox_rel': [r1, r2],
             'feet_abs': [a1, a2],
             'feet_rel': [r1, r2]
         }
-
-        api_dict[self.value][pattern_num](frame)
+        hs = hapserver()
+        api_dict[self.value][pattern_num](dist, hs)
 
     # provides a Tuple of distances for button type
     def get_dist(self) -> Tuple:
