@@ -1,4 +1,4 @@
-from hapServer import *
+from AbhiksPython.hapServer import *
 import time
 
 def a1(targetRow, hapserver):
