@@ -116,7 +116,7 @@ class DataHandler:
         except:
             print("nothing to restore")
             
-'''
+
 dhObject = DataHandler()
 dhObject.generate_distance()
 dhObject.get_user_response("hard code: user response")
@@ -124,7 +124,5 @@ dhObject.repeatbtn()
 dhObject.get_abs_or_rel("hard code: abs/res")
 dhObject.get_prox_or_ft("hard code: prox/ft")
 dhObject.write_to_json()
-dhObject.restore()
-#dhObject.save_results("hi.txt")
-'''
+
 
