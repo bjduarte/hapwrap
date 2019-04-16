@@ -1,5 +1,6 @@
 from appJar import gui
 from datacollection import DataHandler as dh
+
 #This is the Entire dialog box with 1200 x 800 dimensions
 app=gui("Grid Demo", "1200x800", useTtk=True)
 
