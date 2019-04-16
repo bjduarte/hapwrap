@@ -6,6 +6,7 @@ import json
 import random
 import math
 import array as arr
+#from util.button_util import *
 
 class DataHandler:
     
@@ -56,11 +57,13 @@ class DataHandler:
         self.distanceDict["user response"] = response
     
     #get times repeated button is pressed from GUI and adds to dict
-    def get_times_repeatbtn(self, numTimes):
-        self.distanceDict["repeat counter"] = numTimes
+    def get_times_repeatbtn(self):
+        self.repeatCounter += 1
+        
     
     #writes data for when a new distance is being visited with the whole dictionary
     def write_to_json(self):
+        self.distanceDict["repeat counter"] =self.repeatCounter
         f = open('userData.json', 'a+')
         f.write(json.dumps(self.distanceDict, sort_keys = True, indent = 1))
         f.close()
@@ -76,10 +79,22 @@ class DataHandler:
         file = open('userData.json', 'r')
         fin - json.load(file)
         file.close()
+        
+        absolute = zip(fin.get('visited distances'), fin.get('user response'), fin.get('repeat counter'))
+        
+        cwd = os.getcwd()
+        path_to_file = pjoin(cwd, "completedStudies", fileChoice)
+        f = open(path_to_file, "w+")
+        
+        f.write("Absolute Distances|User Response|Times Repeated\n")
+        for i in absolute:
+            f.write(str(i) + "\n")  
+        
+        f.close()
 
 dhObject = DataHandler()
 dhObject.generate_distance()
 dhObject.get_user_response("no user response")
-dhObject.get_times_repeatbtn(10)
+dhObject.get_times_repeatbtn()
 dhObject.write_to_json()
 
