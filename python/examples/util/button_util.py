@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import List, Dict, Tuple
-from AbhiksPython.hapBack import *
+from Eyes-On/python/examples/AbhiksPython.hapBack import *
 
 
 class proxMappings(Enum):
