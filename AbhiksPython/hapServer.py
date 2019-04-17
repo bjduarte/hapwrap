@@ -3,7 +3,7 @@ import json
 import time
 
 class hapserver:
-    def __init__(self,ip = "192.168.1.160"):
+    def __init__(self,ip = "192.168.43.90"):
         self.ws = create_connection("ws://"+ ip +"/ws")
 
     def send(self,hapFrames):
