@@ -1,5 +1,5 @@
-from hapServer import hapserver
-import hapBack as hb
+from AbhiksPython.hapServer import hapserver
+import AbhiksPython.hapBack as hb
 import time
 
 hs = hapserver()
