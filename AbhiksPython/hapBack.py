@@ -21,12 +21,12 @@ def a2(targetRow, hapServer):
     offTime = 200
 
     hframes.addBWFrame(onTime,[targetRow],10)
-    hframes.addBWFrame(inBetweenTime,[],10)
+#    hframes.addBWFrame(inBetweenTime,[],10)
     hframes.addBWFrame(onTime,[9-targetRow],10)
-    hframes.addBWFrame(offTime,[],10)
-    hframes.addBWFrame(onTime,[9-targetRow],10)
-    hframes.addBWFrame(inBetweenTime,[],10)
+#    hframes.addBWFrame(offTime,[],10)
     hframes.addBWFrame(onTime,[targetRow],10)
+#    hframes.addBWFrame(inBetweenTime,[],10)
+    hframes.addBWFrame(onTime,[9-targetRow],10)
 
 
     hapServer.send(hframes.frames)
@@ -37,7 +37,7 @@ def r1(targetRow, hapServer):
     hframes = hapFrames()
     waitTime = 1000
 
-    onTime = 200
+    onTime = 150
     offTime = 100
 
     hframes.addBWFrame(waitTime,[],10)
@@ -45,7 +45,7 @@ def r1(targetRow, hapServer):
 
     for i in range(targetRow):
         hframes.addBWFrame(onTime,[i, 9-i],10)
-        hframes.addBWFrame(offTime,[],10)
+#        hframes.addBWFrame(offTime,[],10)
 
     hapServer.send(hframes.frames)
 
