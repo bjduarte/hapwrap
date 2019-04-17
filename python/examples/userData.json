@@ -1,0 +1,439 @@
+{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 1,
+ "distance counter": {
+  "1": 1,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1
+ ]
+}{
+ "absolute|relative": "absolute",
+ "current distance": 2,
+ "distance counter": {
+  "1": 1,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1,
+  2
+ ]
+}{
+ "absolute|relative": "relative",
+ "current distance": 4,
+ "distance counter": {
+  "1": 1,
+  "2": 1,
+  "3": 0,
+  "4": 1,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1,
+  2,
+  4
+ ]
+}{
+ "absolute|relative": "relative",
+ "current distance": 4,
+ "distance counter": {
+  "1": 1,
+  "2": 1,
+  "3": 0,
+  "4": 1,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1,
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1,
+  2,
+  4
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 3,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 1,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  3
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 3,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 1,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  3
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 4,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 1,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  4
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 1,
+ "distance counter": {
+  "1": 1,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 5,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 1
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  5
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 4,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 1,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  4
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 1,
+ "distance counter": {
+  "1": 1,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 5,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 1
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  5
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 5,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 1
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  5
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 1,
+ "distance counter": {
+  "1": 1,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 1,
+ "distance counter": {
+  "1": 1,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  1
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 5,
+ "distance counter": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 1
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  5
+ ]
+}{
+ "absolute|relative": "hard code: abs/res",
+ "current distance": 2,
+ "distance counter": {
+  "1": 0,
+  "2": 1,
+  "3": 0,
+  "4": 0,
+  "5": 0
+ },
+ "proximate|feet": "hard code: prox/ft",
+ "repeat counter": [
+  1
+ ],
+ "user response": "hard code: user response",
+ "visited distances": [
+  2
+ ]
+}
