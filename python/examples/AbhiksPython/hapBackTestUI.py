@@ -1,5 +1,5 @@
-from python.examples.AbhiksPython.hapServer import hapserver
-import python.examples.AbhiksPython.hapBack as hb
+from hapServer import *
+import hapBack as hb
 import time
 
 
