@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from appJar import gui
 import datacollection as dc
-from python.examples.util.button_util import ButtonType
+from util.button_util import ButtonType
 from typing import Dict
 
 #creating  class objects
