@@ -1,11 +1,12 @@
-from python.examples.AbhiksPython.hapServer import *
+from AbhiksPython.hapServer import *
 import time
 
 
 # diret
 def a1(targetRow, hapserver):
     hframes = hapFrames()
-
+    
+    
     onTime = 500
     hframes.addBWFrame(onTime, [targetRow, 9 - targetRow], 10)
 
