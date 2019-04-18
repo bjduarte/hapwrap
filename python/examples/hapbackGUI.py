@@ -154,7 +154,7 @@ def fam_press(btn) -> None:
 
 def next_press(btn):
     
-    dist = dh.generate_distance
+    dist = dh.generate_distance(")
     
     ButtonType.feet_abs.get_api_call(dist, 0) #feet_absolute1
     ButtonType.feet_abs.get_api_call(dist, 1) #feet_absolute2

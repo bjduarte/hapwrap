@@ -47,7 +47,7 @@ class DataHandler:
                 self.distCtr[rand] += 1
                 ctr = self.distCtr[rand] 
        
-        self.visitedDistanceCount.append(distCtr)
+        self.visitedDistanceCount.append(self.distCtr)
         self.distanceDict["visited counter distances"] = self.visitedDistanceCount
         self.distanceDict["distance counter"] = self.distCtr
         self.distanceDict["visited distances"] = self.visitedDistances
