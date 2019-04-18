@@ -1,4 +1,4 @@
-from python.examples.AbhiksPython.hapServer import *
+from AbhiksPython.hapServer import *
 import time
 
 
