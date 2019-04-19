@@ -15,17 +15,19 @@ fam_state_feet: str = '5'
 fam_state_prox: str = 'Intimate'
 fam_test_state: str = 'absolute_1'
 
-
 app.setSticky("news")
 app.setExpand("both")
 app.setFont(20)
+
 
 #Functions for the button
 def press(btn):
     print(btn)
 
+
 def repeat(btn):
     dh.repeatbtn()
+
 
 def absolute():
     print("Entered Absolute function")
@@ -40,14 +42,18 @@ def relative():
     dh.get_abs_or_rel("relative")
     dh.write_to_json()
 
+
 def prox(btn):
     dh.get_prox_or_ft("proximate")
+
 
 def feet(btn):
     dh.get_prox_or_ft("feet")
 
+
 def writeJson(btn):
     dh.write_to_json()
+
 
 def chooseMode(btn):
     item = app.getListBox("Mode")
@@ -59,6 +65,7 @@ def chooseMode(btn):
     elif item[0] == b:
         relative()
 
+
 def chooseMode(btn):
     item = app.getListBox("Mode1")
     print(item[0])
@@ -69,11 +76,40 @@ def chooseMode(btn):
     elif item[0] == b:
         relative()
 
+
 def writeJsonP():
     print(app.getRadioButton("proximity1"))
 
+
 def writeJsonF():
     print(app.getRadioButton("feet1"))
+
+
+def next_press(btn) -> None:
+    if btn is 'prox_next':
+        mode = app.getListBox('prox_mode')
+        print(f'testing prox_next, rand num is: {dh.generate_distance()}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](dh.generate_distance(),
+                              test_dict[mode[0]][1])
+    elif btn is 'feet_next':
+        mode = app.getListBox('feet_mode')
+        print(f'testing feet_next, rand num is: {dh.generate_distance()}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](dh.generate_distance(),
+                              test_dict[mode[0]][1])
 
 def change_fam_state(btn) -> None:
     global fam_state_feet, fam_state_prox, fam_test_state
@@ -87,11 +123,10 @@ def change_fam_state(btn) -> None:
         fam_test_state = app.getRadioButton('test_state')
         print(f'test state is: {fam_test_state}')
 
-
 def fam_press(btn) -> None:
     global fam_state_feet, fam_state_prox
     if btn is 'feet2':
-        fam_pattern = fam_state_feet + f'_{fam_test_state}'
+        fam_pattern: str = fam_state_feet + f'_{fam_test_state}'
         print(f'vibrating for {fam_pattern}')
         api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 0, 0,],
                                     '5_relative_1': [ButtonType.feet_rel.get_api_call, 1, 0,],
@@ -122,7 +157,7 @@ def fam_press(btn) -> None:
 
     if btn is 'pr2':
         print(f'vibrating for {fam_state_prox}')
-        fam_pattern = fam_state_prox + f'_{fam_test_state}'
+        fam_pattern: str = fam_state_prox + f'_{fam_test_state}'
         api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 0, 0],
                                     'Intimate_relative_1': [ButtonType.prox_rel.get_api_call, 1, 0],
                                     'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
@@ -162,7 +197,7 @@ app.startNotebook("Notebook")
 app.startNote("Proximity")
 
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("Mode", ["Absolute", "Relative"],row=0,column=1,rowspan=0,colspan=0)
+app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=1,rowspan=0,colspan=0)
 app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Intimate",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Personal",row=3,column=2,rowspan=0,colspan=0)
@@ -179,7 +214,7 @@ app.addNamedButton("Restore","res1",press,row=7,column=1,rowspan=0,colspan=0)
 #This is just to align it properly
 app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav1",writeJsonP,row=7,column=3,rowspan=0,colspan=0)
-app.addNamedButton("Next Pattern","nex1",press,row=7,column=4,rowspan=0,colspan=0)
+app.addNamedButton("Next Pattern","prox_next",next_press,row=7,column=4,rowspan=0,colspan=0)
 
 # End of 1st tab
 app.stopNote()
@@ -189,12 +224,12 @@ app.stopNote()
 #start of Feet tab
 app.startNote("Feet")
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("Mode1", ["Absolute", "Relative"],row=0,column=1,rowspan=0,colspan=0)
+app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=1,rowspan=0,colspan=0)
 app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "5",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "10",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "15",row=4,column=2,rowspan=0,colspan=0)
-app.addRadioButton("feet1", "20",row=5,column=2,rowspan=0,colspan=0)
+app.addRadioButton("feet1", "20",row=5,column=2, rowspan=0,colspan=0)
 app.addRadioButton("feet1", "25",row=6,column=2,rowspan=0,colspan=0)
 #app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
 #app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
@@ -206,7 +241,7 @@ app.addNamedButton("Restore","res2",press,row=7,column=1,rowspan=0,colspan=0)
 #This is just to align it properly
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav2",writeJsonF,row=7,column=3,rowspan=0,colspan=0)
-app.addNamedButton("Next Pattern","nex2",press,row=7,column=4,rowspan=0,colspan=0)
+app.addNamedButton("Next Pattern","feet_next",next_press ,row=7,column=4,rowspan=0,colspan=0)
 app.stopNote()
 
 ###############################################################################################################
