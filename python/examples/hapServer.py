@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from websocket import create_connection
 import json
 import time
