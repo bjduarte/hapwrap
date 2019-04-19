@@ -72,15 +72,10 @@ def relative():
     dh.write_to_json()
 
 
-def prox(btn):
-    dh.get_prox_or_ft("proximate")
-
-
-def feet(btn):
-    dh.get_prox_or_ft("feet")
-
 
 def writeJson(btn):
+    get_user_response(btn)
+    proxft(btn)
     dh.write_to_json()
 
 '''
@@ -119,6 +114,7 @@ def next_press(btn) -> None:
     if dist == -1:
         f_name = app.textBox("Type file name", "Please type a file name here")
         print(f_name)
+        dh.save_results(f_name)
 
     else:
         currentDistance = dist
@@ -149,6 +145,21 @@ def next_press(btn) -> None:
             }
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
+def get_user_response(btn):
+    if btn is 'sav2':
+        dh.get_user_response(app.getRadioButton('feet1'))
+    elif btn is 'sav1':
+        dh.get_user_response(app.getRadioButton('proximity1'))
+    
+def proxft(btn):
+    if btn is 'sav2':
+        dh.get_prox_or_ft('feet')
+        feetmode = app.getListBox('feet_mode')
+        dh.get_abs_or_rel(feetmode)
+    elif btn is 'sav1':
+        dh.get_prox_or_ft('proxemics')
+        proxmode = app.getListBox('prox_mode')
+        dh.get_abs_or_rel(proxmode)
 
 def change_fam_state(btn) -> None:
     global fam_state_feet, fam_state_prox, fam_test_state

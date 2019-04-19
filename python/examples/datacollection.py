@@ -30,7 +30,7 @@ class DataHandler:
         if(all(value == 3 for value in self.distCtr.values()) == True):
             print("all distances used 3 times")
             distanceGenerated = True
-            return 0 #POP for file name
+            return -1 #POP for file name
             #POPUP for file name
 
         while distanceGenerated == False:
@@ -68,10 +68,10 @@ class DataHandler:
         print("repeat")
     
     def get_abs_or_rel(self, absOrRel):
-        self.distanceDict["absolute|relative"] = absOrRel
+        self.distanceDict["absolute|relative mode"] = absOrRel
         
     def get_prox_or_ft(self, prxOrFt):
-        self.distanceDict["proximate|feet"] = prxOrFt
+        self.distanceDict["proxemics|feet"] = prxOrFt
     
     #writes data for when a new distance is being visited with the whole dictionary
     def write_to_json(self):
