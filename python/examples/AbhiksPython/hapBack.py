@@ -1,11 +1,11 @@
-from AbhiksPython.hapServer import *
+from hapServer import *
 import time
 
 
 # diret
 def a1(targetRow, hapserver):
     hframes = hapFrames()
-    
+    targetRow = 5-targetRow
     
     onTime = 500
     hframes.addBWFrame(onTime, [targetRow, 9 - targetRow], 10)
@@ -16,7 +16,8 @@ def a1(targetRow, hapserver):
 # back and forth
 def a2(targetRow, hapServer):
     hframes = hapFrames()
-
+    targetRow = 5-targetRow
+    
     onTime = 200
     inBetweenTime = 100
     offTime = 200
@@ -35,6 +36,8 @@ def a2(targetRow, hapServer):
 # ladder
 def r1(targetRow, hapServer):
     hframes = hapFrames()
+    targetRow = 6-targetRow
+    
     waitTime = 1000
 
     onTime = 200
@@ -52,6 +55,8 @@ def r1(targetRow, hapServer):
 # zig zag
 def r2(targetRow, hapServer):
     hframes = hapFrames()
+    targetRow = 6-targetRow
+    
     waitTime = 1000
 
     onTime = 200
