@@ -19,7 +19,7 @@ class DataHandler:
     userResponses = []
     distanceDict = {}
     visitedDistances = []
-    
+    visitedDistanceCount=[]
     #returns 0 if all distances have been used 3 times; return 1-5 for current distance generated
     def generate_distance(self): #randomly chooses distance 1-5 
         currentDistance = 0
@@ -46,7 +46,9 @@ class DataHandler:
                 distanceGenerated = True 
                 self.distCtr[rand] += 1
                 ctr = self.distCtr[rand] 
-        
+       
+        self.visitedDistanceCount.append(self.distCtr)
+        self.distanceDict["visited counter distances"] = self.visitedDistanceCount
         self.distanceDict["distance counter"] = self.distCtr
         self.distanceDict["visited distances"] = self.visitedDistances
         self.distanceDict["current distance"] = currentDistance
@@ -116,7 +118,7 @@ class DataHandler:
         except:
             print("nothing to restore")
             
-
+'''
 dhObject = DataHandler()
 dhObject.generate_distance()
 dhObject.get_user_response("hard code: user response")
@@ -124,5 +126,5 @@ dhObject.repeatbtn()
 dhObject.get_abs_or_rel("hard code: abs/res")
 dhObject.get_prox_or_ft("hard code: prox/ft")
 dhObject.write_to_json()
-
+'''
 

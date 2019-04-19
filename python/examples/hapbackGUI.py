@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from appJar import gui
 import datacollection as dc
-from python.examples.util.button_util import ButtonType
+from util.button_util import ButtonType
 from typing import Dict
 
 #creating  class objects
@@ -35,6 +35,8 @@ def absolute():
     dh.get_abs_or_rel("absolute")
     dh.write_to_json()
 
+def restore():
+    dh.restore()
 
 def relative():
     print("Entered Relative function")
@@ -185,7 +187,19 @@ def fam_press(btn) -> None:
                                               api_prox_call_dict[fam_pattern][2])
         print(f'finished vibrating for {fam_pattern}')
 
-
+def next_press(btn):
+    
+    dist = dh.generate_distance()
+    
+    ButtonType.feet_abs.get_api_call(dist, 0) #feet_absolute1
+    ButtonType.feet_abs.get_api_call(dist, 1) #feet_absolute2
+    ButtonType.feet_rel.get_api_call(dist, 0) #feet_relative1
+    ButtonType.feet_rel.get_api_call(dist, 1) #feet_relative2
+    
+    ButtonType.prox_abs.get_api_call(dist,0) #prox_absolute1
+    ButtonType.prox_abs.get_api_call(dist,1) #prox_absolute2
+    ButtonType.prox_rel.get_api_call(dist, 0) #prox_relative1
+    ButtonType.prox_rel.get_api_call(dist, 1) #prox_relative2   
 
     
 #Notebook is used for different tabs such as proximity,feet and familiarization
@@ -194,7 +208,7 @@ app.startNotebook("Notebook")
 ###############################################################################################################
 
 #start of proximity tab
-app.startNote("Proximity")
+app.startNote("Proxemics")
 
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
 app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=1,rowspan=0,colspan=0)
@@ -209,11 +223,12 @@ app.addRadioButton("proximity1", "General Public",row=6,column=2,rowspan=0,colsp
 #app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
 app.addNamedButton("Repeat","rep1",repeat,row=7,column=0,rowspan=0,colspan=0)
-app.addNamedButton("Restore","res1",press,row=7,column=1,rowspan=0,colspan=0)
+app.addNamedButton("Restore","res1",restore,row=7,column=1,rowspan=0,colspan=0)
 
 #This is just to align it properly
 app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Save","sav1",writeJsonP,row=7,column=3,rowspan=0,colspan=0)
+app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
+
 app.addNamedButton("Next Pattern","prox_next",next_press,row=7,column=4,rowspan=0,colspan=0)
 
 # End of 1st tab
@@ -236,12 +251,12 @@ app.addRadioButton("feet1", "25",row=6,column=2,rowspan=0,colspan=0)
 #app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
 app.addNamedButton("Repeat","rep2",repeat,row=7,column=0,rowspan=0,colspan=0)
-app.addNamedButton("Restore","res2",press,row=7,column=1,rowspan=0,colspan=0)
+app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 
 #This is just to align it properly
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Save","sav2",writeJsonF,row=7,column=3,rowspan=0,colspan=0)
-app.addNamedButton("Next Pattern","feet_next",next_press ,row=7,column=4,rowspan=0,colspan=0)
+app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
+app.addNamedButton("Next Pattern","feet_next",next_press,row=7,column=4,rowspan=0,colspan=0)
 app.stopNote()
 
 ###############################################################################################################
@@ -253,7 +268,7 @@ app.startNote("Familiarization")
 #The radio buttons are grouped according to the proximity group and Feet group
 
 
-app.addNamedButton("  Proximity  ", "pr2", fam_press, row=0, column=2, rowspan=0, colspan=0)
+app.addNamedButton("  Proxemics  ", "pr2", fam_press, row=0, column=2, rowspan=0, colspan=0)
 app.addRadioButton("proximity", "Intimate", row=1, column=2, rowspan=0, colspan=0)
 app.addRadioButton("proximity", "Personal", row=2,column=2,rowspan=0, colspan=0)
 app.addRadioButton("proximity", "Social", row=3, column=2, rowspan=0, colspan=0)
