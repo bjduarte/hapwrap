@@ -3,6 +3,7 @@ from appJar import gui
 import datacollection as dc
 from util.button_util import ButtonType
 from typing import Dict
+from tkinter.constants import CURRENT
 
 #creating  class objects
 dh = dc.DataHandler() #datahandler object
@@ -19,15 +20,40 @@ app.setSticky("news")
 app.setExpand("both")
 app.setFont(20)
 
-
+dist = 0
+currentDistance = 0;
 #Functions for the button
 def press(btn):
     print(btn)
 
 
 def repeat(btn):
+    global currentDistance
     dh.repeatbtn()
-
+    if btn is 'repeat_prox':
+        mode = app.getListBox('prox_mode')
+        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](dist,
+                              test_dict[mode[0]][1])
+    elif btn is 'rep2':
+        mode = app.getListBox('repeat_feet')
+        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](currentDistance,
+                              test_dict[mode[0]][1])
 
 def absolute():
     print("Entered Absolute function")
@@ -88,9 +114,12 @@ def writeJsonF():
 
 
 def next_press(btn) -> None:
+    global dist, currentDistance
+    dist = dh.generate_distance()
+    currentDistance = dist
     if btn is 'prox_next':
         mode = app.getListBox('prox_mode')
-        print(f'testing prox_next, rand num is: {dh.generate_distance()}, select test: '
+        print(f'testing prox_next, rand num is: {dist}, select test: '
               f'{mode[0]}')
         test_dict: Dict = {
             "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
@@ -98,11 +127,11 @@ def next_press(btn) -> None:
             "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
             "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
         }
-        test_dict[mode[0]][0](dh.generate_distance(),
+        test_dict[mode[0]][0](dist,
                               test_dict[mode[0]][1])
     elif btn is 'feet_next':
         mode = app.getListBox('feet_mode')
-        print(f'testing feet_next, rand num is: {dh.generate_distance()}, select test: '
+        print(f'testing feet_next, rand num is: {dist}, select test: '
               f'{mode[0]}')
         test_dict: Dict = {
             "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
@@ -110,7 +139,7 @@ def next_press(btn) -> None:
             "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
             "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
         }
-        test_dict[mode[0]][0](dh.generate_distance(),
+        test_dict[mode[0]][0](dist,
                               test_dict[mode[0]][1])
 
 def change_fam_state(btn) -> None:
@@ -207,7 +236,7 @@ app.addRadioButton("proximity1", "General Public",row=6,column=2,rowspan=0,colsp
 #app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
 #app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
-app.addNamedButton("Repeat","rep1",repeat,row=7,column=0,rowspan=0,colspan=0)
+app.addNamedButton("Repeat","repeat_prox",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res1",restore,row=7,column=1,rowspan=0,colspan=0)
 
 #This is just to align it properly
@@ -235,7 +264,7 @@ app.addRadioButton("feet1", "25",row=6,column=2,rowspan=0,colspan=0)
 #app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
 #app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
-app.addNamedButton("Repeat","rep2",repeat,row=7,column=0,rowspan=0,colspan=0)
+app.addNamedButton("Repeat","repeat_feet",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 
 #This is just to align it properly

@@ -20,6 +20,7 @@ class DataHandler:
     distanceDict = {}
     visitedDistances = []
     visitedDistanceCount=[]
+    #currentDistance = 0
     #returns 0 if all distances have been used 3 times; return 1-5 for current distance generated
     def generate_distance(self): #randomly chooses distance 1-5 
         currentDistance = 0
@@ -64,6 +65,7 @@ class DataHandler:
     def repeatbtn(self):
         self.repeatCounter += 1
         self.repeatCounterList.append(self.repeatCounter)
+        print("repeat")
     
     def get_abs_or_rel(self, absOrRel):
         self.distanceDict["absolute|relative"] = absOrRel
