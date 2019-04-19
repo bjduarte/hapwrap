@@ -186,21 +186,6 @@ def fam_press(btn) -> None:
         api_prox_call_dict[fam_pattern][0](api_prox_call_dict[fam_pattern][1],
                                               api_prox_call_dict[fam_pattern][2])
         print(f'finished vibrating for {fam_pattern}')
-
-def next_press(btn):
-    
-    dist = dh.generate_distance()
-    
-    ButtonType.feet_abs.get_api_call(dist, 0) #feet_absolute1
-    ButtonType.feet_abs.get_api_call(dist, 1) #feet_absolute2
-    ButtonType.feet_rel.get_api_call(dist, 0) #feet_relative1
-    ButtonType.feet_rel.get_api_call(dist, 1) #feet_relative2
-    
-    ButtonType.prox_abs.get_api_call(dist,0) #prox_absolute1
-    ButtonType.prox_abs.get_api_call(dist,1) #prox_absolute2
-    ButtonType.prox_rel.get_api_call(dist, 0) #prox_relative1
-    ButtonType.prox_rel.get_api_call(dist, 1) #prox_relative2   
-
     
 #Notebook is used for different tabs such as proximity,feet and familiarization
 app.startNotebook("Notebook")
