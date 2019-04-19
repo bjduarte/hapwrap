@@ -21,6 +21,7 @@ app.setExpand("both")
 app.setFont(20)
 
 dist = 0
+f_name = "default_name"
 currentDistance = 0;
 #Functions for the button
 def press(btn):
@@ -82,7 +83,7 @@ def feet(btn):
 def writeJson(btn):
     dh.write_to_json()
 
-
+'''
 def chooseMode(btn):
     item = app.getListBox("Mode")
     print(item[0])
@@ -104,7 +105,7 @@ def chooseMode(btn):
     elif item[0] == b:
         relative()
 
-
+'''
 def writeJsonP():
     print(app.getRadioButton("proximity1"))
 
@@ -112,35 +113,42 @@ def writeJsonP():
 def writeJsonF():
     print(app.getRadioButton("feet1"))
 
-
 def next_press(btn) -> None:
-    global dist, currentDistance
+    global dist, currentDistance, f_name
     dist = dh.generate_distance()
-    currentDistance = dist
-    if btn is 'prox_next':
-        mode = app.getListBox('prox_mode')
-        print(f'testing prox_next, rand num is: {dist}, select test: '
-              f'{mode[0]}')
-        test_dict: Dict = {
-            "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
-            "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
-            "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
-            "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
-        }
-        test_dict[mode[0]][0](dist,
-                              test_dict[mode[0]][1])
-    elif btn is 'feet_next':
-        mode = app.getListBox('feet_mode')
-        print(f'testing feet_next, rand num is: {dist}, select test: '
-              f'{mode[0]}')
-        test_dict: Dict = {
-            "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
-            "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
-            "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
-            "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
-        }
-        test_dict[mode[0]][0](dist,
-                              test_dict[mode[0]][1])
+    if dist == -1:
+        f_name = app.textBox("Type file name", "Please type a file name here")
+        print(f_name)
+
+    else:
+        currentDistance = dist
+        if btn is 'prox_next':
+            mode = app.getListBox('prox_mode')
+            print(f'testing prox_next, rand num is: {dist}, select test: '
+                  f'{mode[0]}')
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+                "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+                "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+            }
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
+
+
+
+        elif btn is 'feet_next':
+            mode = app.getListBox('feet_mode')
+            print(f'testing feet_next, rand num is: {dist}, select test: '
+                  f'{mode[0]}')
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+                "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+                "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+            }
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
 
 def change_fam_state(btn) -> None:
     global fam_state_feet, fam_state_prox, fam_test_state
@@ -225,8 +233,8 @@ app.startNotebook("Notebook")
 app.startNote("Proxemics")
 
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=1,rowspan=0,colspan=0)
-app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+#app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Intimate",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Personal",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Social",row=4,column=2,rowspan=0,colspan=0)
@@ -253,8 +261,8 @@ app.stopNote()
 #start of Feet tab
 app.startNote("Feet")
 #all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=1,rowspan=0,colspan=0)
-app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+#app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "5",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "10",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "15",row=4,column=2,rowspan=0,colspan=0)
