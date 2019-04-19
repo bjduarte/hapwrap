@@ -226,7 +226,7 @@ def fam_press(btn) -> None:
                                     'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
                                     'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
                                     'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
-                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5s, 1],
+                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
                                     'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
                                     }
 
