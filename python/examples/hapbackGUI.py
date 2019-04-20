@@ -178,25 +178,25 @@ def fam_press(btn) -> None:
     if btn is 'feet2':
         fam_pattern: str = fam_state_feet + f'_{fam_test_state}'
         print(f'vibrating for {fam_pattern}')
-        api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 0, 0,],
+        api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 1, 0,],
                                     '5_relative_1': [ButtonType.feet_rel.get_api_call, 1, 0,],
-                                    '10_absolute_1':[ButtonType.feet_abs.get_api_call, 1, 0,],
+                                    '10_absolute_1':[ButtonType.feet_abs.get_api_call, 2, 0,],
                                     '10_relative_1': [ButtonType.feet_rel.get_api_call, 2, 0,],
-                                    '15_absolute_1': [ButtonType.feet_abs.get_api_call, 2, 0,],
+                                    '15_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
                                     '15_relative_1': [ButtonType.feet_rel.get_api_call, 3, 0,],
-                                    '20_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
+                                    '20_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
                                     '20_relative_1': [ButtonType.feet_rel.get_api_call, 4, 0,],
-                                    '25_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
+                                    '25_absolute_1': [ButtonType.feet_abs.get_api_call, 5, 0,],
                                     '25_relative_1': [ButtonType.feet_rel.get_api_call, 5, 0,],
-                                    '5_absolute_2': [ButtonType.feet_abs.get_api_call, 0, 1,],
+                                    '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
                                     '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
-                                    '10_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
+                                    '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
                                     '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
-                                    '15_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
+                                    '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
                                     '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
-                                    '20_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
+                                    '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
                                     '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
-                                    '25_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
+                                    '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
                                     '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
                                     }
 
@@ -208,25 +208,25 @@ def fam_press(btn) -> None:
     if btn is 'pr2':
         print(f'vibrating for {fam_state_prox}')
         fam_pattern: str = fam_state_prox + f'_{fam_test_state}'
-        api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 0, 0],
+        api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
                                     'Intimate_relative_1': [ButtonType.prox_rel.get_api_call, 1, 0],
-                                    'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
+                                    'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
                                     'Personal_relative_1': [ButtonType.prox_rel.get_api_call, 2, 0],
-                                    'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
+                                    'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
                                     'Social_relative_1': [ButtonType.prox_rel.get_api_call, 3, 0],
-                                    'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
+                                    'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
                                     'Public_relative_1': [ButtonType.prox_rel.get_api_call, 4, 0],
-                                    'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
+                                    'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 5, 0],
                                     'General_Public_relative_1': [ButtonType.prox_rel.get_api_call, 5, 0],
-                                    'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 0, 1],
+                                    'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
                                     'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
-                                    'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
+                                    'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
                                     'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
-                                    'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
+                                    'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
                                     'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
-                                    'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
+                                    'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
                                     'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
-                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
+                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
                                     'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
                                     }
 
