@@ -51,8 +51,8 @@ class DataHandler:
             
             #print(rand)
             ctr = self.distCtr[rand]
-            #print(ctr)
-            if(ctr < 4):
+            print(ctr)
+            if(ctr < 3):
                 #print("in loop")
                 currentDistance = randDist
                 self.currDistList.append([currentDistance]) #appending current distance to list
@@ -115,13 +115,15 @@ class DataHandler:
         fin = json.load(file)
         file.close()
         
-        saved = zip(fin.get('distance counter'),fin.get('visited distances'), fin.get('user response'), fin.get('repeat counter'))
+        saved = zip(fin.get('absolute|relative mode'),fin.get('current distance'), fin.get('distance counter'),
+                    fin.get('proxemics|feet'), fin.get('repeat counter'), fin.get('user responses'),
+                    fin.get('visited distances'))
         
         cwd = os.getcwd()
         path_to_file = pjoin(cwd, "completedStudies", fileName)
         f = open(path_to_file, "w+")
         
-        f.write("Distances|User Response|Times Repeated\n")
+        f.write("absolute|relative mode | current distance | distance counter | proxemics|feet | repeat counter | user responses | visited distances\n")
         for i in saved:
             f.write(str(i) + "\n")  
         
