@@ -5,10 +5,10 @@ from util.button_util import ButtonType
 from typing import Dict
 from tkinter.constants import CURRENT
 
-#creating  class objects
-dh = dc.DataHandler() #datahandler object
+# creating  class objects
+dh = dc.DataHandler() # datahandler object
 
-#This is the Entire dialog box with 1200 x 800 dimensions
+# This is the Entire dialog box with 1200 x 800 dimensions
 app=gui("Grid Demo", "1200x800", useTtk=True)
 
 # variables to keep track of familiarization radio buttons hit
@@ -23,7 +23,9 @@ app.setFont(20)
 dist = 0
 f_name = "default_name"
 currentDistance = 0;
-#Functions for the button
+
+
+# Functions for the button
 def press(btn):
     print(btn)
 
@@ -56,14 +58,17 @@ def repeat(btn):
         test_dict[mode[0]][0](currentDistance,
                               test_dict[mode[0]][1])
 
+
 def absolute():
     print("Entered Absolute function")
     dh.generate_distance()
     dh.get_abs_or_rel("absolute")
     dh.write_to_json()
 
+
 def restore():
     dh.restore()
+
 
 def relative():
     print("Entered Relative function")
@@ -101,12 +106,15 @@ def chooseMode(btn):
         relative()
 
 '''
+
+
 def writeJsonP():
     print(app.getRadioButton("proximity1"))
 
 
 def writeJsonF():
     print(app.getRadioButton("feet1"))
+
 
 def next_press(btn) -> None:
     global dist, currentDistance, f_name
@@ -154,7 +162,8 @@ def get_user_response(btn):
         dh.get_user_response(app.getRadioButton('feet1'))
     elif btn is 'sav1':
         dh.get_user_response(app.getRadioButton('proximity1'))
-    
+
+
 def proxft(btn):
     if btn is 'sav2':
         dh.get_prox_or_ft('feet')
@@ -164,6 +173,7 @@ def proxft(btn):
         dh.get_prox_or_ft('proxemics')
         proxmode = app.getListBox('prox_mode')
         dh.get_abs_or_rel(proxmode)
+
 
 def change_fam_state(btn) -> None:
     global fam_state_feet, fam_state_prox, fam_test_state
@@ -176,6 +186,7 @@ def change_fam_state(btn) -> None:
     elif btn is 'test_state':
         fam_test_state = app.getRadioButton('test_state')
         print(f'test state is: {fam_test_state}')
+
 
 def fam_press(btn) -> None:
     global fam_state_feet, fam_state_prox
@@ -239,7 +250,7 @@ def fam_press(btn) -> None:
                                               api_prox_call_dict[fam_pattern][2])
         print(f'finished vibrating for {fam_pattern}')
     
-#Notebook is used for different tabs such as proximity,feet and familiarization
+# Notebook is used for different tabs such as proximity,feet and familiarization
 app.startNotebook("Notebook")
 
 ###############################################################################################################
@@ -247,22 +258,22 @@ app.startNotebook("Notebook")
 #start of proximity tab
 app.startNote("Proxemics")
 
-#all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
+# all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
 app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
-#app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+# app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Intimate",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Personal",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Social",row=4,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Public",row=5,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "General Public",row=6,column=2,rowspan=0,colspan=0)
-#app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
+# app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
 app.addNamedButton("Repeat","repeat_prox",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res1",restore,row=7,column=1,rowspan=0,colspan=0)
 
-#This is just to align it properly
+# This is just to align it properly
 app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
 
@@ -274,24 +285,24 @@ app.stopNote()
 
 ###############################################################################################################
 
-#start of Feet tab
+# start of Feet tab
 app.startNote("Feet")
-#all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
+# all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
 app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
-#app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+# app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "5",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "10",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "15",row=4,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "20",row=5,column=2, rowspan=0,colspan=0)
 app.addRadioButton("feet1", "25",row=6,column=2,rowspan=0,colspan=0)
-#app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
+# app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
 app.addNamedButton("Repeat","repeat_feet",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 
-#This is just to align it properly
+# This is just to align it properly
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
 app.addNamedButton("Next Pattern","feet_next",next_press,row=7,column=4,rowspan=0,colspan=0)
@@ -301,11 +312,11 @@ app.stopNote()
 
 ###############################################################################################################
 
-#start of Familiarization tab
+# start of Familiarization tab
 app.startNote("Familiarization")
 
-#All the buttons in Proximity tab- pr2,feet2 etc are the names. Proximity and Feet are the titles on button
-#The radio buttons are grouped according to the proximity group and Feet group
+# All the buttons in Proximity tab- pr2,feet2 etc are the names. Proximity and Feet are the titles on button
+# The radio buttons are grouped according to the proximity group and Feet group
 
 
 app.addNamedButton("  Proxemics  ", "pr2", fam_press, row=0, column=2, rowspan=0, colspan=0)
@@ -330,8 +341,8 @@ app.addRadioButton("test_state", "absolute_2", row=3, column=6, rowspan=0, colsp
 app.addRadioButton("test_state", "relative_2", row=4, column=6, rowspan=0, colspan=0)
 app.setRadioButtonChangeFunction("test_state", change_fam_state)
 
-#End of the 3 tabs
+# End of the 3 tabs
 app.stopNotebook()
 
-#End of the application
+# End of the application
 app.go()
