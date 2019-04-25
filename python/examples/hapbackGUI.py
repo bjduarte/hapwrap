@@ -131,8 +131,8 @@ def next_press(btn) -> None:
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
 
-
-
+            app.setLabel("distance prox", "current distance: " + str(dist))
+            
         elif btn is 'feet_next':
             mode = app.getListBox('feet_mode')
             print(f'testing feet_next, rand num is: {dist}, select test: '
@@ -145,6 +145,10 @@ def next_press(btn) -> None:
             }
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
+            
+            app.setLabel("distance feet", "current distance: " + str(dist))
+
+
 def get_user_response(btn):
     if btn is 'sav2':
         dh.get_user_response(app.getRadioButton('feet1'))
@@ -263,7 +267,8 @@ app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
 
 app.addNamedButton("Next Pattern","prox_next",next_press,row=7,column=4,rowspan=0,colspan=0)
-
+#app.addLabel("distance title", text = "Distance: ", row = 6, column = 3, rowspan = 0, colspan = 0)
+app.addLabel("distance prox", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
 # End of 1st tab
 app.stopNote()
 
@@ -290,6 +295,8 @@ app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
 app.addNamedButton("Next Pattern","feet_next",next_press,row=7,column=4,rowspan=0,colspan=0)
+app.addLabel("distance feet", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
+
 app.stopNote()
 
 ###############################################################################################################
