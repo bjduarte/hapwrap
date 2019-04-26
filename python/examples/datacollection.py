@@ -110,6 +110,19 @@ class DataHandler:
         
 #saving study results after user inputs a file (fileName)
     def save_results(self, fileName): 
+
+        self.distanceDict["distance counter"] = self.distCtrList
+        self.distanceDict["visited distances"] = self.visitedDistanceList
+        self.distanceDict["current distance"] = self.currDistList
+        self.repeatCounterList.append([self.repeatCounter])
+        self.distanceDict["repeat counter"] = self.repeatCounterList
+        self.distanceDict["proxemics|feet"] = self.proxftList
+        self.distanceDict["absolute|relative mode"] = self.absrelModeList
+        self.distanceDict["user responses"] = self.userResponses
+
+        f = open('userData.json', 'w')
+        f.write(json.dumps(self.distanceDict, sort_keys = True, indent = 1))
+        f.close()
         
         file = open('userData.json', 'r')
         fin = json.load(file)
