@@ -23,7 +23,7 @@ app.setFont(20)
 dist = 0
 f_name = "default_name"
 currentDistance = 0;
-
+saveCtr = 0;
 
 # Functions for the button
 def press(btn):
@@ -79,9 +79,31 @@ def relative():
 
 
 def writeJson(btn):
+    global saveCtr
+    
+    saveCtr +=1
     get_user_response(btn)
     proxft(btn)
     dh.write_to_json()
+    
+    if(saveCtr == 60 ):
+        f_name = app.textBox("Type file name", "Please type a file name here")
+        print(f_name)
+        dh.save_results(f_name)
+    elif((saveCtr % 15) == 0):
+        if btn is 'sav1':
+            crr = app.getListBox('prox_mode')
+            #app.setListItemBg('prox_mode',crr, "green")
+            print(crr)
+            app.removeListItem('prox_mode', crr)
+        elif btn is 'sav2':
+            crr = app.getListBox('feet_mode')
+            app.setListItemBg('feet_mode',crr, "green")
+            
+        dh.reset()
+
+
+    
 
 '''
 def chooseMode(btn):
@@ -117,13 +139,15 @@ def writeJsonF():
 
 
 def next_press(btn) -> None:
+    print("next pressed")
     global dist, currentDistance, f_name
     dist = dh.generate_distance()
-    if dist == -1:
-        f_name = app.textBox("Type file name", "Please type a file name here")
-        print(f_name)
-        dh.save_results(f_name)
-
+    print("save: ",saveCtr)
+    print("distance generated: ", dist)
+    if dist == -1: #visited distances = 60 popup
+        print("before pass")
+        pass
+        print("After pass")
     else:
         currentDistance = dist
         if btn is 'prox_next':
@@ -136,9 +160,12 @@ def next_press(btn) -> None:
                 "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
                 "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
             }
+            print("before api dist", dist)
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
-
+            print("After api")
+            
+            
             app.setLabel("distance prox", "current distance: " + str(dist))
             
         elif btn is 'feet_next':
@@ -155,7 +182,7 @@ def next_press(btn) -> None:
                                   test_dict[mode[0]][1])
             
             app.setLabel("distance feet", "current distance: " + str(dist))
-
+    print("finished next")
 
 def get_user_response(btn):
     if btn is 'sav2':

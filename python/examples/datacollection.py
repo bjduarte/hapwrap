@@ -13,7 +13,7 @@ class DataHandler:
     
     #global distCtr 
     ctr = 0
-    distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr} #counter
+    distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr}
     repeatCounter = 0
     repeatCounterList = []
     currDistList = []
@@ -26,14 +26,18 @@ class DataHandler:
     proxftList = []    
     listOfStudy = []
     currentDistance = 0
-    
+
     #dictionary to convert user response to integer/distance
     convertToDist = {'5': 1, 'Intimate': 1,
                      '10': 2, 'Personal': 2,
                      '15': 3, 'Social': 3,
                      '20': 4, 'Public': 4,
                      '25': 5, 'General Public': 5}
-    
+    def reset(self):
+        ctr = 0
+        self.distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr}
+        print("reset")
+        print(self.distCtr)
     #returns -1 if all distances have been used 3 times; return 1-5 for current distance generated
     def generate_distance(self): #randomly chooses distance 1-5 
         #currentDistance = []
@@ -110,7 +114,7 @@ class DataHandler:
         
 #saving study results after user inputs a file (fileName)
     def save_results(self, fileName): 
-
+        '''
         self.distanceDict["distance counter"] = self.distCtrList
         self.distanceDict["visited distances"] = self.visitedDistanceList
         self.distanceDict["current distance"] = self.currDistList
@@ -119,7 +123,8 @@ class DataHandler:
         self.distanceDict["proxemics|feet"] = self.proxftList
         self.distanceDict["absolute|relative mode"] = self.absrelModeList
         self.distanceDict["user responses"] = self.userResponses
-
+        '''
+        
         f = open('userData.json', 'w')
         f.write(json.dumps(self.distanceDict, sort_keys = True, indent = 1))
         f.close()
