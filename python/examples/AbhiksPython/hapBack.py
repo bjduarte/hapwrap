@@ -44,7 +44,7 @@ def r1(targetRow, hapServer):
 
     for i in range(targetRow):
         hframes.addBWFrame(onTime, [i, 9 - i], 10)
-        hframes.addBWFrame(offTime, [], 10)
+#        hframes.addBWFrame(offTime, [], 10)
 
     hapServer.send(hframes.frames)
 

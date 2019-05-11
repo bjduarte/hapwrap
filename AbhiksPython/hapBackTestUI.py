@@ -15,9 +15,9 @@ if sys.argv[1] == "2":
     time.sleep(1)
 
 if sys.argv[1] == "3":
-    hb.r1(int(sys.argv[2]),hs)
+    hb.r1(5-int(sys.argv[2]),hs)
     time.sleep(1)
 
 if sys.argv[1] == "4":
-    hb.r2(int(sys.argv[2]),hs)
+    hb.r2(5-int(sys.argv[2]),hs)
     time.sleep(1)
