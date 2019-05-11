@@ -3,11 +3,12 @@ from appJar import gui
 import datacollection as dc
 from util.button_util import ButtonType
 from typing import Dict
+from tkinter.constants import CURRENT
 
-#creating  class objects
-dh = dc.DataHandler() #datahandler object
+# creating  class objects
+dh = dc.DataHandler() # datahandler object
 
-#This is the Entire dialog box with 1200 x 800 dimensions
+# This is the Entire dialog box with 1200 x 800 dimensions
 app=gui("Grid Demo", "1200x800", useTtk=True)
 
 # variables to keep track of familiarization radio buttons hit
@@ -15,17 +16,48 @@ fam_state_feet: str = '5'
 fam_state_prox: str = 'Intimate'
 fam_test_state: str = 'absolute_1'
 
-
 app.setSticky("news")
 app.setExpand("both")
 app.setFont(20)
 
-#Functions for the button
+dist = 0
+f_name = "default_name"
+currentDistance = 0;
+saveCtr = 0;
+
+# Functions for the button
 def press(btn):
     print(btn)
 
+
 def repeat(btn):
+    global currentDistance
     dh.repeatbtn()
+    if btn is 'repeat_prox':
+        mode = app.getListBox('prox_mode')
+        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](dist,
+                              test_dict[mode[0]][1])
+    elif btn is 'rep2':
+        mode = app.getListBox('repeat_feet')
+        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+              f'{mode[0]}')
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+            "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+            "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](currentDistance,
+                              test_dict[mode[0]][1])
+
 
 def absolute():
     print("Entered Absolute function")
@@ -33,8 +65,10 @@ def absolute():
     dh.get_abs_or_rel("absolute")
     dh.write_to_json()
 
+
 def restore():
     dh.restore()
+
 
 def relative():
     print("Entered Relative function")
@@ -42,15 +76,36 @@ def relative():
     dh.get_abs_or_rel("relative")
     dh.write_to_json()
 
-def prox(btn):
-    dh.get_prox_or_ft("proximate")
 
-def feet(btn):
-    dh.get_prox_or_ft("feet")
 
 def writeJson(btn):
+    global saveCtr
+    
+    saveCtr +=1
+    get_user_response(btn)
+    proxft(btn)
     dh.write_to_json()
+    
+    if(saveCtr == 60 ):
+        f_name = app.textBox("Type file name", "Please type a file name here")
+        print(f_name)
+        dh.save_results(f_name)
+    elif((saveCtr % 15) == 0):
+        if btn is 'sav1':
+            crr = app.getListBox('prox_mode')
+            #app.setListItemBg('prox_mode',crr, "green")
+            print(crr)
+            app.removeListItem('prox_mode', crr)
+        elif btn is 'sav2':
+            crr = app.getListBox('feet_mode')
+            app.setListItemBg('feet_mode',crr, "green")
+            
+        dh.reset()
 
+
+    
+
+'''
 def chooseMode(btn):
     item = app.getListBox("Mode")
     print(item[0])
@@ -60,6 +115,7 @@ def chooseMode(btn):
         absolute()
     elif item[0] == b:
         relative()
+
 
 def chooseMode(btn):
     item = app.getListBox("Mode1")
@@ -71,11 +127,80 @@ def chooseMode(btn):
     elif item[0] == b:
         relative()
 
+'''
+
+
 def writeJsonP():
     print(app.getRadioButton("proximity1"))
 
+
 def writeJsonF():
     print(app.getRadioButton("feet1"))
+
+
+def next_press(btn) -> None:
+    print("next pressed")
+    global dist, currentDistance, f_name
+    dist = dh.generate_distance()
+    print("save: ",saveCtr)
+    print("distance generated: ", dist)
+    if dist == -1: #visited distances = 60 popup
+        print("before pass")
+        pass
+        print("After pass")
+    else:
+        currentDistance = dist
+        if btn is 'prox_next':
+            mode = app.getListBox('prox_mode')
+            print(f'testing prox_next, rand num is: {dist}, select test: '
+                  f'{mode[0]}')
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+                "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+                "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+            }
+            print("before api dist", dist)
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
+            print("After api")
+            
+            
+            app.setLabel("distance prox", "current distance: " + str(dist))
+            
+        elif btn is 'feet_next':
+            mode = app.getListBox('feet_mode')
+            print(f'testing feet_next, rand num is: {dist}, select test: '
+                  f'{mode[0]}')
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+                "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+                "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+            }
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
+            
+            app.setLabel("distance feet", "current distance: " + str(dist))
+    print("finished next")
+
+def get_user_response(btn):
+    if btn is 'sav2':
+        dh.get_user_response(app.getRadioButton('feet1'))
+    elif btn is 'sav1':
+        dh.get_user_response(app.getRadioButton('proximity1'))
+
+
+def proxft(btn):
+    if btn is 'sav2':
+        dh.get_prox_or_ft('feet')
+        feetmode = app.getListBox('feet_mode')
+        dh.get_abs_or_rel(feetmode)
+    elif btn is 'sav1':
+        dh.get_prox_or_ft('proxemics')
+        proxmode = app.getListBox('prox_mode')
+        dh.get_abs_or_rel(proxmode)
+
 
 def change_fam_state(btn) -> None:
     global fam_state_feet, fam_state_prox, fam_test_state
@@ -93,27 +218,27 @@ def change_fam_state(btn) -> None:
 def fam_press(btn) -> None:
     global fam_state_feet, fam_state_prox
     if btn is 'feet2':
-        fam_pattern = fam_state_feet + f'_{fam_test_state}'
+        fam_pattern: str = fam_state_feet + f'_{fam_test_state}'
         print(f'vibrating for {fam_pattern}')
-        api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 0, 0,],
+        api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 1, 0,],
                                     '5_relative_1': [ButtonType.feet_rel.get_api_call, 1, 0,],
-                                    '10_absolute_1':[ButtonType.feet_abs.get_api_call, 1, 0,],
+                                    '10_absolute_1':[ButtonType.feet_abs.get_api_call, 2, 0,],
                                     '10_relative_1': [ButtonType.feet_rel.get_api_call, 2, 0,],
-                                    '15_absolute_1': [ButtonType.feet_abs.get_api_call, 2, 0,],
+                                    '15_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
                                     '15_relative_1': [ButtonType.feet_rel.get_api_call, 3, 0,],
-                                    '20_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
+                                    '20_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
                                     '20_relative_1': [ButtonType.feet_rel.get_api_call, 4, 0,],
-                                    '25_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
+                                    '25_absolute_1': [ButtonType.feet_abs.get_api_call, 5, 0,],
                                     '25_relative_1': [ButtonType.feet_rel.get_api_call, 5, 0,],
-                                    '5_absolute_2': [ButtonType.feet_abs.get_api_call, 0, 1,],
+                                    '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
                                     '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
-                                    '10_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
+                                    '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
                                     '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
-                                    '15_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
+                                    '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
                                     '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
-                                    '20_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
+                                    '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
                                     '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
-                                    '25_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
+                                    '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
                                     '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
                                     }
 
@@ -124,26 +249,26 @@ def fam_press(btn) -> None:
 
     if btn is 'pr2':
         print(f'vibrating for {fam_state_prox}')
-        fam_pattern = fam_state_prox + f'_{fam_test_state}'
-        api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 0, 0],
+        fam_pattern: str = fam_state_prox + f'_{fam_test_state}'
+        api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
                                     'Intimate_relative_1': [ButtonType.prox_rel.get_api_call, 1, 0],
-                                    'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
+                                    'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
                                     'Personal_relative_1': [ButtonType.prox_rel.get_api_call, 2, 0],
-                                    'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
+                                    'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
                                     'Social_relative_1': [ButtonType.prox_rel.get_api_call, 3, 0],
-                                    'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
+                                    'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
                                     'Public_relative_1': [ButtonType.prox_rel.get_api_call, 4, 0],
-                                    'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
+                                    'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 5, 0],
                                     'General_Public_relative_1': [ButtonType.prox_rel.get_api_call, 5, 0],
-                                    'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 0, 1],
+                                    'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
                                     'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
-                                    'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
+                                    'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
                                     'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
-                                    'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
+                                    'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
                                     'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
-                                    'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
+                                    'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
                                     'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
-                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
+                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
                                     'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
                                     }
 
@@ -151,23 +276,8 @@ def fam_press(btn) -> None:
         api_prox_call_dict[fam_pattern][0](api_prox_call_dict[fam_pattern][1],
                                               api_prox_call_dict[fam_pattern][2])
         print(f'finished vibrating for {fam_pattern}')
-
-def next_press(btn):
     
-    dist = dh.generate_distance(")
-    
-    ButtonType.feet_abs.get_api_call(dist, 0) #feet_absolute1
-    ButtonType.feet_abs.get_api_call(dist, 1) #feet_absolute2
-    ButtonType.feet_rel.get_api_call(dist, 0) #feet_relative1
-    ButtonType.feet_rel.get_api_call(dist, 1) #feet_relative2
-    
-    ButtonType.prox_abs.get_api_call(dist,0) #prox_absolute1
-    ButtonType.prox_abs.get_api_call(dist,1) #prox_absolute2
-    ButtonType.prox_rel.get_api_call(dist, 0) #prox_relative1
-    ButtonType.prox_rel.get_api_call(dist, 1) #prox_relative2   
-
-    
-#Notebook is used for different tabs such as proximity,feet and familiarization
+# Notebook is used for different tabs such as proximity,feet and familiarization
 app.startNotebook("Notebook")
 
 ###############################################################################################################
@@ -175,62 +285,65 @@ app.startNotebook("Notebook")
 #start of proximity tab
 app.startNote("Proxemics")
 
-#all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("Mode", ["Absolute", "Relative"],row=0,column=1,rowspan=0,colspan=0)
-app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+# all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
+app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+# app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Intimate",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Personal",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Social",row=4,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Public",row=5,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "General Public",row=6,column=2,rowspan=0,colspan=0)
-#app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
+# app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
-app.addNamedButton("Repeat","rep1",repeat,row=7,column=0,rowspan=0,colspan=0)
+app.addNamedButton("Repeat","repeat_prox",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res1",restore,row=7,column=1,rowspan=0,colspan=0)
 
-#This is just to align it properly
+# This is just to align it properly
 app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
 
-app.addNamedButton("Next Pattern","nex1",next_press,row=7,column=4,rowspan=0,colspan=0)
-
+app.addNamedButton("Next Pattern","prox_next",next_press,row=7,column=4,rowspan=0,colspan=0)
+#app.addLabel("distance title", text = "Distance: ", row = 6, column = 3, rowspan = 0, colspan = 0)
+app.addLabel("distance prox", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
 # End of 1st tab
 app.stopNote()
 
 ###############################################################################################################
 
-#start of Feet tab
+# start of Feet tab
 app.startNote("Feet")
-#all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("Mode1", ["Absolute", "Relative"],row=0,column=1,rowspan=0,colspan=0)
-app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
+# all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
+app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+# app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "5",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "10",row=3,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "15",row=4,column=2,rowspan=0,colspan=0)
-app.addRadioButton("feet1", "20",row=5,column=2,rowspan=0,colspan=0)
+app.addRadioButton("feet1", "20",row=5,column=2, rowspan=0,colspan=0)
 app.addRadioButton("feet1", "25",row=6,column=2,rowspan=0,colspan=0)
-#app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
-#app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
+# app.addLabelOptionBox("Mode", ["- Choose one -", "Absolute", "Relative"],row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Absolute","ab1",absolute,row=0,column=2,rowspan=0,colspan=0)
+# app.addNamedButton("Relative","rel1",relative,row=1,column=2,rowspan=0,colspan=0)
 
-app.addNamedButton("Repeat","rep2",repeat,row=7,column=0,rowspan=0,colspan=0)
+app.addNamedButton("Repeat","repeat_feet",repeat,row=7,column=0,rowspan=0,colspan=0)
 app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 
-#This is just to align it properly
+# This is just to align it properly
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
 app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
-app.addNamedButton("Next Pattern","nex2",next_press,row=7,column=4,rowspan=0,colspan=0)
+app.addNamedButton("Next Pattern","feet_next",next_press,row=7,column=4,rowspan=0,colspan=0)
+app.addLabel("distance feet", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
+
 app.stopNote()
 
 ###############################################################################################################
 
-#start of Familiarization tab
+# start of Familiarization tab
 app.startNote("Familiarization")
 
-#All the buttons in Proximity tab- pr2,feet2 etc are the names. Proximity and Feet are the titles on button
-#The radio buttons are grouped according to the proximity group and Feet group
+# All the buttons in Proximity tab- pr2,feet2 etc are the names. Proximity and Feet are the titles on button
+# The radio buttons are grouped according to the proximity group and Feet group
 
 
 app.addNamedButton("  Proxemics  ", "pr2", fam_press, row=0, column=2, rowspan=0, colspan=0)
@@ -255,8 +368,8 @@ app.addRadioButton("test_state", "absolute_2", row=3, column=6, rowspan=0, colsp
 app.addRadioButton("test_state", "relative_2", row=4, column=6, rowspan=0, colspan=0)
 app.setRadioButtonChangeFunction("test_state", change_fam_state)
 
-#End of the 3 tabs
+# End of the 3 tabs
 app.stopNotebook()
 
-#End of the application
+# End of the application
 app.go()

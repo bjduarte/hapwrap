@@ -1,6 +1,8 @@
+#!/usr/bin/python3
+
 from enum import Enum
 from typing import List, Dict, Tuple
-from AbhiksPython.hapBack import *
+from hapBack import *
 
 
 class proxMappings(Enum):
