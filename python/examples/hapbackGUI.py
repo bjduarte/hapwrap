@@ -9,7 +9,8 @@ from tkinter.constants import CURRENT
 dh = dc.DataHandler() # datahandler object
 
 # This is the Entire dialog box with 1200 x 800 dimensions
-app=gui("Grid Demo", "1200x800", useTtk=True)
+app=gui("Grid Demo", useTtk=True)
+app.setResizable(canResize=True)
 
 # variables to keep track of familiarization radio buttons hit
 fam_state_feet: str = '5'
@@ -59,6 +60,7 @@ def repeat(btn):
                               test_dict[mode[0]][1])
 
 
+
 def absolute():
     print("Entered Absolute function")
     dh.generate_distance()
@@ -78,56 +80,35 @@ def relative():
 
 
 
-def writeJson(btn):
-    global saveCtr
-    
-    saveCtr +=1
-    get_user_response(btn)
-    proxft(btn)
-    dh.write_to_json()
-    
-    if(saveCtr == 60 ):
-        f_name = app.textBox("Type file name", "Please type a file name here")
-        print(f_name)
-        dh.save_results(f_name)
-    elif((saveCtr % 15) == 0):
-        if btn is 'sav1':
-            crr = app.getListBox('prox_mode')
-            #app.setListItemBg('prox_mode',crr, "green")
-            print(crr)
-            app.removeListItem('prox_mode', crr)
-        elif btn is 'sav2':
-            crr = app.getListBox('feet_mode')
-            app.setListItemBg('feet_mode',crr, "green")
-            
-        dh.reset()
+# def writeJson(btn):
+
 
 
     
 
-'''
-def chooseMode(btn):
-    item = app.getListBox("Mode")
-    print(item[0])
-    a = "Absolute"
-    b = "Relative"
-    if item[0] == a:
-        absolute()
-    elif item[0] == b:
-        relative()
+# '''
+# def chooseMode(btn):
+#     item = app.getListBox("Mode")
+#     print(item[0])
+#     a = "Absolute"
+#     b = "Relative"
+#     if item[0] == a:
+#         absolute()
+#     elif item[0] == b:
+#         relative()
 
 
-def chooseMode(btn):
-    item = app.getListBox("Mode1")
-    print(item[0])
-    a = "Absolute"
-    b = "Relative"
-    if item[0] == a:
-        absolute()
-    elif item[0] == b:
-        relative()
+# def chooseMode(btn):
+#     item = app.getListBox("Mode1")
+#     print(item[0])
+#     a = "Absolute"
+#     b = "Relative"
+#     if item[0] == a:
+#         absolute()
+#     elif item[0] == b:
+#         relative()
 
-'''
+# '''
 
 
 def writeJsonP():
@@ -140,7 +121,33 @@ def writeJsonF():
 
 def next_press(btn) -> None:
     print("next pressed")
-    global dist, currentDistance, f_name
+    global dist, currentDistance, f_name, saveCtr
+    
+    saveCtr +=1
+    get_user_response(btn)
+    proxft(btn)
+    dh.counterAdd()
+    dh.write_to_json()
+    
+    if(saveCtr == 60 ):
+        f_name = app.textBox("Type file name", "Please type a file name here")
+        print(f_name)
+
+        dh.save_results(f_name)
+    elif((saveCtr % 15) == 0):
+        if btn is 'prox_next':
+            crr = app.getListBox('prox_mode')
+            #app.setListItemBg('prox_mode',crr, "green")
+            print(crr)
+            app.removeListItem('prox_mode', crr)
+        elif btn is 'feet_next':
+            crr = app.getListBox('feet_mode')
+            # app.setListItemBg('feet_mode',crr, "green")
+            
+        dh.reset()
+
+
+
     dist = dh.generate_distance()
     print("save: ",saveCtr)
     print("distance generated: ", dist)
@@ -163,10 +170,19 @@ def next_press(btn) -> None:
             print("before api dist", dist)
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
+
             print("After api")
             
+            proxemicDistances = ["Intimate", "Personal", "Social", "Public", "General Public"]
             
-            app.setLabel("distance prox", "current distance: " + str(dist))
+            if dist == 0:
+                app.setLabel("distance prox", "current distance: ")
+            
+            else:
+                app.setLabel("distance prox", "current distance: " + proxemicDistances[dist-1])
+
+            app.setLabel("pattern num", "Pattern: " + str(saveCtr))
+
             
         elif btn is 'feet_next':
             mode = app.getListBox('feet_mode')
@@ -181,22 +197,31 @@ def next_press(btn) -> None:
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
             
-            app.setLabel("distance feet", "current distance: " + str(dist))
+            feetDistances = [5, 10, 15, 20, 25]
+
+            if dist == 0:
+                app.setLabel("distance feet", "current distance: ")
+            
+            else:
+                app.setLabel("distance feet", "current distance: " + str(feetDistances[dist-1]))
+
+            app.setLabel("pattern num2", "Pattern: " + str(saveCtr))
+
     print("finished next")
 
 def get_user_response(btn):
-    if btn is 'sav2':
+    if btn is 'feet_next':
         dh.get_user_response(app.getRadioButton('feet1'))
-    elif btn is 'sav1':
+    elif btn is 'prox_next':
         dh.get_user_response(app.getRadioButton('proximity1'))
 
 
 def proxft(btn):
-    if btn is 'sav2':
+    if btn is 'feet_next':
         dh.get_prox_or_ft('feet')
         feetmode = app.getListBox('feet_mode')
         dh.get_abs_or_rel(feetmode)
-    elif btn is 'sav1':
+    elif btn is 'prox_next':
         dh.get_prox_or_ft('proxemics')
         proxmode = app.getListBox('prox_mode')
         dh.get_abs_or_rel(proxmode)
@@ -245,6 +270,7 @@ def fam_press(btn) -> None:
         print(f'{api_feet_call_dict[fam_pattern][1]}, {api_feet_call_dict[fam_pattern][2]}')
         api_feet_call_dict[fam_pattern][0](api_feet_call_dict[fam_pattern][1],
                                            api_feet_call_dict[fam_pattern][2])
+
         print(f'finished vibrating for {fam_state_feet}')
 
     if btn is 'pr2':
@@ -275,6 +301,7 @@ def fam_press(btn) -> None:
         print(f'{api_prox_call_dict[fam_pattern][1]}, {api_prox_call_dict[fam_pattern][2]}')
         api_prox_call_dict[fam_pattern][0](api_prox_call_dict[fam_pattern][1],
                                               api_prox_call_dict[fam_pattern][2])
+
         print(f'finished vibrating for {fam_pattern}')
     
 # Notebook is used for different tabs such as proximity,feet and familiarization
@@ -302,11 +329,12 @@ app.addNamedButton("Restore","res1",restore,row=7,column=1,rowspan=0,colspan=0)
 
 # This is just to align it properly
 app.addLabel("                ",row=7,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
+# app.addNamedButton("Save","sav1",writeJson,row=7,column=3,rowspan=0,colspan=0)
+app.addLabel("pattern num", "Pattern: ", row=6,column=4,rowspan=0,colspan=0)
 
 app.addNamedButton("Next Pattern","prox_next",next_press,row=7,column=4,rowspan=0,colspan=0)
 #app.addLabel("distance title", text = "Distance: ", row = 6, column = 3, rowspan = 0, colspan = 0)
-app.addLabel("distance prox", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
+app.addLabel("distance prox", "current distance: ", row = 6, column = 3, rowspan = 0, colspan = 0)
 # End of 1st tab
 app.stopNote()
 
@@ -331,9 +359,10 @@ app.addNamedButton("Restore","res2",restore,row=7,column=1,rowspan=0,colspan=0)
 
 # This is just to align it properly
 app.addLabel("               ",row=7,column=2,rowspan=0,colspan=0)
-app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
+# app.addNamedButton("Save","sav2",writeJson,row=7,column=3,rowspan=0,colspan=0)
 app.addNamedButton("Next Pattern","feet_next",next_press,row=7,column=4,rowspan=0,colspan=0)
-app.addLabel("distance feet", "current distance: " +str(currentDistance), row = 6, column = 3, rowspan = 0, colspan = 0)
+app.addLabel("distance feet", "current distance: ", row = 6, column = 3, rowspan = 0, colspan = 0)
+app.addLabel("pattern num2", "Pattern: ", row=6,column=4,rowspan=0,colspan=0)
 
 app.stopNote()
 
@@ -367,6 +396,9 @@ app.addRadioButton("test_state", "relative_1", row=2, column=6, rowspan=0, colsp
 app.addRadioButton("test_state", "absolute_2", row=3, column=6, rowspan=0, colspan=0)
 app.addRadioButton("test_state", "relative_2", row=4, column=6, rowspan=0, colspan=0)
 app.setRadioButtonChangeFunction("test_state", change_fam_state)
+
+
+app.stopNote()
 
 # End of the 3 tabs
 app.stopNotebook()

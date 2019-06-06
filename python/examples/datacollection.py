@@ -15,7 +15,9 @@ class DataHandler:
     ctr = 0
     distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr}
     repeatCounter = 0
+    counter = 0
     repeatCounterList = []
+    counterList = []
     currDistList = []
     distCtrList = []
     userResponses = []
@@ -60,16 +62,15 @@ class DataHandler:
                 #print("in loop")
                 currentDistance = randDist
                 self.currDistList.append([currentDistance]) #appending current distance to list
-                self.visitedDistances.append(randDist)
-                #print(self.visitedDistances)
+                # print(self.visitedDistances)
                 distanceGenerated = True 
                 self.distCtr[rand] += 1
                 ctr = self.distCtr[rand] 
         
         print(self.distCtr)       
-        self.distCtrList.append(self.distCtr.copy()) #distance counter
+        # self.distCtrList.append(self.distCtr.copy()) #distance counter
 
-        (self.visitedDistanceList).append((self.visitedDistances[:])) #appending new list of visited distances
+        # (self.visitedDistanceList).append((self.visitedDistances[:])) #appending new list of visited distances
         
         
         #distanceDict["counter"] = ctr  
@@ -87,6 +88,9 @@ class DataHandler:
     #get times repeated button is pressed from GUI and adds to dict
     def repeatbtn(self):
         self.repeatCounter += 1
+
+    def counterAdd(self):
+        self.counter += 1
     
     def get_abs_or_rel(self, absOrRel):
         self.absrelModeList.append([absOrRel])
@@ -97,14 +101,16 @@ class DataHandler:
     #writes data for when a new distance is being visited with the whole dictionary
     def write_to_json(self):
 
-        self.distanceDict["distance counter"] = self.distCtrList
-        self.distanceDict["visited distances"] = self.visitedDistanceList
-        self.distanceDict["current distance"] = self.currDistList
+        # self.distanceDict["distance counter"] = self.distCtrList
+        # self.distanceDict["visited distances"] = self.visitedDistanceList
+        self.distanceDict["actual distance"] = self.currDistList
         self.repeatCounterList.append([self.repeatCounter])
+        self.counterList.append([self.counter])
+        self.distanceDict["count"] = self.counterList
         self.distanceDict["repeat counter"] = self.repeatCounterList
-        self.distanceDict["proxemics|feet"] = self.proxftList
-        self.distanceDict["absolute|relative mode"] = self.absrelModeList
-        self.distanceDict["user responses"] = self.userResponses
+        self.distanceDict["prox/feet"] = self.proxftList
+        self.distanceDict["absolute/relative mode"] = self.absrelModeList
+        self.distanceDict["user response"] = self.userResponses
 
         f = open('userData.json', 'w')
         f.write(json.dumps(self.distanceDict, sort_keys = True, indent = 1))
@@ -133,15 +139,14 @@ class DataHandler:
         fin = json.load(file)
         file.close()
         
-        saved = zip(fin.get('absolute|relative mode'),fin.get('current distance'), fin.get('distance counter'),
-                    fin.get('proxemics|feet'), fin.get('repeat counter'), fin.get('user responses'),
-                    fin.get('visited distances'))
+        saved = zip(fin.get('count'), fin.get('absolute/relative mode'),fin.get('actual distance'),
+                    fin.get('prox/feet'), fin.get('repeat counter'), fin.get('user response'))
         
         cwd = os.getcwd()
         path_to_file = pjoin(cwd, "completedStudies", fileName)
         f = open(path_to_file, "w+")
         
-        f.write("absolute|relative mode | current distance | distance counter | proxemics|feet | repeat counter | user responses | visited distances\n")
+        f.write("count | absolute/relative mode | actual distance | prox/feet | repeat counter | user response\n")
         for i in saved:
             f.write(str(i) + "\n")  
         
@@ -155,16 +160,16 @@ class DataHandler:
             print(fin)
             f.close()
 
-            for i in fin['visited distances']:
-                visitedDistances.append(i)
+            # for i in fin['visited distances']:
+            #     visitedDistances.append(i)
             for i in fin['user response']:
                 userResponses.append(i)
                 print ("worked2")
             for i in fin['repeat counter']:
                 repeatCounter.append(i)
                 print ("worked3")  
-            for i in fin['distance counter']:
-                distCtr.append(i)     
+            # for i in fin['distance counter']:
+            #     distCtr.append(i)     
         except:
             print("nothing to restore")
             
