@@ -40,9 +40,9 @@ def repeat(btn):
               f'{mode[0]}')
         test_dict: Dict = {
             "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
-            "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+            # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
             "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
-            "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+            # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
         }
         test_dict[mode[0]][0](dist,
                               test_dict[mode[0]][1])
@@ -52,9 +52,9 @@ def repeat(btn):
               f'{mode[0]}')
         test_dict: Dict = {
             "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
-            "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+            # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
             "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
-            "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+            # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
         }
         test_dict[mode[0]][0](currentDistance,
                               test_dict[mode[0]][1])
@@ -163,9 +163,9 @@ def next_press(btn) -> None:
                   f'{mode[0]}')
             test_dict: Dict = {
                 "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
-                "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+                # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
                 "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
-                "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+                # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
             }
             print("before api dist", dist)
             test_dict[mode[0]][0](dist,
@@ -190,9 +190,9 @@ def next_press(btn) -> None:
                   f'{mode[0]}')
             test_dict: Dict = {
                 "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
-                "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+                # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
                 "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
-                "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+                # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
             }
             test_dict[mode[0]][0](dist,
                                   test_dict[mode[0]][1])
@@ -255,16 +255,16 @@ def fam_press(btn) -> None:
                                     '20_relative_1': [ButtonType.feet_rel.get_api_call, 4, 0,],
                                     '25_absolute_1': [ButtonType.feet_abs.get_api_call, 5, 0,],
                                     '25_relative_1': [ButtonType.feet_rel.get_api_call, 5, 0,],
-                                    '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
-                                    '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
-                                    '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
-                                    '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
-                                    '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
-                                    '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
-                                    '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
-                                    '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
-                                    '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
-                                    '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
+                                    # '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
+                                    # '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
+                                    # '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
+                                    # '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
+                                    # '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
+                                    # '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
+                                    # '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
+                                    # '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
+                                    # '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
+                                    # '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
                                     }
 
         print(f'{api_feet_call_dict[fam_pattern][1]}, {api_feet_call_dict[fam_pattern][2]}')
@@ -286,16 +286,16 @@ def fam_press(btn) -> None:
                                     'Public_relative_1': [ButtonType.prox_rel.get_api_call, 4, 0],
                                     'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 5, 0],
                                     'General_Public_relative_1': [ButtonType.prox_rel.get_api_call, 5, 0],
-                                    'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
-                                    'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
-                                    'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
-                                    'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
-                                    'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
-                                    'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
-                                    'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
-                                    'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
-                                    'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
-                                    'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
+                                    # 'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
+                                    # 'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
+                                    # 'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
+                                    # 'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
+                                    # 'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
+                                    # 'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
+                                    # 'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
+                                    # 'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
+                                    # 'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
+                                    # 'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
                                     }
 
         print(f'{api_prox_call_dict[fam_pattern][1]}, {api_prox_call_dict[fam_pattern][2]}')
@@ -313,7 +313,7 @@ app.startNotebook("Notebook")
 app.startNote("Proxemics")
 
 # all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("prox_mode", ["Absolute_1", "Absolute_2","Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+app.addListBox("prox_mode", ["Absolute_1","Relative_1"],row=0,column=2,rowspan=0,colspan=0)
 # app.addButton("Selected",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Intimate",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("proximity1", "Personal",row=3,column=2,rowspan=0,colspan=0)
@@ -343,7 +343,7 @@ app.stopNote()
 # start of Feet tab
 app.startNote("Feet")
 # all the buttons in Proximity tab- ab1,rel1 etc are the names. Absolute, relative are the titles on button
-app.addListBox("feet_mode", ["Absolute_1", "Absolute_2", "Relative_1", "Relative_2"],row=0,column=2,rowspan=0,colspan=0)
+app.addListBox("feet_mode", ["Absolute_1", "Relative_1"],row=0,column=2,rowspan=0,colspan=0)
 # app.addButton("Selected ",chooseMode,row=0,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "5",row=2,column=2,rowspan=0,colspan=0)
 app.addRadioButton("feet1", "10",row=3,column=2,rowspan=0,colspan=0)
@@ -393,8 +393,8 @@ app.setRadioButtonChangeFunction("feet", change_fam_state)
 
 app.addRadioButton("test_state", "absolute_1", row=1, column=6, rowspan=0, colspan=0)
 app.addRadioButton("test_state", "relative_1", row=2, column=6, rowspan=0, colspan=0)
-app.addRadioButton("test_state", "absolute_2", row=3, column=6, rowspan=0, colspan=0)
-app.addRadioButton("test_state", "relative_2", row=4, column=6, rowspan=0, colspan=0)
+# app.addRadioButton("test_state", "absolute_2", row=3, column=6, rowspan=0, colspan=0)
+# app.addRadioButton("test_state", "relative_2", row=4, column=6, rowspan=0, colspan=0)
 app.setRadioButtonChangeFunction("test_state", change_fam_state)
 
 
