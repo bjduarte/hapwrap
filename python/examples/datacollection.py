@@ -42,7 +42,6 @@ class DataHandler:
         print(self.distCtr)
     #returns -1 if all distances have been used 3 times; return 1-5 for current distance generated
     def generate_distance(self): #randomly chooses distance 1-5 
-        #currentDistance = []
         distanceGenerated = False
         #check if all distances used
         if(all(value == 3 for value in self.distCtr.values()) == True):
@@ -74,13 +73,15 @@ class DataHandler:
         
         
         #distanceDict["counter"] = ctr  
-        #print(currentDistance)
+        # print("current distance: " + str(currentDistance))
         return currentDistance
     
     #get user response from GUI and adds to dict
-    def get_user_response(self, response):
+    def get_user_response(self, response, dist):
         #self.distanceDict["user response"] = response
-        if(self.convertToDist[response] != self.currentDistance):
+        if(self.convertToDist[response] != dist):
+            # print("user response: " + str(self.convertToDist[response]))
+            # print("current distance: " + str(dist))
             self.userResponses.append([response])
         else:
             self.userResponses.append([0])

@@ -4,27 +4,111 @@
    [
     "Absolute_1"
    ]
+  ],
+  [
+   [
+    "Absolute_1"
+   ]
+  ],
+  [
+   [
+    "Absolute_1"
+   ]
+  ],
+  [
+   [
+    "Absolute_1"
+   ]
+  ],
+  [
+   [
+    "Absolute_1"
+   ]
   ]
  ],
- "actual distance": [],
+ "actual distance": [
+  [
+   3
+  ],
+  [
+   5
+  ],
+  [
+   5
+  ],
+  [
+   1
+  ],
+  [
+   4
+  ]
+ ],
  "count": [
   [
    1
+  ],
+  [
+   2
+  ],
+  [
+   3
+  ],
+  [
+   4
+  ],
+  [
+   5
   ]
  ],
  "prox/feet": [
   [
-   "feet"
+   "proxemics"
+  ],
+  [
+   "proxemics"
+  ],
+  [
+   "proxemics"
+  ],
+  [
+   "proxemics"
+  ],
+  [
+   "proxemics"
   ]
  ],
  "repeat counter": [
+  [
+   0
+  ],
+  [
+   0
+  ],
+  [
+   0
+  ],
+  [
+   0
+  ],
   [
    0
   ]
  ],
  "user response": [
   [
-   "5"
+   "Intimate"
+  ],
+  [
+   "Social"
+  ],
+  [
+   "Personal"
+  ],
+  [
+   "Personal"
+  ],
+  [
+   "Personal"
   ]
  ]
 }
