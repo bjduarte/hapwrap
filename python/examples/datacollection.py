@@ -13,6 +13,7 @@ class DataHandler:
     
     #global distCtr 
     ctr = 0
+    numRight = 0
     distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr}
     repeatCounter = 0
     counter = 0
@@ -41,7 +42,7 @@ class DataHandler:
         print("reset")
         print(self.distCtr)
     #returns -1 if all distances have been used 3 times; return 1-5 for current distance generated
-    def generate_distance(self): #randomly chooses distance 1-5 
+    def generate_distance(self, prxOrFtMode, prxDistance, ftDistance): #randomly chooses distance 1-5 
         distanceGenerated = False
         #check if all distances used
         if(all(value == 3 for value in self.distCtr.values()) == True):
@@ -60,7 +61,13 @@ class DataHandler:
             if(ctr < 3):
                 #print("in loop")
                 currentDistance = randDist
-                self.currDistList.append([currentDistance]) #appending current distance to list
+                if prxOrFtMode is 'prox_next':
+                    self.currDistList.append(prxDistance[currentDistance-1]) #appending current distance to list and displays as proxemic
+
+                elif prxOrFtMode is 'feet_next':
+                    self.currDistList.append(ftDistance[currentDistance-1]) #appending current distance to list and displays as feet
+
+
                 # print(self.visitedDistances)
                 distanceGenerated = True 
                 self.distCtr[rand] += 1
@@ -80,11 +87,13 @@ class DataHandler:
     def get_user_response(self, response, dist):
         #self.distanceDict["user response"] = response
         if(self.convertToDist[response] != dist):
-            # print("user response: " + str(self.convertToDist[response]))
-            # print("current distance: " + str(dist))
+            print("user response: " + str(self.convertToDist[response]))
+            print("current distance: " + str(dist))
             self.userResponses.append([response])
         else:
-            self.userResponses.append([0])
+            self.userResponses.append([response])
+            self.numRight+=1
+            print ("numRight:" + str(self.numRight))
     
     #get times repeated button is pressed from GUI and adds to dict
     def repeatbtn(self):
@@ -106,7 +115,7 @@ class DataHandler:
         # self.distanceDict["visited distances"] = self.visitedDistanceList
         self.distanceDict["actual distance"] = self.currDistList
         self.repeatCounterList.append([self.repeatCounter])
-        self.counterList.append([self.counter])
+        self.counterList.append([self.counter - 1])
         self.distanceDict["count"] = self.counterList
         self.distanceDict["repeat counter"] = self.repeatCounterList
         self.distanceDict["prox/feet"] = self.proxftList
@@ -153,24 +162,28 @@ class DataHandler:
         
         f.close()
         
-#function for the restore button ?! idk what it does
+#function for the restore button 
     def restore(self):
         try:
             f = open('userData.json', 'r')
             fin = json.load(f)
             print(fin)
             f.close()
-
-            # for i in fin['visited distances']:
-            #     visitedDistances.append(i)
+            for i in fin['absolute/relative mode']:
+                self.absrelModeList.append(i)
+            for i in fin['prox/feet']:
+                self.proxftList.append(i)
+            for i in fin['actual distance']:
+                self.currDistList.append(i)
             for i in fin['user response']:
-                userResponses.append(i)
-                print ("worked2")
+                self.userResponses.append(i)
             for i in fin['repeat counter']:
-                repeatCounter.append(i)
-                print ("worked3")  
+                self.repeatCounterList.append(i)
+            for i in fin['count']:
+            	self.counterList.append(i)
             # for i in fin['distance counter']:
             #     distCtr.append(i)     
+
         except:
             print("nothing to restore")
             
