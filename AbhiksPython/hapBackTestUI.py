@@ -3,7 +3,7 @@ import hapBack as hb
 import time
 import sys
 
-hs = hapserver()
+hs = hapserver("192.168.1.160")
 
 print(sys.argv[1])
 if sys.argv[1] == "1":
