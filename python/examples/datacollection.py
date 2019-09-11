@@ -42,7 +42,8 @@ class DataHandler:
         print("reset")
         print(self.distCtr)
     #returns -1 if all distances have been used 3 times; return 1-5 for current distance generated
-    def generate_distance(self, prxOrFtMode, prxDistance, ftDistance): #randomly chooses distance 1-5 
+    def generate_distance(self): #randomly chooses distance 1-5 
+        ftDistance = [5, 10, 15, 20, 25]
         distanceGenerated = False
         #check if all distances used
         if(all(value == 3 for value in self.distCtr.values()) == True):
@@ -61,11 +62,11 @@ class DataHandler:
             if(ctr < 3):
                 #print("in loop")
                 currentDistance = randDist
-                if prxOrFtMode is 'prox_next':
-                    self.currDistList.append(prxDistance[currentDistance-1]) #appending current distance to list and displays as proxemic
+                # if prxOrFtMode is 'prox_next':
+                #     self.currDistList.append(prxDistance[currentDistance-1]) #appending current distance to list and displays as proxemic
 
-                elif prxOrFtMode is 'feet_next':
-                    self.currDistList.append(ftDistance[currentDistance-1]) #appending current distance to list and displays as feet
+                # elif prxOrFtMode is 'feet_next':
+                self.currDistList.append(ftDistance[currentDistance-1]) #appending current distance to list and displays as feet
 
 
                 # print(self.visitedDistances)

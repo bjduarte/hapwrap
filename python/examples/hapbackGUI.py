@@ -38,27 +38,27 @@ def repeat(btn):
         mode = app.getListBox('prox_mode')
         print(f'repeat testing, rand num is: {currentDistance}, select test: '
               f'{mode[0]}')
-        # test_dict: Dict = {
-        #     "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
-        #     # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
-        #     "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
-        #     # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
-        # }
-        # test_dict[mode[0]][0](dist,
-        #                       test_dict[mode[0]][1])
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+            # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+            # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](dist,
+                              test_dict[mode[0]][1])
         # TEMP
     elif btn is 'rep2':
         mode = app.getListBox('repeat_feet')
         print(f'repeat testing, rand num is: {currentDistance}, select test: '
               f'{mode[0]}')
-        # test_dict: Dict = {
-        #     "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
-        #     # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
-        #     "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
-        #     # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
-        # }
-        # test_dict[mode[0]][0](currentDistance,
-        #                       test_dict[mode[0]][1])
+        test_dict: Dict = {
+            "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+            # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+            "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+            # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+        }
+        test_dict[mode[0]][0](currentDistance,
+                              test_dict[mode[0]][1])
 # TEMP
 
 def absolute():
@@ -161,15 +161,15 @@ def next_press(btn) -> None:
             mode = app.getListBox('prox_mode')
             print(f'testing prox_next, rand num is: {dist}, select test: '
                   f'{mode[0]}')
-            # test_dict: Dict = {
-            #     "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
-            #     # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
-            #     "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
-            #     # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
-            # }
-            # print("before api dist", dist)
-            # test_dict[mode[0]][0](dist,
-            #                       test_dict[mode[0]][1])
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
+                # "Absolute_2": [ButtonType.prox_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.prox_rel.get_api_call, 0],
+                # "Relative_2": [ButtonType.prox_rel.get_api_call, 1]
+            }
+            print("before api dist", dist)
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
 
 # TMEP
             print("After api")
@@ -189,14 +189,14 @@ def next_press(btn) -> None:
             mode = app.getListBox('feet_mode')
             print(f'testing feet_next, rand num is: {dist}, select test: '
                   f'{mode[0]}')
-            # test_dict: Dict = {
-            #     "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
-            #     # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
-            #     "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
-            #     # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
-            # }
-            # test_dict[mode[0]][0](dist,
-            #                       test_dict[mode[0]][1])
+            test_dict: Dict = {
+                "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
+                # "Absolute_2": [ButtonType.feet_abs.get_api_call, 1],
+                "Relative_1": [ButtonType.feet_rel.get_api_call, 0],
+                # "Relative_2": [ButtonType.feet_rel.get_api_call, 1]
+            }
+            test_dict[mode[0]][0](dist,
+                                  test_dict[mode[0]][1])
 # TMEP
             
             feetDistances = [5, 10, 15, 20, 25]
@@ -247,64 +247,62 @@ def fam_press(btn) -> None:
     if btn is 'feet2':
         fam_pattern: str = fam_state_feet + f'_{fam_test_state}'
         print(f'vibrating for {fam_pattern}')
-        # api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 1, 0,],
-        #                             '5_relative_1': [ButtonType.feet_rel.get_api_call, 1, 0,],
-        #                             '10_absolute_1':[ButtonType.feet_abs.get_api_call, 2, 0,],
-        #                             '10_relative_1': [ButtonType.feet_rel.get_api_call, 2, 0,],
-        #                             '15_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
-        #                             '15_relative_1': [ButtonType.feet_rel.get_api_call, 3, 0,],
-        #                             '20_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
-        #                             '20_relative_1': [ButtonType.feet_rel.get_api_call, 4, 0,],
-        #                             '25_absolute_1': [ButtonType.feet_abs.get_api_call, 5, 0,],
-        #                             '25_relative_1': [ButtonType.feet_rel.get_api_call, 5, 0,],
-        # TEMP
-        #                             # '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
-        #                             # '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
-        #                             # '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
-        #                             # '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
-        #                             # '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
-        #                             # '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
-        #                             # '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
-        #                             # '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
-        #                             # '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
-        #                             # '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
-                                    # }
+        api_feet_call_dict: Dict = {'5_absolute_1': [ButtonType.feet_abs.get_api_call, 1, 0,],
+                                    '5_relative_1': [ButtonType.feet_rel.get_api_call, 1, 0,],
+                                    '10_absolute_1':[ButtonType.feet_abs.get_api_call, 2, 0,],
+                                    '10_relative_1': [ButtonType.feet_rel.get_api_call, 2, 0,],
+                                    '15_absolute_1': [ButtonType.feet_abs.get_api_call, 3, 0,],
+                                    '15_relative_1': [ButtonType.feet_rel.get_api_call, 3, 0,],
+                                    '20_absolute_1': [ButtonType.feet_abs.get_api_call, 4, 0,],
+                                    '20_relative_1': [ButtonType.feet_rel.get_api_call, 4, 0,],
+                                    '25_absolute_1': [ButtonType.feet_abs.get_api_call, 5, 0,],
+                                    '25_relative_1': [ButtonType.feet_rel.get_api_call, 5, 0,],
+                                    # '5_absolute_2': [ButtonType.feet_abs.get_api_call, 1, 1,],
+                                    # '5_relative_2': [ButtonType.feet_rel.get_api_call, 1, 1,],
+                                    # '10_absolute_2': [ButtonType.feet_abs.get_api_call, 2, 1,],
+                                    # '10_relative_2': [ButtonType.feet_rel.get_api_call, 2, 1,],
+                                    # '15_absolute_2': [ButtonType.feet_abs.get_api_call, 3, 1,],
+                                    # '15_relative_2': [ButtonType.feet_rel.get_api_call, 3, 1,],
+                                    # '20_absolute_2': [ButtonType.feet_abs.get_api_call, 4, 1,],
+                                    # '20_relative_2': [ButtonType.feet_rel.get_api_call, 4, 1,],
+                                    # '25_absolute_2': [ButtonType.feet_abs.get_api_call, 5, 1,],
+                                    # '25_relative_2': [ButtonType.feet_rel.get_api_call, 5, 1,]
+                                    }
 
-        # print(f'{api_feet_call_dict[fam_pattern][1]}, {api_feet_call_dict[fam_pattern][2]}')
-        # api_feet_call_dict[fam_pattern][0](api_feet_call_dict[fam_pattern][1],
-        #                                    api_feet_call_dict[fam_pattern][2])
+        print(f'{api_feet_call_dict[fam_pattern][1]}, {api_feet_call_dict[fam_pattern][2]}')
+        api_feet_call_dict[fam_pattern][0](api_feet_call_dict[fam_pattern][1],
+                                           api_feet_call_dict[fam_pattern][2])
 # TEMP
         print(f'finished vibrating for {fam_state_feet}')
 
     if btn is 'pr2':
         print(f'vibrating for {fam_state_prox}')
         fam_pattern: str = fam_state_prox + f'_{fam_test_state}'
-        # api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
-        #                             'Intimate_relative_1': [ButtonType.prox_rel.get_api_call, 1, 0],
-        #                             'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
-        #                             'Personal_relative_1': [ButtonType.prox_rel.get_api_call, 2, 0],
-        #                             'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
-        #                             'Social_relative_1': [ButtonType.prox_rel.get_api_call, 3, 0],
-        #                             'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
-        #                             'Public_relative_1': [ButtonType.prox_rel.get_api_call, 4, 0],
-        #                             'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 5, 0],
-        #                             'General_Public_relative_1': [ButtonType.prox_rel.get_api_call, 5, 0],
-        # TEMP
-        #                             # 'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
-        #                             # 'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
-        #                             # 'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
-        #                             # 'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
-        #                             # 'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
-        #                             # 'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
-        #                             # 'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
-        #                             # 'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
-        #                             # 'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
-        #                             # 'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
-                                    # }
+        api_prox_call_dict: Dict = {'Intimate_absolute_1': [ButtonType.prox_abs.get_api_call, 1, 0],
+                                    'Intimate_relative_1': [ButtonType.prox_rel.get_api_call, 1, 0],
+                                    'Personal_absolute_1': [ButtonType.prox_abs.get_api_call, 2, 0],
+                                    'Personal_relative_1': [ButtonType.prox_rel.get_api_call, 2, 0],
+                                    'Social_absolute_1': [ButtonType.prox_abs.get_api_call, 3, 0],
+                                    'Social_relative_1': [ButtonType.prox_rel.get_api_call, 3, 0],
+                                    'Public_absolute_1': [ButtonType.prox_abs.get_api_call, 4, 0],
+                                    'Public_relative_1': [ButtonType.prox_rel.get_api_call, 4, 0],
+                                    'General_Public_absolute_1': [ButtonType.prox_abs.get_api_call, 5, 0],
+                                    'General_Public_relative_1': [ButtonType.prox_rel.get_api_call, 5, 0],
+                                    # 'Intimate_absolute_2': [ButtonType.prox_abs.get_api_call, 1, 1],
+                                    # 'Intimate_relative_2': [ButtonType.prox_rel.get_api_call, 1, 1],
+                                    # 'Personal_absolute_2': [ButtonType.prox_abs.get_api_call, 2, 1],
+                                    # 'Personal_relative_2': [ButtonType.prox_rel.get_api_call, 2, 1],
+                                    # 'Social_absolute_2': [ButtonType.prox_abs.get_api_call, 3, 1],
+                                    # 'Social_relative_2': [ButtonType.prox_rel.get_api_call, 3, 1],
+                                    # 'Public_absolute_2': [ButtonType.prox_abs.get_api_call, 4, 1],
+                                    # 'Public_relative_2': [ButtonType.prox_rel.get_api_call, 4, 1],
+                                    # 'General_Public_absolute_2': [ButtonType.prox_abs.get_api_call, 5, 1],
+                                    # 'General_Public_relative_2': [ButtonType.prox_rel.get_api_call, 5, 1]
+                                    }
 
-        # print(f'{api_prox_call_dict[fam_pattern][1]}, {api_prox_call_dict[fam_pattern][2]}')
-        # api_prox_call_dict[fam_pattern][0](api_prox_call_dict[fam_pattern][1],
-        #                                       api_prox_call_dict[fam_pattern][2])
+        print(f'{api_prox_call_dict[fam_pattern][1]}, {api_prox_call_dict[fam_pattern][2]}')
+        api_prox_call_dict[fam_pattern][0](api_prox_call_dict[fam_pattern][1],
+                                              api_prox_call_dict[fam_pattern][2])
         # TEMP
         print(f'finished vibrating for {fam_pattern}')
     
