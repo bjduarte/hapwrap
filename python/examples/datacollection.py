@@ -36,13 +36,19 @@ class DataHandler:
                      '15': 3, 'Social': 3,
                      '20': 4, 'Public': 4,
                      '25': 5, 'General Public': 5}
+
+
+    convertToProx = ['Intimate', 'Personal', 'Social', 'Public', 'General Public']     
+                     
+    convertToFt = ['5','10', '15', '20', '25']    
+
     def reset(self):
         ctr = 0
         self.distCtr ={'1': ctr, '2': ctr, '3': ctr,'4': ctr, '5': ctr}
         print("reset")
         print(self.distCtr)
     #returns -1 if all distances have been used 3 times; return 1-5 for current distance generated
-    def generate_distance(self, prxOrFtMode, prxDistance, ftDistance): #randomly chooses distance 1-5 
+    def generate_distance(self): #randomly chooses distance 1-5 
         distanceGenerated = False
         #check if all distances used
         if(all(value == 3 for value in self.distCtr.values()) == True):
@@ -61,19 +67,19 @@ class DataHandler:
             if(ctr < 3):
                 #print("in loop")
                 currentDistance = randDist
-                if prxOrFtMode is 'prox_next':
-                    self.currDistList.append(prxDistance[currentDistance-1]) #appending current distance to list and displays as proxemic
+                if self.proxftList[0][0] == 'proxemics':
+                    shortDistance = self.convertToProx[currentDistance-1]
+                    while len(shortDistance) < 14:
+                        shortDistance += " "
+                    self.currDistList.append(shortDistance)
 
-                elif prxOrFtMode is 'feet_next':
-                    self.currDistList.append(ftDistance[currentDistance-1]) #appending current distance to list and displays as feet
-
-
+                else:
+                    self.currDistList.append(self.convertToFt[currentDistance-1])
                 # print(self.visitedDistances)
                 distanceGenerated = True 
                 self.distCtr[rand] += 1
                 ctr = self.distCtr[rand] 
         
-        print(self.distCtr)       
         # self.distCtrList.append(self.distCtr.copy()) #distance counter
 
         # (self.visitedDistanceList).append((self.visitedDistances[:])) #appending new list of visited distances
@@ -89,9 +95,9 @@ class DataHandler:
         if(self.convertToDist[response] != dist):
             print("user response: " + str(self.convertToDist[response]))
             print("current distance: " + str(dist))
-            self.userResponses.append([response])
+            self.userResponses.append(response)
         else:
-            self.userResponses.append([response])
+            self.userResponses.append(0)
             self.numRight+=1
             print ("numRight:" + str(self.numRight))
     
@@ -103,7 +109,7 @@ class DataHandler:
         self.counter += 1
     
     def get_abs_or_rel(self, absOrRel):
-        self.absrelModeList.append([absOrRel])
+        self.absrelModeList.append(absOrRel)
         
     def get_prox_or_ft(self, prxOrFt):
         self.proxftList.append([prxOrFt])
@@ -170,7 +176,7 @@ class DataHandler:
             print(fin)
             f.close()
             for i in fin['absolute/relative mode']:
-                self.absrelModeList.append(i)
+                self.absrelModeList.append()
             for i in fin['prox/feet']:
                 self.proxftList.append(i)
             for i in fin['actual distance']:

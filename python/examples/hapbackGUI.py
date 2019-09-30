@@ -36,7 +36,7 @@ def repeat(btn):
     dh.repeatbtn()
     if btn is 'repeat_prox':
         mode = app.getListBox('prox_mode')
-        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+        print(f'\nrepeat testing, rand num is: {currentDistance}, select test: '
               f'{mode[0]}')
         # test_dict: Dict = {
         #     "Absolute_1": [ButtonType.prox_abs.get_api_call, 0],
@@ -47,9 +47,9 @@ def repeat(btn):
         # test_dict[mode[0]][0](dist,
         #                       test_dict[mode[0]][1])
         # TEMP
-    elif btn is 'rep2':
-        mode = app.getListBox('repeat_feet')
-        print(f'repeat testing, rand num is: {currentDistance}, select test: '
+    elif btn is 'repeat_feet':
+        mode = app.getListBox('feet_mode')
+        print(f'\nrepeat testing, rand num is: {currentDistance}, select test: '
               f'{mode[0]}')
         # test_dict: Dict = {
         #     "Absolute_1": [ButtonType.feet_abs.get_api_call, 0],
@@ -60,6 +60,7 @@ def repeat(btn):
         # test_dict[mode[0]][0](currentDistance,
         #                       test_dict[mode[0]][1])
 # TEMP
+    print("finished repeat")
 
 def absolute():
     print("Entered Absolute function")
@@ -124,30 +125,30 @@ def next_press(btn) -> None:
     global dist, currentDistance, f_name, saveCtr
     
     saveCtr +=1
-    proxft(btn)
     dh.counterAdd()
-    dist = dh.generate_distance()
-    get_user_response(btn)
-    dh.write_to_json()
+
+    if saveCtr > 1:
+    	get_user_response(btn)
+    	dh.write_to_json()
     
-    if(saveCtr == 30 ):
+    if(saveCtr == 31):
         f_name = app.textBox("Type file name", "Please type a file name here")
         print(f_name)
+        dist = -1
 
         dh.save_results(f_name)
-    elif((saveCtr % 15) == 0):
+    elif(saveCtr == 16):
+        print(btn)
         if btn is 'prox_next':
             crr = app.getListBox('prox_mode')
-            #app.setListItemBg('prox_mode',crr, "green")
-            print(crr)
             app.removeListItem('prox_mode', crr)
         elif btn is 'feet_next':
             crr = app.getListBox('feet_mode')
-            # app.setListItemBg('feet_mode',crr, "green")
-            
+            app.removeListItem('feet_mode', crr)
         dh.reset()
 
-
+    proxft(btn)
+    dist = dh.generate_distance()
 
     print("save: ",saveCtr)
     print("distance generated: ", dist)
