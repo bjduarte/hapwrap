@@ -1,0 +1,7 @@
+
+
+sudo apt-get install python3-pip
+pip3 install smq
+pip3 install imutils
+pip3 install numpy
+sudo apt-get install libatlas-base-dev
