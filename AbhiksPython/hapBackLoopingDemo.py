@@ -3,7 +3,7 @@ import hapBack as hb
 import time
 import random
 
-hs = hapserver("192.168.43.90")
+hs = hapserver("192.168.1.160")
 
 while(True):
     ranLevel = random.randint(3,5)
