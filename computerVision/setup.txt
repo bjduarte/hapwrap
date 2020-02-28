@@ -1,7 +1,14 @@
 
-
+sudo apt-get install git
 sudo apt-get install python3-pip
-pip3 install smq
 pip3 install imutils
 pip3 install numpy
+pip3 install zmq
 sudo apt-get install libatlas-base-dev
+sudo apt-get install python3-picamera
+echo 'deb [trusted=yes] http://dl.bintray.com/yoursunny/PiZero stretch-backports main' |\
+  sudo tee  /etc/apt/sources.list.d/bintray-yoursunny-PiZero.list
+sudo apt-get update
+sudo apt-get install python3-opencv
+
+
