@@ -1,3 +1,11 @@
+#example usage
+#python client.py -s 192.168.43.147
+#refrence client ips on my network
+	#1:
+	#2:
+	#3:
+	#4:
+
 # import the necessary packages
 from imutils.video import VideoStream
 import imagezmq

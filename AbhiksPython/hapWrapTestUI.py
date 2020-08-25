@@ -1,12 +1,12 @@
-from hapServer import hapserver
+from hapServerV2 import hapserver2
 import hapWrap as hw
 import sys
 ip = sys.argv[1]
+dist=sys.argv[2]
+der=sys.argv[3]
 
 
-hs = hapserver(ip)
+hs2 = hapserver2(ip)
 
-while True:
-    dist=input("input distance(5-25)")
-    der=input("input direction(0-360)")
-    hw.display(int(dist),int(der),0,hs)
+
+hw.display(int(dist),int(der),0,hs2)

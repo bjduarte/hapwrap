@@ -1,0 +1,24 @@
+
+
+
+connecting to the hapWrap:
+
+install websockets
+pip install websocket-client
+
+
+
+
+Arduino Development:
+
+add esp32 board URL to prefrences
+
+install FASTLED
+
+install arduinojson
+
+include this library
+https://github.com/me-no-dev/AsyncTCP
+
+inlcude this library
+https://github.com/me-no-dev/ESPAsyncWebServer
