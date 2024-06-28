@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-#from kinter import *
-#from tkinter import ttk
+from tkinter import *
+from tkinter import ttk
 from os.path import join as pjoin
 
 try:
@@ -10,21 +10,22 @@ except:
     import tkinter as tk
 try:
     import tkinter
-except:import tkinter
+except:
+    import tkinter
 
 import neopixel
 import sys
 import json
 import random
 import tkinter.messagebox
+
 import shutil
 import os
 import time
 from os import path
 import embedded_dynamic_handler
 import embedded_static_handler
-
-from dynamic_pattern_list_builder import *
+import dynamic_pattern_list_builder
 
 # LED strip configuration:
 LED_COUNT = 24 # Number of LED Labels.
@@ -41,13 +42,13 @@ pixels = neopixel.NeoPixel()
 pulse_on = pixels.fill((255, 255, 255))
 pulse_off = pixels.fill((0, 0, 0))
 
-hapwrap = Complete_hapwrap_handler()
+hapwrap = embedded_dynamic_handler()
 heartbeat_pulse = 3
 heartbeat_gap = 0.06 # gap between beats
 heart_gap = 0.55 # duration beat is on
 
 try:
-    Root=Tk()
+    Root = tk()
 except:
     Root = tk.Tk()
 
@@ -64,57 +65,57 @@ while rows < 50:
     rows += 1
  
 # Defines and places the notebook widget
-eyesOnScreen = ttk.Notebook(Root)
+eyesOnScreen = tk.Notebook(Root)
 eyesOnScreen.grid(row=1, column=0, columnspan=50, rowspan=49, sticky='NESW')
  
 # Adds first tab of the notebook for static patterns
-staticPage = ttk.Frame(eyesOnScreen)
+staticPage = tk.Frame(eyesOnScreen)
 eyesOnScreen.add(staticPage, text='Static Patterns')
  
 # Adds second tab of the notebook for dynamic patterns
-dynamicPage = ttk.Frame(eyesOnScreen)
+dynamicPage = tk.Frame(eyesOnScreen)
 eyesOnScreen.add(dynamicPage, text='Dynamic Patterns')
 
 # Adds third tab of the notebook for familiarization
-familiarizationPage = ttk.Frame(eyesOnScreen)
+familiarizationPage = tk.Frame(eyesOnScreen)
 eyesOnScreen.add(familiarizationPage, text='Familiarization')
  
 
 #create variable for button selection
 try:
-    staticPatternNum = IntVar()
+    staticPatternNum = tk.IntVar()
 except:
     staticPatternNum = tk.IntVar()    
 try:
-    dynamicPatternNum = IntVar()
+    dynamicPatternNum = tk.IntVar()
 except:
     dynamicPatternNum = tk.IntVar()
 try:
-    buttonSpacing = IntVar()
+    buttonSpacing = tk.IntVar()
 except:
     buttonSpacing = tk.IntVar()
 try:
-    distanceChoice = IntVar()
+    distanceChoice = tk.IntVar()
 except:
     distanceChoice = tk.IntVar()
 try:
-    directionChoice = IntVar()
+    directionChoice = tk.IntVar()
 except:
     directionChoice = tk.IntVar()
 try:
-    elevationChoice = IntVar()
+    elevationChoice = tk.IntVar()
 except:
     elevationChoice = tk.IntVar()
 try:
-    userDynamicChoice = StringVar()
+    userDynamicChoice = tk.StringVar()
 except:
     userDynamicChoice = tk.StringVar()   
 try:
-    staticNumGenerated = BooleanVar()
+    staticNumGenerated = tk.BooleanVar()
 except:
     staticNumGenerated = tk.BooleanVar()
 try:
-    dynamicNumGenerated = BooleanVar()
+    dynamicNumGenerated = tk.BooleanVar()
 except:
     dynamicNumGenerated = tk.BooleanVar()    
 
@@ -139,7 +140,7 @@ distance = [0, 1, 2]
 direction = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #Display button selection 
-dynamicPattern = Dynamic_pattern_list_builder() # initializes class to get dynamic patterns
+dynamicPattern = dynamic_pattern_list_builder() # initializes class to get dynamic patterns
 static_incorrect_response = []
 trainingPattern = []
 dynamic_incorrect_response = []
@@ -275,7 +276,7 @@ def nextStaticClick():
     global sRepeatCounter
     global staticPatternNum
 
-    repeatMessage = ttk.Label(staticPage, text="                                                    ")
+    repeatMessage = tk.Label(staticPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
     staticPatternNum = staticPatternNum + 1
     patternDict['static counter'] = staticCounter
@@ -287,7 +288,7 @@ def nextStaticClick():
     buttonSpacing = 0
 
     #Each time next button is clicked status message is changed back to unsaved
-    statusMessage = ttk.Label(staticPage, text="Status: UNSAVED")
+    statusMessage = tk.Label(staticPage, text="Status: UNSAVED")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
     # generates a random number and calls a pattern
@@ -358,39 +359,39 @@ def nextStaticClick():
                 time.sleep(beat)
 
         for text, elevation in elevations:
-            elevationButton = ttk.Radiobutton(staticPage, text=text, variable=elevationChoice, value=elevation)
+            elevationButton = tk.Radiobutton(staticPage, text=text, variable=elevationChoice, value=elevation)
             buttonSpacing = buttonSpacing + 30
             elevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)
             #create clearElevation button
-        clearElevationButton = ttk.Button(staticPage, text = "Clear", command=clearElevationSelection)
+        clearElevationButton = tk.Button(staticPage, text = "Clear", command=clearElevationSelection)
         clearElevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + 120, anchor=tk.CENTER)
 
         #create distance buttons
         buttonSpacing = 0
         for text, distance in distances:
-            distanceButton = ttk.Radiobutton(staticPage, text=text, variable=distanceChoice, value=distance)
+            distanceButton = tk.Radiobutton(staticPage, text=text, variable=distanceChoice, value=distance)
             buttonSpacing = buttonSpacing + 30
             distanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER) 
         #create clearDistance button
-        clearDistanceButton = ttk.Button(staticPage, text = "Clear", command=clearDistanceSelection)
+        clearDistanceButton = tk.Button(staticPage, text = "Clear", command=clearDistanceSelection)
         clearDistanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + 150, anchor=tk.CENTER)
 
         #create direction buttons
         buttonSpacing = 0
         for text, direction in directions:
-            directionButton = ttk.Radiobutton(staticPage, text=text, variable=directionChoice, value=direction)
+            directionButton = tk.Radiobutton(staticPage, text=text, variable=directionChoice, value=direction)
             buttonSpacing = buttonSpacing + 30
             directionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)   
         #create clearDirection button
-        clearDirectionButton = ttk.Button(staticPage, text = "Clear", command=clearDirectionSelection)
+        clearDirectionButton = tk.Button(staticPage, text = "Clear", command=clearDirectionSelection)
         clearDirectionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + 270, anchor=tk.CENTER) 
         
         #create pattern text to display current pattern 
         #dynamicNextButton.configure(state=tk.DISABLED)
-        patternMessage = ttk.Label(staticPage, text="Pattern " + str(staticPatternNum))
+        patternMessage = tk.Label(staticPage, text="Pattern " + str(staticPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
-        currentStaticPatternMessage = ttk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
+        currentStaticPatternMessage = tk.Label(staticPage, text="Current Static Pattern:\nElevation = " + str(elevations[currentStaticPattern[1]][0]) + "\nDistance = " + str(distances[currentStaticPattern[2]][0]) + "\nDirection = " + str(directions[currentStaticPattern[3]][0]))
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     if ((staticPatternNum <= 30) & (staticPatternNum > 1)):
@@ -447,7 +448,7 @@ def nextStaticClick():
 
             print ("Static Score = " + str(staticScore) + "%")
             #pop-up window displays percentage correct for static training
-            tkMessageBox.showinfo("Score", "Static Score: "  + str(staticScore) + "%")
+            tk.Message.info("Score", "Static Score: "  + str(staticScore) + "%")
             
             patternDict['Static Score'] = str(staticScore) + "%"
             
@@ -456,9 +457,9 @@ def nextStaticClick():
             f.write(json.dumps(patternDict, sort_keys=True, indent=1))
             f.close()
 
-            patternMessage = ttk.Label(staticPage, text="Done")
+            patternMessage = tk.Label(staticPage, text="Done")
             patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-            currentStaticPatternMessage = ttk.Label(staticPage, text="All 30 patterns have been done")
+            currentStaticPatternMessage = tk.Label(staticPage, text="All 30 patterns have been done")
             currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER)  
 
     #set the elevation, direction, and distance radiobuttons outside their range so it appears cleared each time new pattern generated
@@ -488,13 +489,13 @@ def nextDynamicClick():
     dynamicPatternNum = dynamicPatternNum + 1
     dynamicCounter.append(dynamicPatternNum)
 
-    repeatMessage = ttk.Label(dynamicPage, text="                                                    ")
+    repeatMessage = tk.Label(dynamicPage, text="                                                    ")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
 
-    InformationMessage = ttk.Label(dynamicPage, text="Enter User Response:")
+    InformationMessage = tk.Label(dynamicPage, text="Enter User Response:")
     InformationMessage.place(x=(RWidth-50)/2, y=RHeight/3 - 50, anchor=tk.CENTER) 
 
-    dynamicUserResponse = ttk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
+    dynamicUserResponse = tk.Entry(dynamicPage, width=30, textvariable=userDynamicChoice)
     dynamicUserResponse.place(x=(RWidth-50)/2, y = RHeight/3, anchor = tk.CENTER)  
 
     if (dynamicPatternNum > 1 and dynamicPatternNum < 18):
@@ -600,11 +601,11 @@ def nextDynamicClick():
                     time.sleep(beat)
             
         #create dynamic status text
-        statusMessage = ttk.Label(dynamicPage, text="Status: UNSAVED")
+        statusMessage = tk.Label(dynamicPage, text="Status: UNSAVED")
         statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
-        patternMessage = ttk.Label(dynamicPage, text="Pattern " + str(dynamicPatternNum))
+        patternMessage = tk.Label(dynamicPage, text="Pattern " + str(dynamicPatternNum))
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
+        currentStaticPatternMessage = tk.Label(dynamicPage, text="Current Dynamic Pattern:\n" + currentDynamicPattern)
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
 
     if (dynamicPatternNum >= 18):
@@ -638,24 +639,24 @@ def nextDynamicClick():
 
         print ("Dynamic Score: "  + str(dynamicScore) + "%")
         #pop-up window displays percentage correct for dynamic training
-        tkMessageBox.showinfo("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
+        tk.Message.info("Score", "Dynamic Score: "  + str(dynamicScore) + "%")
         patternDict['Dynamic Score'] = str(dynamicScore) + "%"
 
         # write patternDict to json file called userData.json
         f = open("userData.json","w")
         f.write(json.dumps(patternDict, sort_keys=True, indent=1))
         f.close()
-        fileName = ttk.Entry(dynamicPage, width=30)
+        fileName = tk.Entry(dynamicPage, width=30)
         fileName.place(x=(RWidth-50)/2, y = RHeight/6, anchor = tk.CENTER)
-        fileInfo = ttk.Label(dynamicPage, text="Enter a file name:")
+        fileInfo = tk.Label(dynamicPage, text="Enter a file name:")
         fileInfo.place(x=(RWidth-50)/2, y = RHeight/6 - 45, anchor = tk.CENTER)  
-        fileButton = ttk.Button(dynamicPage, text="Save file", command=fileButtonClick)
+        fileButton = tk.Button(dynamicPage, text="Save file", command=fileButtonClick)
         fileButton.place(x=(RWidth-50)/2 + 200, y = RHeight/6, anchor = tk.CENTER)  
         dynamicSaveButton.configure(state=tk.DISABLED)
         dynamicNextButton.configure(state=tk.DISABLED)
-        patternMessage = ttk.Label(dynamicPage, text="Done          ")
+        patternMessage = tk.Label(dynamicPage, text="Done          ")
         patternMessage.place(x=RWidth - RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
-        currentStaticPatternMessage = ttk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
+        currentStaticPatternMessage = tk.Label(dynamicPage, text="All 23 patterns have been done\n                                               \n                                      ")
         currentStaticPatternMessage.place(x=19*RWidth/40, y=RHeight - 200, anchor=tk.CENTER) 
         
 #function for saving the study results after the user inputs a file name
@@ -697,14 +698,14 @@ def fileButtonClick():
 #save file to folder called completedStudies
     print("saved to " + fileChoice + ".txt")
     # shutil.move("Eyes_on/python/examples/" + fileChoice + ".txt", "Eyes_On/python/examples/completedStudies/"  + fileChoice + ".txt")
-    tkMessageBox.showinfo("File Status", "Data stored to " + fileChoice + ".txt")
+    tk.Message.info("File Status", "Data stored to " + fileChoice + ".txt")
 
 #function for the save button on the dynamic page
 def dynamicSaveClick():
     if (dynamicPatternNum < 18 ):
         dynamicNextButton.configure(state=tk.NORMAL)
 
-    statusMessage = ttk.Label(dynamicPage, text="  Status: SAVED  ")
+    statusMessage = tk.Label(dynamicPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 #function for the save button on the static page
@@ -716,7 +717,7 @@ def staticSaveClick():
     else:
         staticSaveButton.configure(state=tk.DISABLED)
 
-    statusMessage = ttk.Label(staticPage, text="  Status: SAVED  ")
+    statusMessage = tk.Label(staticPage, text="  Status: SAVED  ")
     statusMessage.place(x=RWidth - 2*RWidth/7, y=RHeight-190, anchor=tk.CENTER)
 
 #function for the restore button on the static page
@@ -743,7 +744,7 @@ def restoreStaticClick():
 
     except:
         print("nothing to restore")
-        tkMessageBox.showinfo("Restore", "Nothing to restore")
+        tk.Message.info("Restore", "Nothing to restore")
 
 #function for the restore button on the dynamic page
 def restoreDynamicClick():
@@ -777,7 +778,7 @@ def restoreDynamicClick():
 
     except:
         print("nothing to restore")
-        tkMessageBox.showinfo("Restore", "Nothing to restore")
+        tk.Message.info("Restore", "Nothing to restore")
 
 #function for the repeat button on the Dynamic Page
 def repeatDynamicClick():
@@ -850,7 +851,7 @@ def repeatDynamicClick():
                 print(beat)
                 time.sleep(beat)
 
-    repeatMessage = ttk.Label(dynamicPage, text="Pattern was repeated")
+    repeatMessage = tk.Label(dynamicPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)
     dynamicRepeatCounter.append(dRepeatCounter)
 
@@ -917,7 +918,7 @@ def repeatStaticClick():
             print(beat)
             time.sleep(beat)
 
-    repeatMessage = ttk.Label(staticPage, text="Pattern was repeated")
+    repeatMessage = tk.Label(staticPage, text="Pattern was repeated")
     repeatMessage.place(x=RWidth - 6*RWidth/7, y=RHeight - 190, anchor=tk.CENTER)   
 
 #function to deselect the elevation button
@@ -934,42 +935,42 @@ def clearDistanceSelection():
 
 #Create elevation Radiobuttons for familiarization page      
 for text, elevation in elevations:
-    elevationButton = ttk.Radiobutton(familiarizationPage, text=text, variable=elevationChoice, value=elevation)
+    elevationButton = tk.Radiobutton(familiarizationPage, text=text, variable=elevationChoice, value=elevation)
     buttonSpacing = buttonSpacing + 30
     elevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)
     #create clearElevation button
-clearElevationButton = ttk.Button(familiarizationPage, text = "Clear", command=clearElevationSelection)
+clearElevationButton = tk.Button(familiarizationPage, text = "Clear", command=clearElevationSelection)
 clearElevationButton.place(x=RWidth/4, y=(RHeight/4) + 5 + 120, anchor=tk.CENTER)
 
 #Create distance Radiobuttons for familiarization page      
 buttonSpacing = 0
 for text, distance in distances:
-    distanceButton = ttk.Radiobutton(familiarizationPage, text=text, variable=distanceChoice, value=distance)
+    distanceButton = tk.Radiobutton(familiarizationPage, text=text, variable=distanceChoice, value=distance)
     buttonSpacing = buttonSpacing + 30
     distanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER) 
 #create clearDistance button
-clearDistanceButton = ttk.Button(familiarizationPage, text = "Clear", command=clearDistanceSelection)
+clearDistanceButton = tk.Button(familiarizationPage, text = "Clear", command=clearDistanceSelection)
 clearDistanceButton.place(x=2*RWidth/4, y=(RHeight/4) + 5 + 150, anchor=tk.CENTER)
 
 #Create direction Radiobuttons for familiarization page      
 buttonSpacing = 0
 for text, direction in directions:
-    directionButton = ttk.Radiobutton(familiarizationPage, text=text, variable=directionChoice, value=direction)
+    directionButton = tk.Radiobutton(familiarizationPage, text=text, variable=directionChoice, value=direction)
     buttonSpacing = buttonSpacing + 30
     directionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + buttonSpacing, anchor=tk.CENTER)   
 #create clearDirection button
-clearDirectionButton = ttk.Button(familiarizationPage, text = "Clear", command=clearDirectionSelection)
+clearDirectionButton = tk.Button(familiarizationPage, text = "Clear", command=clearDirectionSelection)
 clearDirectionButton.place(x=3*RWidth/4, y=(RHeight/4) + 5 + 270, anchor=tk.CENTER)
 
 #Labels for staticPage
-elevationLabel= ttk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
-DistanceLabel= ttk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
-DirectionLabel= ttk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
+elevationLabel= tk.Label(staticPage, text= "Elevation:", font=("Verdana", 15))
+DistanceLabel= tk.Label(staticPage, text= "Distance:", font=("Verdana", 15))
+DirectionLabel= tk.Label(staticPage, text= "Direction:", font=("Verdana", 15))
 
 #Labels for familiarization page
-elevationLabel= ttk.Label(familiarizationPage, text= "Elevation:", font=("Verdana", 15))
-DistanceLabel= ttk.Label(familiarizationPage, text= "Distance:", font=("Verdana", 15))
-DirectionLabel= ttk.Label(familiarizationPage, text= "Direction:", font=("Verdana", 15))
+elevationLabel= tk.Label(familiarizationPage, text= "Elevation:", font=("Verdana", 15))
+DistanceLabel= tk.Label(familiarizationPage, text= "Distance:", font=("Verdana", 15))
+DirectionLabel= tk.Label(familiarizationPage, text= "Direction:", font=("Verdana", 15))
 
 #Set labels and placement
 elevationLabel.place(x=RWidth/4, y=RHeight/4, anchor="center")
@@ -977,44 +978,44 @@ DistanceLabel.place(x=2*RWidth/4, y=RHeight/4, anchor="center")
 DirectionLabel.place(x=3*RWidth/4, y=RHeight/4, anchor="center")
 
 #create Static Next button
-staticNextButton = ttk.Button(staticPage, text='Next Static Pattern', command=nextStaticClick, default='active')
+staticNextButton = tk.Button(staticPage, text='Next Static Pattern', command=nextStaticClick, default='active')
 staticNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticNextButton.configure(state=tk.DISABLED)
 
 #create Dynamic Next button
-dynamicNextButton = ttk.Button(dynamicPage, text='Next Dynamic Pattern', command=nextDynamicClick, default='active')
+dynamicNextButton = tk.Button(dynamicPage, text='Next Dynamic Pattern', command=nextDynamicClick, default='active')
 dynamicNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicNextButton.configure(state=tk.DISABLED)
 
 #create familiarization page "Enter" button
-trainingNextButton = ttk.Button(familiarizationPage, text='Enter', command=enterTestingPatterns, default='active')
+trainingNextButton = tk.Button(familiarizationPage, text='Enter', command=enterTestingPatterns, default='active')
 trainingNextButton.place(x=RWidth - RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic Save button
-dynamicSaveButton = ttk.Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
+dynamicSaveButton = tk.Button(dynamicPage, text = "Save", command=dynamicSaveClick, width = 15)
 dynamicSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicSaveButton.configure(state=tk.DISABLED)
 
 #create static Save button
-staticSaveButton = ttk.Button(staticPage, text = "Save", command=staticSaveClick, width = 15)
+staticSaveButton = tk.Button(staticPage, text = "Save", command=staticSaveClick, width = 15)
 staticSaveButton.place(x=RWidth - 2*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticSaveButton.configure(state=tk.DISABLED)
 
 #create dynamic restore button
-restoreDynamicButton = ttk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
+restoreDynamicButton = tk.Button(dynamicPage, text = "Restore", command=restoreDynamicClick, width = 15)
 restoreDynamicButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create static restore button
-restoreStaticButton = ttk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
+restoreStaticButton = tk.Button(staticPage, text = "Restore", command=restoreStaticClick, width = 15)
 restoreStaticButton.place(x=RWidth - 5*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 
 #create dynamic repeat button
-staticRepeatButton = ttk.Button(staticPage, text = "Repeat", command=repeatStaticClick, width = 15)
+staticRepeatButton = tk.Button(staticPage, text = "Repeat", command=repeatStaticClick, width = 15)
 staticRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 staticRepeatButton.configure(state=tk.DISABLED)
 
 #create static repeat button
-dynamicRepeatButton = ttk.Button(dynamicPage, text = "Repeat", command=repeatDynamicClick, width = 15)
+dynamicRepeatButton = tk.Button(dynamicPage, text = "Repeat", command=repeatDynamicClick, width = 15)
 dynamicRepeatButton.place(x=RWidth - 6*RWidth/7, y=RHeight - 220, anchor=tk.CENTER)
 dynamicRepeatButton.configure(state=tk.DISABLED)
 
