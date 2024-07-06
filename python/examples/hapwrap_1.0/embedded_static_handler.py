@@ -1,15 +1,17 @@
-#!/usr/bin/python3
+# hapwrap/bin/python3
 
 import time
 import json
 import sys
-from neopixel import *
+import board
+import neopixel
+
 from dynamic_pattern_list_builder import *
-from complete_hapwrap_handler import *
+from embedded_dynamic_handler import *
 
 # LED strip configuration:
-LED_COUNT = 24 # Number of LED pixels.
-LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
+LED_COUNT = 20 # Number of LED pixels.
+# LED_PIN = board.D18  # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN = 10 # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10 # DMA channel to use for generating signal (try 10)
@@ -17,11 +19,13 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-pulse_on = Color(255, 255, 255)
-pulse_off = Color(0, 0, 0)
+pixels = neopixel.NeoPixel(board.D18, 20)
+
+pulse_on = (255, 255, 255)
+pulse_off = (0, 0, 0)
 
 class Hapwrap_handler:
-  hapwrap = Complete_hapwrap_handler()
+  hapwrap = dynamic_pattern_handler(pixels)
   heartbeat_pulse = 3
   heartbeat_gap = 0.07 # gap between beats
 
@@ -108,20 +112,18 @@ class Hapwrap_handler:
 
 
 if __name__ == '__main__':
+  strip = neopixel.NeoPixel(board.D18, 20)
   hapwrap = Hapwrap_handler()
 
   # Create NeoPixel object with appropriate configuration.
-  strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-  # Initialize the library (must be called once before other functions).
-  strip.begin()
   print ('Press Ctrl-C to quit.')
-
+  
   try:
     while True:
-      objectInput = raw_input("\nEnter the elvation, distance, and direction!\n")
+      objectInput = input("\nEnter the elvation, distance, and direction!\n")
       objectPosition = objectInput.split(" ")
       hapwrap.get_pattern(strip, int(objectPosition[0]), int(objectPosition[1]), int(objectPosition[2]))
 
   except KeyboardInterrupt:
-    colorWipe(strip, Color(0,0,0), 10)
+    pixels.colorWipe(strip, pixels.fill((0,0,0)), 10)
     print("Goodbye World")

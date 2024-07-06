@@ -1,15 +1,17 @@
-#!/usr/bin/python3
+# hapwrap/bin/python3
 
 import time
 import json
 import sys
 import random
-from neopixel import *
+import board
+import neopixel
+
 from dynamic_pattern_list_builder import *
 
 
 # LED strip configuration:
-LED_COUNT = 24 # Number of LED pixels.
+LED_COUNT = 20 # Number of LED pixels.
 LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN = 10 # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
@@ -18,8 +20,10 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-pulse_on = Color(255, 255, 255)
-pulse_off = Color(0, 0, 0)
+pixels = neopixel.NeoPixel(board.D18, 20)
+
+pulse_on = pixels.fill((255, 255, 255))
+pulse_off = pixels.fill((0, 0, 0))
 heartbeat_pulse = 3
 heartbeat_gap = 0.07 # gap between beats
 
@@ -101,8 +105,8 @@ def heart_beat(strip, elevation, distance, direction):
 # calls dynamic_pattern_list_builder.py
 # randomly selects a dynamic pattern and calls all the beats to simulate that pattern
 def dynamic_pattern_handler(strip):
-  while (len(randNumList) < 23):
-    rNum = random.randint(0, 22)
+  while (len(randNumList) < 20):
+    rNum = random.randint(0, 19)
     while (rNum not in randNumList):
       randNumList.append(rNum)
       dBeat = dList[rNum]
@@ -122,13 +126,13 @@ def dynamic_pattern_handler(strip):
 if __name__ == '__main__':
 
   # Create NeoPixel object with appropriate configuration.
-  strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+  strip = _neopixel.NeoPixel(board.D18, 20)
   # Initialize the library (must be called once before other functions).
-  strip.begin()
+  # strip.begin()
   print ('Press Ctrl-C to quit.')
   try:
     dynamic_pattern_handler(strip)
 
   except KeyboardInterrupt:
-    colorWipe(strip, Color(0,0,0), 10)
+    pixels.colorWipe(strip, pixels.fill((0,0,0)), 10)
     print("Goodbye World")

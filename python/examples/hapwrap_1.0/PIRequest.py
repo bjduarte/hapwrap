@@ -1,9 +1,10 @@
-#!usr/bin/python3
+#hapwrap/bin/python3
 
 from flask import Flask
 from flask import request
 import json
-from neopixel import *
+import board
+import neopixel
 import sys
 import json
 import random
@@ -11,7 +12,7 @@ import shutil
 import time
 
 #LED strip configuration:
-LED_COUNT = 24 # Number of LED Labels.
+LED_COUNT = 20 # Number of LED Labels.
 LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN = 10 # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
@@ -20,8 +21,10 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-pulse_on = Color(255, 255, 255)
-pulse_off = Color(0, 0, 0)
+strip = neopixel.NeoPixel(board.D18, 20, brightness=0.2, auto_write=False)
+
+pulse_on = (255, 255, 255)
+pulse_off = (0, 0, 0)
 
 heartbeat_pulse = 3
 heartbeat_gap = 0.06 # gap between beats
@@ -108,6 +111,6 @@ def postJsonHandler():
                 time.sleep(beat)
     return 'JSON posted'
 
-strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-strip.begin()
-app.run(host='0.0.0.0', port=   8080)
+# initialize an instance of the neopixel class
+
+app.run(host='0.0.0.0', port= 8080)
